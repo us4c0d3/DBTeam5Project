@@ -1,0 +1,67 @@
+er-diagram 수정사항
+order와 chef의 관계 handles에서 order는 total participation관계이다. 
+order와 menu_item의 관계 part of에서 order는 total participation관계이다. 
+menu_item과 ingredient의 관계 need에서 menu_item은 total participation관계이다. 
+menu와 menu_item의 관계 contains에서 menu는 total participation관계이다. 
+customer와 menu의 관계 view는 N:1이 아닌 M:N관계이다. 
+order의 multivalued attribute인 menu_id는 part of와 중복되므로 제거, amount는 part of의 attribute로 바꾼다. 
+order의 attribute인 customer_id는 places와 중복되므로 제거한다. 
+chef의 multivalued attribute인 order_id는 handles와 중복되므로 제거한다. 
+customer의 multivalued attribute인 order_id, payment id는 places와 중복되므로 제거한다. 
+menu의 multivalued attribute인 menu_item_id는 contains와 중복되므로 제거한다. 
+menu_item의 multivalued attribute인 ingredient_id는 need와 중복되므로 제거한다. 
+payment의 attribute인 Customer_id, order_id는 paid for와 중복되므로 제거한다. 
+order의 attribute인 time과 date를 제거한다.  
+payment의 attribute인 time과 date를 제거한다.
+menu_item과 manager의 관계 managed by의 attribute인 time과 date를 제거한다. 
+
+
+er_mapping(총 13개의 relation: customer, order(payment), menu, menu_item, ingredient, manager, chef, managed_item, edited_menu, part_of, contains, need, views)
+1) customer entity
+-> customer relation으로 그대로 변경
+
+2) customer - order(places)
+-> order의 PK로 FK 추가
+
+3) order - chef(handles)
+-> order에 FK 추가
+
+4) order entity
+-> order relation으로 그대로 변경 (이름은 order로 사용이 불가능하여 payment라는 이름으로 변경)
+
+5) order - payment(paid for)
+-> payment를 order에 추가하고 order relation만 남겨두기 (weak entity이지만 합치는 게 편해보여서 하나의 relation으로 합쳤습니다, relation name은 order 사용이 불가능하여 payment로 하였습니다)
+
+6) menu entity
+-> menu relation으로 그대로 변경
+
+7) menu_item entity
+-> menu_item relation으로 그대로 변경
+
+8) ingredient entity
+-> ingredient relation으로 그대로 변경
+
+9) manager entity
+-> manager relation으로 그대로 변경
+
+10) chef entity
+-> chef relation으로 그대로 변경
+
+11) menu_item - manager(managed by)
+-> 새로운 relation managed_item 추가
+
+12) menu - manager(edited by)
+-> 새로운 relation edited_menu 추가
+
+13) order - menu_item(part of)
+-> 새로운 relation part_of 추가
+
+14) menu - menu_item(contains)
+-> 새로운 relation contains 추가
+
+15) menu_item - ingredient(need)
+-> 새로운 relation need 추가
+
+16) customer - menu(view)
+-> 새로운 relation views 추가
+
