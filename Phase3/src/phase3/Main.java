@@ -4,7 +4,8 @@ import java.io.*;
 import java.sql.*; // import JDBC package
 
 public class Main {
-	public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	public static final String URL = "jdbc:oracle:thin:@192.168.219.100:1521/orcl";
+	//public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 	public static final String USER_NAME ="teamproject"; 
 	public static final String USER_PASSWD ="comp322";
 		
@@ -43,14 +44,14 @@ public class Main {
 			System.out.println("0. Exit");
 			System.out.println("1. Query");
 			System.out.println("2. DML");
-			System.out.println("Select Type: ");
+			System.out.print("Select Type: ");
             line = br.readLine();
             int requirement = Integer.parseInt(line);
             
             if (requirement == 1) { // Query
     			System.out.println("");
-    			System.out.println("Query: 2, 3, 4, 6, 7, 9, 18, 20");
-    			System.out.println("Select Query Type: ");
+    			System.out.println("Query: 2, 3, 4, 6, 7, 9, 12, 13, 17, 18, 19, 20");
+    			System.out.print("Select Query Type: ");
             	line = br.readLine();
                 int query_number = Integer.parseInt(line);
                 switch (query_number) {
@@ -72,9 +73,20 @@ public class Main {
                 case 9:
                 	Q.Q9();
                 	break;
+                case 12:
+                	Q.Q12();
+                	break;
+                case 13:
+                	Q.Q13();
+                	break;
+                case 17:
+                	Q.Q17();
+                	break;
                 case 18:
                 	Q.Q18();
                 	break;
+                case 19:
+                	Q.Q19();
                 case 20:
                 	Q.Q20();
                 	break;

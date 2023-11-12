@@ -15,7 +15,7 @@ public class Query {
 	
 	public void Q2() throws IOException {
 		try {
-			System.out.println("payment_type: ");
+			System.out.print("payment_type: ");
 			line = br.readLine();
 			String paymentType = line.toString();
 		    
@@ -48,7 +48,7 @@ public class Query {
 	
 	public void Q3() throws IOException {
 		try {
-			System.out.println("max_ingredient_Count: ");
+			System.out.print("max_ingredient_Count: ");
 			line = br.readLine();
 			int ingredientCount = Integer.parseInt(line);
 		    
@@ -81,7 +81,7 @@ public class Query {
 
 	public void Q4() throws IOException {
 		try {
-			System.out.println("soldoutValue: ");
+			System.out.print("soldoutValue: ");
 			line = br.readLine();
 			String soldoutValue = line.toString();
 
@@ -118,7 +118,7 @@ public class Query {
 
 	public void Q6() throws IOException {
 		try {
-			System.out.println("startDate: ");
+			System.out.print("startDate: ");
 			line = br.readLine();
 			String startDate = line.toString();
 			System.out.println("endDate: ");
@@ -156,7 +156,7 @@ public class Query {
 
 	public void Q7() throws IOException {
 		try {
-			System.out.println("menu_item_name: ");
+			System.out.print("menu_item_name: ");
 			line = br.readLine();
 			String menu_item_name = line.toString();
 			
@@ -194,7 +194,7 @@ public class Query {
 
 	public void Q9() throws IOException {
 		try {
-			System.out.println("menu_item_name: ");
+			System.out.print("menu_item_name: ");
 			line = br.readLine();
 			String menu_item_name = line.toString();
 			
@@ -228,10 +228,108 @@ public class Query {
 			e.printStackTrace();
 		}
 	}
+	
+	public void Q12() throws IOException {
+		try {
+			System.out.print("customer_id: ");
+			line = br.readLine();
+			String customerID = line.toString();
+			
+			String sql = "SELECT p.order_id, SUM(mi.unit_price * po.amount)\n"
+		            + "FROM customer c\n"
+		            + "JOIN payment p ON c.customer_id = p.customer_id\n"
+		            + "JOIN part_of po ON p.order_id = po.order_id AND p.customer_id = po.customer_id\n"
+		            + "JOIN menu_item mi ON po.item_id = mi.item_id\n"
+		            + "WHERE c.customer_id = ?\n"
+		            + "GROUP BY p.order_id\n"
+		            + "ORDER BY p.order_id";
+			PreparedStatement ps = conn.prepareStatement(sql);
+	        ps.setString(1, customerID);
+	         
+	         // System.out.println(sql);
+	         
+	         ResultSet rs = ps.executeQuery();
+	         
+	         System.out.println("<< query 12 result >>");
+	         System.out.printf("%-12s | %-9s\n", "Order_id", "Total Price");
+	         System.out.println("--------------------------");
+	         while(rs.next()) {
+	            System.out.printf("%-12s | %-9.2f\n", rs.getString(1), rs.getDouble(2));
+	         }
+	         rs.close();
+	         System.out.println();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void Q13() throws IOException {
+		try {
+			System.out.print("Category: ");
+			line = br.readLine();
+			String category = line.toString();
+			
+			String sql = "SELECT p.order_id, p.customer_id, p.total_price\n"
+		            + "FROM PAYMENT p\n"
+		            + "WHERE p.total_price > (\n"
+		            + "    SELECT AVG(mi.unit_price)\n"
+		            + "    FROM menu_item mi\n"
+		            + "    WHERE mi.category = ?)";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+	         ps.setString(1, category);
+	         ResultSet rs = ps.executeQuery();
+	         
+	         System.out.println("<< query 13 result >>");
+	         System.out.printf("%-12s | %-12s | %s\n", "Order_id", "Customer_id", "Total Price");
+	         System.out.println("--------------------------------------");
+	         while(rs.next()) {
+	            System.out.printf("%-12s | %-12s | %.2f\n", rs.getString(1), rs.getString(2), rs.getDouble(3));
+	         }
+	         rs.close();
+	         System.out.println();
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	public void Q17() throws IOException {
+		try {
+			System.out.print("How many rows to print: ");
+			line = br.readLine();
+			int num = Integer.parseInt(line);
+
+			String sql = "SELECT inlview.item_name, inlview.order_count\r\n"
+		            + "   FROM (\r\n"
+		            + "       SELECT mi.name AS item_name, COUNT(p.item_id) AS order_count\r\n"
+		            + "       FROM menu_item mi\r\n"
+		            + "       LEFT JOIN part_of p ON mi.item_id = p.item_id\r\n"
+		            + "       GROUP BY mi.name\r\n"
+		            + "   ) inlview\r\n"
+		            + "   ORDER BY inlview.order_count DESC\r\n"
+		            + "   FETCH FIRST ? ROWS ONLY";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, num);
+			ResultSet rs = ps.executeQuery();
+			
+			System.out.println("<< query 17 result >>");
+			System.out.printf("%-12s | %s\n", "Item Name", "Order Count");
+			System.out.println("--------------------------------------");
+			while(rs.next()) {
+				System.out.printf("%-12s | %d\n", rs.getString(1), rs.getInt(2));
+			}
+		         rs.close();
+		         System.out.println();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void Q18() throws IOException {
 		try {
-			System.out.println("Total_price: ");
+			System.out.print("Total_price: ");
 			line = br.readLine();
 			int Total_price = Integer.parseInt(line);
 			
@@ -265,10 +363,42 @@ public class Query {
 			e.printStackTrace();
 		}
 	}
+	
+	public void Q19() throws IOException {
+		try {
+			System.out.print("How many items to print the manager who managed them? : ");
+			line = br.readLine();
+			int num = Integer.parseInt(line);
+
+			String sql = "SELECT ma.name, ma.phone_number\r\n"
+		            + "FROM manager ma\r\n"
+		            + "WHERE ma.manager_id IN (\r\n"
+		            + "    SELECT mg.manager_id\r\n"
+		            + "    FROM managed_item mg, menu_item mi\r\n"
+		            + "    WHERE mi.item_id = mg.item_id\r\n"
+		            + "    GROUP BY mg.manager_id, mi.category\r\n"
+		            + "    HAVING COUNT(*) >= ?)\r\n"
+		            + "ORDER BY ma.name";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+	        ps.setInt(1, num);
+	        ResultSet rs = ps.executeQuery();
+	         
+	        System.out.printf("%-30s | %s\n", "Manager Name", "Phone Number");
+	        System.out.println("---------------------------------------------------------");
+	        while(rs.next()) {
+	        	System.out.printf("%-30s | %s\n", rs.getString(1), rs.getString(2));
+	        }
+	        rs.close(); 
+	        System.out.println();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void Q20() throws IOException {
 		try {
-			System.out.println("customer_id: ");
+			System.out.print("customer_id: ");
 			line = br.readLine();
 			String customer_id = line.toString();
 			
