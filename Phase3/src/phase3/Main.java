@@ -5,14 +5,12 @@ import java.io.*;
 import java.sql.*; // import JDBC package
 
 public class Main {
-	public static final String URL = "jdbc:oracle:thin:@192.168.219.100:1521/orcl";
-	//public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	public static final String URL = "jdbc:oracle:thin:@localhost:1521/orcl";
 	public static final String USER_NAME ="teamproject"; 
 	public static final String USER_PASSWD ="comp322";
 		
 	public static void main(String[] args) throws IOException {
 		Connection conn = null; // Connection object
-		Statement stmt = null;	// Statement object
 		try {
 			// Load a JDBC driver for Oracle DBMS
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -27,7 +25,6 @@ public class Main {
 		try{
 			conn = DriverManager.getConnection(URL, USER_NAME, USER_PASSWD); 
 			System.out.println("Connected.");
-			stmt = conn.createStatement();
 		}catch(SQLException ex) {
 			ex.printStackTrace();
 			System.err.println("Cannot get a connection: " + ex.getLocalizedMessage());
@@ -38,7 +35,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		
 		Query Q = new Query(conn, sc);
-        String line = "";
+		DML D = new DML(conn, sc);
         
 		while (true) {
 			System.out.println("");
@@ -93,7 +90,7 @@ public class Main {
             }
             else if (requirement == 2) { // DML
     			System.out.println("");
-            	
+            	D.Run();
             }
             else if (requirement == 0) { // EXIT
     			System.out.println("");
@@ -106,8 +103,6 @@ public class Main {
 		
 		// Release database resources.
 		try {
-			// Close the Statement object.
-			stmt.close(); 
 			// Close the Connection object.
 			conn.close();
 		} catch (SQLException e) {
