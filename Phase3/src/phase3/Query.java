@@ -1,28 +1,28 @@
 package phase3;
 
 import java.io.*;
+import java.util.Scanner;
 import java.sql.*; // import JDBC package
 
 public class Query {
 	Connection conn;
-	BufferedReader br;
+	Scanner sc;
 	String sql = "", line = "";
 	PreparedStatement ps;
-	public Query(Connection conn, BufferedReader br) {
+	public Query(Connection conn, Scanner sc) {
 		this.conn = conn;
-		this.br = br;
+		this.sc = sc;
 	}
 	
 	public void Q2() throws IOException {
 		try {
 			System.out.print("payment_type: ");
-			line = br.readLine();
-			String paymentType = line.toString();
+			String paymentType = sc.next();
 		    
 		    sql = "SELECT distinct cu.name, cu.phone_number " +
 		                 "FROM customer cu, payment p " +
 		                 "WHERE cu.customer_id = p.customer_id " +
-		                 "AND p.payment_type =  ?";
+		                 "AND p.payment_type = ?";
 		    
 		    ps = conn.prepareStatement(sql);
 		    ps.setString(1, paymentType);
@@ -49,8 +49,7 @@ public class Query {
 	public void Q3() throws IOException {
 		try {
 			System.out.print("max_ingredient_Count: ");
-			line = br.readLine();
-			int ingredientCount = Integer.parseInt(line);
+			int ingredientCount = sc.nextInt();
 		    
 		    sql = "SELECT mi.name, COUNT(*) as count " +
 	                 "FROM menu_item mi, ingredient i, need n " +
@@ -82,8 +81,7 @@ public class Query {
 	public void Q4() throws IOException {
 		try {
 			System.out.print("soldoutValue: ");
-			line = br.readLine();
-			String soldoutValue = line.toString();
+			String soldoutValue = sc.next();
 
 		    String subquery = "SELECT po.customer_id " +
 		                      "FROM menu_item mi, part_of po " +
@@ -119,11 +117,9 @@ public class Query {
 	public void Q6() throws IOException {
 		try {
 			System.out.print("startDate: ");
-			line = br.readLine();
-			String startDate = line.toString();
-			System.out.println("endDate: ");
-			line = br.readLine();
-		    String endDate = line.toString();
+			String startDate = sc.next();
+			System.out.print("endDate: ");
+		    String endDate = sc.next();
 
 		    sql = "SELECT mi.name " +
 		                     "FROM menu_item mi " +
@@ -157,8 +153,7 @@ public class Query {
 	public void Q7() throws IOException {
 		try {
 			System.out.print("menu_item_name: ");
-			line = br.readLine();
-			String menu_item_name = line.toString();
+			String menu_item_name = sc.next();
 			
 			sql = "SELECT mi.name, mi.item_quantity, iv.total_ingredient_quantity\n"
 					+ "FROM menu_item mi\n"
@@ -195,8 +190,7 @@ public class Query {
 	public void Q9() throws IOException {
 		try {
 			System.out.print("menu_item_name: ");
-			line = br.readLine();
-			String menu_item_name = line.toString();
+			String menu_item_name = sc.next();
 			
 			sql = "SELECT m.name AS manager_name, mi.name AS menu_item_name, SUM(po.amount) AS total_ordered\n"
 					+ "FROM menu_item mi\n"
@@ -232,8 +226,7 @@ public class Query {
 	public void Q12() throws IOException {
 		try {
 			System.out.print("customer_id: ");
-			line = br.readLine();
-			String customerID = line.toString();
+			String customerID = sc.next();
 			
 			String sql = "SELECT p.order_id, SUM(mi.unit_price * po.amount)\n"
 		            + "FROM customer c\n"
@@ -266,8 +259,7 @@ public class Query {
 	public void Q13() throws IOException {
 		try {
 			System.out.print("Category: ");
-			line = br.readLine();
-			String category = line.toString();
+			String category = sc.next();
 			
 			String sql = "SELECT p.order_id, p.customer_id, p.total_price\n"
 		            + "FROM PAYMENT p\n"
@@ -297,8 +289,7 @@ public class Query {
 	public void Q17() throws IOException {
 		try {
 			System.out.print("How many rows to print: ");
-			line = br.readLine();
-			int num = Integer.parseInt(line);
+			int num = sc.nextInt();
 
 			String sql = "SELECT inlview.item_name, inlview.order_count\r\n"
 		            + "   FROM (\r\n"
@@ -330,8 +321,7 @@ public class Query {
 	public void Q18() throws IOException {
 		try {
 			System.out.print("Total_price: ");
-			line = br.readLine();
-			int Total_price = Integer.parseInt(line);
+			int Total_price = sc.nextInt();
 			
 			sql = "SELECT c.name AS customer_name, mi.name AS menu_item_name, m.name AS manager_name\n"
 					+ "FROM customer c, payment p, part_of po, menu_item mi, managed_item mani, manager m\n"
@@ -367,8 +357,7 @@ public class Query {
 	public void Q19() throws IOException {
 		try {
 			System.out.print("How many items to print the manager who managed them? : ");
-			line = br.readLine();
-			int num = Integer.parseInt(line);
+			int num = sc.nextInt();
 
 			String sql = "SELECT ma.name, ma.phone_number\r\n"
 		            + "FROM manager ma\r\n"
@@ -383,7 +372,8 @@ public class Query {
 			PreparedStatement ps = conn.prepareStatement(sql);
 	        ps.setInt(1, num);
 	        ResultSet rs = ps.executeQuery();
-	         
+	        
+	        System.out.println("<< Query 19 Result >>");
 	        System.out.printf("%-30s | %s\n", "Manager Name", "Phone Number");
 	        System.out.println("---------------------------------------------------------");
 	        while(rs.next()) {
@@ -399,8 +389,7 @@ public class Query {
 	public void Q20() throws IOException {
 		try {
 			System.out.print("customer_id: ");
-			line = br.readLine();
-			String customer_id = line.toString();
+			String customer_id = sc.next();
 			
 			sql = "SELECT c.name AS customer_name, mi.name AS menu_item_name, ch.name AS chef_name\n"
 					+ "FROM customer c, payment p, part_of po, menu_item mi, chef ch\n"

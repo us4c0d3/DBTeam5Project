@@ -1,5 +1,6 @@
 package phase3;
 
+import java.util.*;
 import java.io.*;
 import java.sql.*; // import JDBC package
 
@@ -34,9 +35,9 @@ public class Main {
 			System.exit(1);
 		}
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		Scanner sc = new Scanner(System.in);
 		
-		Query Q = new Query(conn, br);
+		Query Q = new Query(conn, sc);
         String line = "";
         
 		while (true) {
@@ -45,15 +46,13 @@ public class Main {
 			System.out.println("1. Query");
 			System.out.println("2. DML");
 			System.out.print("Select Type: ");
-            line = br.readLine();
-            int requirement = Integer.parseInt(line);
+            int requirement = sc.nextInt();
             
             if (requirement == 1) { // Query
     			System.out.println("");
     			System.out.println("Query: 2, 3, 4, 6, 7, 9, 12, 13, 17, 18, 19, 20");
     			System.out.print("Select Query Type: ");
-            	line = br.readLine();
-                int query_number = Integer.parseInt(line);
+                int query_number = sc.nextInt();
                 switch (query_number) {
                 case 2:
                 	Q.Q2();
@@ -102,6 +101,8 @@ public class Main {
             	break;
             }
 		}
+		
+		sc.close();
 		
 		// Release database resources.
 		try {
