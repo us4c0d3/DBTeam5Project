@@ -71,3 +71,70 @@ DML: Customer, Manager, Chef 중 어떤 엔티티에 대한 DML을 선택할 것
     3. Chef 정보 삭제 : Chef로 부터 id를 입력 받고, Chef id에 해당하는 정보를 삭제하는 delete를 실행한다.
 
 아래는 입출력 예제입니다.
+Success!
+Connected.
+
+0. Exit
+1. Query
+2. DML
+Select Type: 2
+
+1. Customer
+2. Manager
+3. Chef
+Select Entity: 1
+
+1. INSERT
+2. UPDATE
+3. DELETE
+Select DML type: 1
+
+Name: Customer1
+Password: comp322
+Phone_number: 01012345678
+CU000201 customer insert
+0. Exit
+1. Query
+2. DML
+Select Type: 2
+
+1. Customer
+2. Manager
+3. Chef
+Select Entity: 1
+
+1. INSERT
+2. UPDATE
+3. DELETE
+Select DML type: 2
+
+Customer id: CU000201
+
+Attribute: Name Password Phone_number
+Select Attribute: Name
+Name: Customer 201
+CU000201 customer update
+Name: Customer 201
+0. Exit
+1. Query
+2. DML
+Select Type: 2
+
+1. Customer
+2. Manager
+3. Chef
+Select Entity: 1
+
+1. INSERT
+2. UPDATE
+3. DELETE
+Select DML type: 3
+
+Customer id: CU000201
+CU000201 customer delete
+0. Exit
+1. Query
+2. DML
+Select Type: 0
+
+Exit
