@@ -1,4 +1,6 @@
-Eclipse IDE를 사용하였고 Java 11, ojdbc10.jar를 사용했습니다.
+Phase2대비 ERD와 Relational schema가 일부 수정되었습니다. 로그인을 가정하고 Customer와 Manager 엔티티에 ID 속성이 있었으나 customer_id와 manager_id가 그 역할을 대체할 수 있다고 생각하여 두 엔티티에서 ID 속성을 삭제하였습니다. 수정된 사항이 포함된 DDL 및 Insert문은 각각 Team5-Phase2-1-modified.sql, Team5-Phase2-2-modified.sql로 첨부하였습니다.
+
+Eclipse IDE를 사용하였고 Java 11, ojdbc10.jar를 사용했습니다. Database 접속을 위한 USER_NAME 및 USER_PASSWD는 각각 teamproject, comp322입니다.
 
 Main.java에서 실행을 하면 
 
@@ -67,6 +69,3 @@ DML: Customer, Manager, Chef 중 어떤 엔티티에 대한 DML을 선택할 것
     1. Chef 정보 입력 : chef로부터 이름과 휴대폰 번호를 입력받는다. 신규 Chef id는 기존에 순차적으로 저장되어 있는 Chef_id에서 가장 큰 id 번호에 1을 더해 생성한다. 최종적으로 chef의 id, 이름, 휴대폰 번호를 추가하는 insert를 실행한다.
     2. Chef 정보 수정 : chef로부터 id를 입력 받고, 이름과 휴대폰번호 중 수정할 항목을 선택하게 한다. chef가 선택한 수정 항목에 대해 새로운 값을 입력 받게 하고 Update를 실행한다.
     3. Chef 정보 삭제 : Chef로 부터 id를 입력 받고, Chef id에 해당하는 정보를 삭제하는 delete를 실행한다.
-
-
-Phase2대비 ERD와 Relational schema가 일부 수정되었습니다. 로그인을 가정하고 Customer와 Manager 엔티티에 ID 속성이 있었으나 customer_id와 manager_id가 그 역할을 대체할 수 있다고 생각하여 두 엔티티에서 ID 속성을 삭제하였습니다. 수정된 사항이 포함된 DDL 및 Insert문은 각각 Team5-Phase2-1-modified.sql, Team5-Phase2-2-modified.sql로 첨부하였습니다.
