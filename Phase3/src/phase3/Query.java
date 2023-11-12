@@ -39,6 +39,9 @@ public class Query {
 		        System.out.println(name
 		        		+  "     |     " + phoneNumber);
 		    }
+		    System.out.println();
+		    
+		    rs.close();
 		    ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -72,6 +75,10 @@ public class Query {
 		        System.out.println(name
 		        		+ "     |     " + count);
 		    }
+		    System.out.println();
+		    
+		    rs.close();
+		    ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,6 +114,10 @@ public class Query {
 		        System.out.println(customerId
 		        		+ "     |     " + name);
 		    }
+		    System.out.println();
+		    
+		    rs.close();
+		    ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -144,6 +155,10 @@ public class Query {
 		        String name = rs.getString(1);
 		        System.out.println(name);
 		    }
+		    System.out.println();
+		    
+		    rs.close();
+		    ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -180,7 +195,10 @@ public class Query {
 						+  "     |     " + item_quantity
 						+  "     |     " + total_ingredient_quantity);
 			}
+			System.out.println();
+			
 			rs.close();
+			ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -216,7 +234,10 @@ public class Query {
 						+  "     |     " + menu_item_name2
 						+  "     |     " + total_ordered);
 			}
+			System.out.println();
+			
 			rs.close();
+			ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -249,8 +270,10 @@ public class Query {
 	         while(rs.next()) {
 	            System.out.printf("%-12s | %-9.2f\n", rs.getString(1), rs.getDouble(2));
 	         }
-	         rs.close();
 	         System.out.println();
+	         
+	         rs.close();
+	         ps.close();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -278,8 +301,10 @@ public class Query {
 	         while(rs.next()) {
 	            System.out.printf("%-12s | %-12s | %.2f\n", rs.getString(1), rs.getString(2), rs.getDouble(3));
 	         }
-	         rs.close();
 	         System.out.println();
+	         
+	         rs.close();
+	         ps.close();
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -311,8 +336,10 @@ public class Query {
 			while(rs.next()) {
 				System.out.printf("%-12s | %d\n", rs.getString(1), rs.getInt(2));
 			}
-		         rs.close();
-		         System.out.println();
+			System.out.println();
+			
+			rs.close();
+			ps.close();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -347,7 +374,10 @@ public class Query {
 						+  "     |     " + menu_item_name
 						+  "     |     " + manager_name);
 			}
+			System.out.println();
+			
 			rs.close();
+			ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -379,8 +409,10 @@ public class Query {
 	        while(rs.next()) {
 	        	System.out.printf("%-30s | %s\n", rs.getString(1), rs.getString(2));
 	        }
-	        rs.close(); 
 	        System.out.println();
+	        
+	        rs.close(); 
+	        ps.close();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -415,7 +447,10 @@ public class Query {
 						+  "     |     " + menu_item_name
 						+  "     |     " + chef_name);
 			}
+			System.out.println();
+			
 			rs.close();
+			ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

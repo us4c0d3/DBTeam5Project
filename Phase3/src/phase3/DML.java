@@ -21,18 +21,17 @@ public class DML {
 	}
 	
 	public void Run() throws IOException {
-		System.out.println("");
-		
 		System.out.println("1. Customer");
 		System.out.println("2. Manager");
 		System.out.println("3. Chef");
 		System.out.print("Select Entity: ");
 		int Entity = sc.nextInt();
+		System.out.println();
 		
 		System.out.println("1. INSERT");
 		System.out.println("2. UPDATE");
 		System.out.println("3. DELETE");
-		System.out.print("Select DML type:");
+		System.out.print("Select DML type: ");
 		int DML_type = sc.nextInt();
 		
 		switch (Entity) {

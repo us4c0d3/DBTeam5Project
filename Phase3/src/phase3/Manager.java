@@ -15,6 +15,7 @@ public class Manager {
 	}
 	
 	public String getlastId() {
+		String lastId = "MA000000";
 		try {
 			String query = "SELECT c.manager_id\r\n"
 					+ "FROM manager c\r\n"
@@ -23,12 +24,14 @@ public class Manager {
 			ps = conn.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) 
-		        return rs.getString(1);
+		        lastId = rs.getString(1);
+			rs.close();
+			ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "MA100000";
+		return lastId;
 	}
 	
 	public static String generateNextId(String lastId) {
@@ -38,9 +41,10 @@ public class Manager {
 	
 	public void INSERT() throws IOException {
 		try {
-			System.out.println("");
+			System.out.println();
 			System.out.print("Name: ");
-			String Name = sc.next();
+			sc.nextLine();
+			String Name = sc.nextLine();
 			
 			System.out.print("Password: ");
 			String Password = sc.next();
@@ -74,17 +78,18 @@ public class Manager {
 	
 	public void UPDATE() throws IOException {
 		try {
-			System.out.println("");
+			System.out.println();
 			System.out.println("Manager id: ");
 			String id = sc.next();
 			
-			System.out.println("");
+			System.out.println();
 			System.out.println("Attribute: Name Password Phone_number");
 			System.out.print("Select Attribute: ");
 			line = sc.next();
 			
 			System.out.printf("%s: ", line);
-			String update_value = sc.next();
+			sc.nextLine();
+			String update_value = sc.nextLine();
 			
 			sql = "UPDATE MANAGER "
 					+ "SET " + line + " = ? "
@@ -112,7 +117,7 @@ public class Manager {
 	
 	public void DELETE() throws IOException {
 		try {
-			System.out.println("");
+			System.out.println();
 			System.out.println("Manager id: ");
 			String id = sc.next();
 			

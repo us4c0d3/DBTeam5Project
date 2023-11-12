@@ -5,7 +5,7 @@ import java.io.*;
 import java.sql.*; // import JDBC package
 
 public class Main {
-	public static final String URL = "jdbc:oracle:thin:@localhost:1521/orcl";
+	public static final String URL = "jdbc:oracle:thin:@192.168.219.100:1521/orcl";
 	public static final String USER_NAME ="teamproject"; 
 	public static final String USER_PASSWD ="comp322";
 		
@@ -31,22 +31,20 @@ public class Main {
 			System.err.println("Cannot get a connection: " + ex.getMessage());
 			System.exit(1);
 		}
-
+		System.out.println();
 		Scanner sc = new Scanner(System.in);
 		
 		Query Q = new Query(conn, sc);
 		DML D = new DML(conn, sc);
         
 		while (true) {
-			System.out.println("");
 			System.out.println("0. Exit");
 			System.out.println("1. Query");
 			System.out.println("2. DML");
 			System.out.print("Select Type: ");
             int requirement = sc.nextInt();
-            
+            System.out.println();
             if (requirement == 1) { // Query
-    			System.out.println("");
     			System.out.println("Query: 2, 3, 4, 6, 7, 9, 12, 13, 17, 18, 19, 20");
     			System.out.print("Select Query Type: ");
                 int query_number = sc.nextInt();
@@ -89,11 +87,9 @@ public class Main {
                 }
             }
             else if (requirement == 2) { // DML
-    			System.out.println("");
             	D.Run();
             }
             else if (requirement == 0) { // EXIT
-    			System.out.println("");
             	System.out.println("Exit");
             	break;
             }

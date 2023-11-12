@@ -20,6 +20,7 @@ public class Chef {
     }
 	
 	public String getlastId() {
+		String lastId = "CH000000";
 		try {
 			String query = "SELECT c.chef_id\r\n"
 					+ "FROM chef c\r\n"
@@ -28,18 +29,22 @@ public class Chef {
 			ps = conn.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) 
-		        return rs.getString(1);
+		        lastId = rs.getString(1);
+			rs.close();
+			ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(1);
 		}
-		return "CH100000";
+		return lastId;
 	}
 	
 	public void INSERT() throws IOException {
 	    try {
 	        System.out.print("1. input chef's name: ");
-	        String chefName = sc.next();
+	        sc.nextLine();
+	        String chefName = sc.nextLine();
 	        System.out.print("2. input chef's phoneNumber: ");
 	        String chefPhone = sc.next();
 
@@ -71,17 +76,18 @@ public class Chef {
 	
 	public void UPDATE() throws IOException {
 		try {
-			System.out.println("");
+			System.out.println();
 			System.out.print("input chef's id: ");
 			String chefId = sc.next();
 			
-			System.out.println("");
+			System.out.println();
 			System.out.println("Attribute: Name Phone_number");
 			System.out.print("Select Attribute: ");
 			String line = sc.next();
 			
 			System.out.printf("%s: ", line);
-			String update_value = sc.next();
+			sc.nextLine();
+			String update_value = sc.nextLine();
 			
 			sql = "UPDATE CHEF "
 					+ "SET " + line + " = ? "
@@ -110,8 +116,8 @@ public class Chef {
 	
 	public void DELETE() throws IOException {
 		try {
-			System.out.printf("");
-			System.out.printf("Chef id: ");
+			System.out.println();
+			System.out.print("Chef id: ");
 			String chefId = sc.next();
 			
 			sql = "DELETE FROM CHEF "

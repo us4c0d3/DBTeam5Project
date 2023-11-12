@@ -69,3 +69,5 @@ DML: Customer, Manager, Chef 중 어떤 엔티티에 대한 DML을 선택할 것
     1. Chef 정보 입력 : chef로부터 이름과 휴대폰 번호를 입력받는다. 신규 Chef id는 기존에 순차적으로 저장되어 있는 Chef_id에서 가장 큰 id 번호에 1을 더해 생성한다. 최종적으로 chef의 id, 이름, 휴대폰 번호를 추가하는 insert를 실행한다.
     2. Chef 정보 수정 : chef로부터 id를 입력 받고, 이름과 휴대폰번호 중 수정할 항목을 선택하게 한다. chef가 선택한 수정 항목에 대해 새로운 값을 입력 받게 하고 Update를 실행한다.
     3. Chef 정보 삭제 : Chef로 부터 id를 입력 받고, Chef id에 해당하는 정보를 삭제하는 delete를 실행한다.
+
+아래는 입출력 예제입니다.
