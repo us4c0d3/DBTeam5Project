@@ -47,6 +47,7 @@ public class DML {
 			case 3:
 				CU.DELETE();
 			}
+			break;
 		case 2:
 			switch (DML_type) {
 			case 1:
@@ -58,6 +59,7 @@ public class DML {
 			case 3:
 				MA.DELETE();
 			}
+			break;
 		case 3:
 			switch (DML_type) {
 			case 1:
@@ -69,6 +71,7 @@ public class DML {
 			case 3:
 				CH.DELETE();
 			}
+			break;
 		}
 		
 	}
