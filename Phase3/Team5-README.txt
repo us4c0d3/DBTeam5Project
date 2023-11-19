@@ -71,27 +71,27 @@ DML: Customer, Manager, Chef, Menu, Ingredient 중 어떤 엔티티에 대한 DM
     3. Chef 정보 삭제 : Chef로 부터 id를 입력 받고, Chef id에 해당하는 정보를 삭제하는 delete를 실행한다.
 
 5. Menu : Menu에 대한 정보 입력, 수정을 수행합니다.
-     1. Menu 정보 입력 : Manager로부터 Menu start_date와 end_date를 입력받는다. 신규 Menu_id는 기존에 순차적으로 저장되어 있는 Menu_id에 가장 큰 id번호에 1을 더해 생성한다. 최종적으로 Menu_id, start_date, end_date를 추가하는 insert를 실행한다.
-     2. Menu 정보 수정 : Manager로부터 id를 입력 받고, 메뉴의 Start_date와 End_date 중 수정할 항목을 선택하게 한다. Manager가 선택한 수정 항목에 대해 새로운 값을 입력 받게 하고 Update를 실행한다.
+    1. Menu 정보 입력 : Manager로부터 Menu start_date와 end_date를 입력받는다. 신규 Menu_id는 기존에 순차적으로 저장되어 있는 Menu_id에 가장 큰 id번호에 1을 더해 생성한다. 최종적으로 Menu_id, start_date, end_date를 추가하는 insert를 실행한다.
+    2. Menu 정보 수정 : Manager로부터 id를 입력 받고, 메뉴의 Start_date와 End_date 중 수정할 항목을 선택하게 한다. Manager가 선택한 수정 항목에 대해 새로운 값을 입력 받게 하고 Update를 실행한다.
 
 5. Ingredient: Ingredient에 대한 정보 수정을 수행합니다.
-     1. Ingredient 정보 수정: Menager로부터 Ingredeint id를 입력 받고, Unit_price와 Quantity 중 수정할 항목을 선택하게 한다. 
+    1. Ingredient 정보 수정: Menager로부터 Ingredeint id를 입력 받고, Unit_price와 Quantity 중 수정할 항목을 선택하게 한다. 
                               Manager가 선택한 수정 항목에 대해 새로운 값을 입력 받게 하고 Update를 실행한다.
 
 6. Menu_item : Menu_item에 대한 정보 입력을 수행합니다.
-     1. Menu_item 정보 입력 : Manager로부터 Menu_item의 이름, 카테고리 명을 입력받는다. 신규 Menu_item은 기존에 순차적으로 저장 되었있는 Item_id에서 가장 큰 id번호에 1을 더해 생성한다. 최종적으로 Item_id, Name, Category를 추가하는 insert를 실행한다.
+    1. Menu_item 정보 입력 : Manager로부터 Menu_item의 이름, 카테고리 명을 입력받는다. 신규 Menu_item은 기존에 순차적으로 저장 되었있는 Item_id에서 가장 큰 id번호에 1을 더해 생성한다. 최종적으로 Item_id, Name, Category를 추가하는 insert를 실행한다.
 
 7. contains : contains에 대한 정보 입력을 수행합니다.
-       1. contains 정보 입력 : Menu와 Menu_item이 생성되면, Menu와 Menu_item의 신규 Menu_id와 Item_id를 입력 받게 하고 insert를 실행한다.
+    1. contains 정보 입력 : Menu와 Menu_item이 생성되면, Menu와 Menu_item의 신규 Menu_id와 Item_id를 입력 받게 하고 insert를 실행한다.
 
 8. need : need에 대한 정보 입력을 수행합니다.
-        1. need 정보 입력 : Menu_item이 추가되면, Menu_item의 신규 Item_id와 Ingredient_id를 입력 받게 하고 insert를 실행한다.  
+    1. need 정보 입력 : Menu_item이 추가되면, Menu_item의 신규 Item_id와 Ingredient_id를 입력 받게 하고 insert를 실행한다.  
 
 9. edited by : edited_menu에 대한 정보 입력을 수행합니다.
-        1.  edited_menu 정보 입력 : manager가 Menu를 생성 또는 수정하면, 해당 Menu의 Menu_id와 manager_id를 추가하는 insert를 실행한다. 
+    1.  edited_menu 정보 입력 : manager가 Menu를 생성 또는 수정하면, 해당 Menu의 Menu_id와 manager_id를 추가하는 insert를 실행한다. 
  
 10 managed by : managed_item에 대한 정보 입력을 수행합니다.
-        1. magaged_item 정보 입력 : manager가 Menu_item을 생성 또는 수정하면, 해당 Menu_item의 item_id와 manager_id를 추가하는 insert를 실행한다. 
+    1. magaged_item 정보 입력 : manager가 Menu_item을 생성 또는 수정하면, 해당 Menu_item의 item_id와 manager_id를 추가하는 insert를 실행한다. 
 
 
 
