@@ -94,8 +94,6 @@ DML: Customer, Manager, Chef, Menu, Ingredient 중 어떤 엔티티에 대한 DM
     1. magaged_item 정보 입력 : manager가 Menu_item을 생성 또는 수정하면, 해당 Menu_item의 item_id와 manager_id를 추가하는 insert를 실행한다. 
 
 
-
-
 DML은 아래의 Requirement를 따릅니다.
 1. Customer 및 Manager 관련 기능
 새로운 직원 또는 소비자의 데이터를 테이블에 삽입하거나 기존 데이터를 수정, 삭제하거나 로그인을 위해 정보를 검색할 수 있습니다.
@@ -110,3 +108,8 @@ chef는 시스템에 접근 권한이 없이 직원 정보만을 테이블에 �
   * 직원 정보 등록: ID를 제외한 모든 정보를 입력하여 삽입, ID는 시스템에서 생성하여 발급
   * 정보 수정: ID를 제외한 개인정보 수정 가능
   * 퇴사: 퇴사시 chef정보 삭제
+  
+3. 메뉴 관련 기능
+Manager는 ingredient, menu_item 및 menu에 대한 접근 권한을 가집니다. ingredient의 단위 가격 및 재고를 수정할 수 있습니다. 그리고 menu_item을 추가할 수 있으며, menu는 menu_item에서 정보를 조회해 가져옵니다. 이는 각각 need 및 contains 테이블에 저장됩니다.
+  * 원재료 수정: Ingredient테이블에서 unit price 또는 quantity 수정
+  * menu_item추가: 항목의 이름과 
