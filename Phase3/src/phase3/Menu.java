@@ -50,7 +50,7 @@ public class Menu {
 			String end_date = sc.next();
 			
 			String id = generateNextId(getlastId());
-			sql = "INSERT INTO MANAGER VALUES(?, TO_DATE(?, 'yyyy-mm-dd'), TO_DATE(?, 'yyyy-mm-dd'))";
+			sql = "INSERT INTO MENU VALUES(?, TO_DATE(?, 'yyyy-mm-dd'), TO_DATE(?, 'yyyy-mm-dd'))";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.setString(2, start_date);
@@ -83,12 +83,12 @@ public class Menu {
 			System.out.print("Select Attribute: ");
 			line = sc.next();
 			
-			System.out.printf("%s: ", line);
+			System.out.printf("%s(yyyy-mm-dd): ", line);
 			sc.nextLine();
 			String update_value = sc.nextLine();
 			
 			sql = "UPDATE MENU "
-					+ "SET " + line + " = ? "
+					+ "SET " + line + " = TO_DATE(?, 'yyyy-mm-dd') "
 					+ "WHERE Menu_id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, update_value);
