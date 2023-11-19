@@ -53,7 +53,7 @@ customer가 주문한 menu_item의 이름과 해당 menu_item을 만드는 chef�
 
 
 메인에서 2 입력시 DML 클래스가 실행됩니다.
-DML: Customer, Manager, Chef 중 어떤 엔티티에 대한 DML을 선택할 것인지 입력받은 후 각각의 정보 입력, 수정, 삭제를 하는 기능을 선택합니다.
+DML: Customer, Manager, Chef, Ingredeint, Menu 중 어떤 엔티티에 대한 DML을 선택할 것인지 입력받은 후 각각의 정보 입력, 수정, 삭제를 하는 기능을 선택합니다.
 
 1. Customer: Customer에 대한 정보 입력, 수정, 삭제를 수행합니다. 
     1. Customer 정보 입력 : Customer로부터 이름과 비밀번호 그리고 휴대폰 번호를 입력받는다. 신규 Customer id는 기존에 순차적으로 저장되어 있는 Customer_id에서 가장 큰 id 번호에 1을 더해 생성한다. 최종적으로 customer의 id, 이름, 비밀번호, 휴대폰 번호를 추가하는 insert를 실행한다.
@@ -70,7 +70,26 @@ DML: Customer, Manager, Chef 중 어떤 엔티티에 대한 DML을 선택할 것
     2. Chef 정보 수정 : chef로부터 id를 입력 받고, 이름과 휴대폰번호 중 수정할 항목을 선택하게 한다. chef가 선택한 수정 항목에 대해 새로운 값을 입력 받게 하고 Update를 실행한다.
     3. Chef 정보 삭제 : Chef로 부터 id를 입력 받고, Chef id에 해당하는 정보를 삭제하는 delete를 실행한다.
 
-아래는 입출력 예제입니다.
+4. Ingredient: Ingredient에 대한 정보 수정을 수행합니다.
+     1. Ingredient 정보 수정: Menager로부터 Ingredeint id를 입력 받고, Unit_price와 Quantity 중 수정할 항목을 선택하게 한다. 
+                                        Manager가 선택한 수정 항목에 대해 새로운 값을 입력 받게 하고 Update를 실행한다.
+
+5. Menu : Menu에 대한 정보 입력, 수정을 수행합니다.
+     1. Menu 정보 입력 : Manager로부터 Menu start_date와 end_date를 입력받는다. 신규 Menu_id는 기존에 순차적으로 저장되어 있는 Menu_id에 가장 큰 id번호에 1을 더해 생성한다. 최종적으로 Menu_id, start_date, end_date를 추가하는
+        insert를 실행한다.
+   2. Menu 정보 수정 : Manager로부터 id를 입력 받고, 메뉴의 Start_date와 End_date 중 수정할 항목을 선택하게 한다. Manager가 선택한 수정 항목에 대해 새로운 값을 입력 받게 하고 Update를 실행한다.
+
+
+6. Menu_item : Menu_item에 대한 정보 입력을 수행합니다.
+
+7. contains
+
+8. need
+
+9. edited by
+
+10 managed by
+
 Success!
 Connected.
 
