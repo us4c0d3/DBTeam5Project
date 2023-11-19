@@ -112,7 +112,7 @@ public class DML {
 				EM.INSERT();
 				break;
 			case 2:
-				CH.UPDATE();
+				ME.UPDATE();
 				break;
 			case 3:
 				System.out.println("DELETE 불가");
@@ -134,7 +134,7 @@ public class DML {
 				MI.INSERT();
 				break;
 			case 2:
-				CH.UPDATE();
+				System.out.println("UPDATE 불가");
 				break;
 			case 3:
 				System.out.println("DELETE 불가");
@@ -146,7 +146,7 @@ public class DML {
 				System.out.println("INSERT 불가");
 				break;
 			case 2:
-				CH.UPDATE();
+				IN.UPDATE();
 				break;
 			case 3:
 				System.out.println("DELETE 불가");
