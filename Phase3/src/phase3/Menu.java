@@ -39,7 +39,8 @@ public class Menu {
         return String.format("ME%06d", numPart);
     }
 	
-	public void INSERT() throws IOException {
+	public String INSERT() throws IOException {
+		String id = "";
 		try {
 			System.out.println();
 			System.out.print("start_date(yyyy-mm-dd): ");
@@ -49,7 +50,7 @@ public class Menu {
 			System.out.print("end_date(yyyy-mm-dd): ");
 			String end_date = sc.next();
 			
-			String id = generateNextId(getlastId());
+			id = generateNextId(getlastId());
 			sql = "INSERT INTO MENU VALUES(?, TO_DATE(?, 'yyyy-mm-dd'), TO_DATE(?, 'yyyy-mm-dd'))";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
@@ -70,6 +71,7 @@ public class Menu {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return id;
 	}
 	
 	public void UPDATE() throws IOException {
@@ -111,4 +113,3 @@ public class Menu {
 		}
 	}
 }
-
