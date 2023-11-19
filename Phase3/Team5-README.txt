@@ -95,70 +95,18 @@ DML: Customer, Manager, Chef, Menu, Ingredient 중 어떤 엔티티에 대한 DM
 
 
 
-Success!
-Connected.
 
-0. Exit
-1. Query
-2. DML
-Select Type: 2
-
-1. Customer
-2. Manager
-3. Chef
-Select Entity: 1
-
-1. INSERT
-2. UPDATE
-3. DELETE
-Select DML type: 1
-
-Name: Customer1
-Password: comp322
-Phone_number: 01012345678
-CU000201 customer insert
-0. Exit
-1. Query
-2. DML
-Select Type: 2
-
-1. Customer
-2. Manager
-3. Chef
-Select Entity: 1
-
-1. INSERT
-2. UPDATE
-3. DELETE
-Select DML type: 2
-
-Customer id: CU000201
-
-Attribute: Name Password Phone_number
-Select Attribute: Name
-Name: Customer 201
-CU000201 customer update
-Name: Customer 201
-0. Exit
-1. Query
-2. DML
-Select Type: 2
-
-1. Customer
-2. Manager
-3. Chef
-Select Entity: 1
-
-1. INSERT
-2. UPDATE
-3. DELETE
-Select DML type: 3
-
-Customer id: CU000201
-CU000201 customer delete
-0. Exit
-1. Query
-2. DML
-Select Type: 0
-
-Exit
+DML은 아래의 Requirement를 따릅니다.
+1. Customer 및 Manager 관련 기능
+새로운 직원 또는 소비자의 데이터를 테이블에 삽입하거나 기존 데이터를 수정, 삭제하거나 로그인을 위해 정보를 검색할 수 있습니다.
+  * 회원 가입: ID를 제외한 모든 정보를 입력하여 기입, 회원 아이디는 시스템에서 생성하여 발급
+  * 회원 정보 수정: 회원은 본인 계정의 정보 수정이 가능. 단, ID는 수정 불가
+  * 로그인: 회원은 아이디와 비밀번호를 입력하고 application에서 로그인
+  * 회원탈퇴: 회원 정보 삭제
+  * 계정 권한: Customer와 Manager는 속성은 비슷하나 권한 등이 달라 다른 테이블을 사용
+  
+2. Chef 관련 기능
+chef는 시스템에 접근 권한이 없이 직원 정보만을 테이블에 저장하고 퇴사시 삭제합니다.
+  * 직원 정보 등록: ID를 제외한 모든 정보를 입력하여 삽입, ID는 시스템에서 생성하여 발급
+  * 정보 수정: ID를 제외한 개인정보 수정 가능
+  * 퇴사: 퇴사시 chef정보 삭제
