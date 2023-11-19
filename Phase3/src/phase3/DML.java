@@ -18,6 +18,7 @@ public class DML {
 	Managed_item MI;
 	Contains CO;
 	Edited_menu EM;
+	Login LO;
 	String id = "";
 	PreparedStatement ps;
 	public DML(Connection conn, Scanner sc) {
@@ -33,6 +34,7 @@ public class DML {
 		this.MI = new Managed_item(conn, sc);
 		this.CO = new Contains(conn, sc);
 		this.EM = new Edited_menu(conn, sc);
+		this.LO = new Login(conn, sc);
 	}
 	
 	public void Run() throws IOException {
@@ -42,15 +44,20 @@ public class DML {
 		System.out.println("4. Menu");
 		System.out.println("5. Menu_item");
 		System.out.println("6. Ingredient");
-		System.out.print("Select Entity: ");
+		System.out.println("7. Login");
+		System.out.print("Select Entity or Query: ");
 		int Entity = sc.nextInt();
 		System.out.println();
 		
-		System.out.println("1. INSERT");
-		System.out.println("2. UPDATE");
-		System.out.println("3. DELETE");
-		System.out.print("Select DML type: ");
-		int DML_type = sc.nextInt();
+		int DML_type = 0;
+		if (Entity != 7) {
+			System.out.println("1. INSERT");
+			System.out.println("2. UPDATE");
+			System.out.println("3. DELETE");
+			System.out.print("Select DML type: ");
+			DML_type = sc.nextInt();
+		}
+		
 		
 		switch (Entity) {
 		case 1:
@@ -144,6 +151,9 @@ public class DML {
 			case 3:
 				System.out.println("DELETE 불가");
 			}
+			break;
+		case 7:
+			LO.Run();
 			break;
 		}
 	}
