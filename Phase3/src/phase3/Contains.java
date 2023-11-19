@@ -25,22 +25,22 @@ public class Contains {
 		}
 		try {
 			System.out.println();
-			System.out.print("Menu_item id: ");
+			System.out.print("Menu item id: ");
 			sc.nextLine();
-			String Menu_item_id = sc.nextLine();
+			String Item_id = sc.nextLine();
 			
 			
-			sql = "INSERT INTO Contains(Menu_id, Menu_item) VALUES(?, ?)";
+			sql = "INSERT INTO Contains(Menu_id, Item_id) VALUES(?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, Menu_id);
-			ps.setString(2, Menu_item_id);
+			ps.setString(2, Item_id);
 			
 			int res = ps.executeUpdate();
 			if (res == 0) {
 				System.out.println("Can't insert");
 			}
 			else {
-				System.out.println(Menu_id + " " + Menu_item_id + " Contains insert");
+				System.out.println(Menu_id + " " + Item_id + " Contains insert");
 			}
 			
 			//conn.commit();
