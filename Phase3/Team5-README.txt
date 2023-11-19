@@ -112,4 +112,4 @@ chef는 시스템에 접근 권한이 없이 직원 정보만을 테이블에 �
 3. 메뉴 관련 기능
 Manager는 ingredient, menu_item 및 menu에 대한 접근 권한을 가집니다. ingredient의 단위 가격 및 재고를 수정할 수 있습니다. 그리고 menu_item을 추가할 수 있으며, menu는 menu_item에서 정보를 조회해 가져옵니다. 이는 각각 need 및 contains 테이블에 저장됩니다.
   * 원재료 수정: Ingredient테이블에서 unit price 또는 quantity 수정
-  * menu_item추가: 항목의 이름과 
+  * menu_item추가: 항목의 이름과 재료를 
