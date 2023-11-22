@@ -49,11 +49,12 @@ public class Payment {
 	public String INSERT(String customerId, String paymentType, String cardInfo, String chefId) {
 		String orderId = "";
 		try {
-			sql = "INSERT PAYMENT (order_id, customer_id, total_price, payment_type, card_info, chef_id) "
+			sql = "INSERT INTO PAYMENT (order_id, customer_id, total_price, payment_type, card_info, chef_id) "
 				+ "VALUES (?, ?, ?, ?, ?, ?)";
 
 			orderId = generateNextId(getLastId());
 
+			ps = this.conn.prepareStatement(sql);
 			ps.setString(1, orderId);
 			ps.setString(2, customerId);
 			ps.setInt(3, 0);
@@ -64,8 +65,7 @@ public class Payment {
 				ps.setNull(5, Types.VARCHAR);
 			}
 			ps.setString(6, chefId);
-
-			ps.executeQuery();
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "error";
@@ -83,11 +83,10 @@ public class Payment {
 	public int UPDATE(String updateAttribute, String updateValue, String updateId) {
 		int res = -1;
 		try {
-			sql = "UPDATE PAYMENT SET ? = ? WHERE order_id = ?";
+			sql = "UPDATE PAYMENT SET " + updateAttribute + " = ? WHERE order_id = ?";
 			ps = this.conn.prepareStatement(sql);
-			ps.setString(1, updateAttribute);
-			ps.setString(2, updateValue);
-			ps.setString(3, updateId);
+			ps.setString(1, updateValue);
+			ps.setString(2, updateId);
 
 			res = ps.executeUpdate();
 		} catch (SQLException e) {
