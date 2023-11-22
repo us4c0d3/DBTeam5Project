@@ -11,7 +11,7 @@ public class Payment {
 	PreparedStatement ps;
 	String sql = "";
 
-	private Payment(Connection conn) {
+	public Payment(Connection conn) {
 		this.conn = conn;
 	}
 
