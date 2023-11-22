@@ -71,6 +71,12 @@ public class Payment {
 			return "error";
 		}
 
+		try {
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return orderId;
 	}
 
@@ -84,6 +90,12 @@ public class Payment {
 			ps.setString(3, updateId);
 
 			res = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
