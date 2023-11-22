@@ -110,4 +110,19 @@ public class Payment {
 		}
 		return res;
 	}
+
+	public ResultSet SELECT(String customerId) {
+		ResultSet rs = null;
+		try {
+			sql = "SELECT * FROM PAYMENT WHERE customer_id = ?";
+			ps = this.conn.prepareStatement(sql);
+			ps.setString(1, customerId);
+
+			rs = ps.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return rs;
+	}
 }
