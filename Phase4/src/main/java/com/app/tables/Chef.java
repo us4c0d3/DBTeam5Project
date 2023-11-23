@@ -1,6 +1,5 @@
-package table;
+package com.app.tables;
 
-// import JDBC package
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
