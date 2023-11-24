@@ -64,11 +64,15 @@ public class Menu_item {
   public ResultSet SELECT(String name, String category, String soldout) throws IOException {
     ResultSet rs = null;
     try {
-      sql = "SELECT * FROM Menu_item WHERE name LIKE ? AND category LIKE ? AND soldout = ?";
+      if (soldout == "")
+        sql = "SELECT * FROM Menu_item WHERE name LIKE ? AND category LIKE ? AND soldout LIKE ?";
       ps = conn.prepareStatement(sql);
       ps.setString(1, "%" + name + "%");
       ps.setString(2, "%" + category + "%");
-      ps.setString(3, soldout);
+      if (soldout != "T" && soldout != "F")
+        ps.setString(3, "_");
+      else
+        ps.setString(3, soldout);
 
       rs = ps.executeQuery();
       // conn.commit();
