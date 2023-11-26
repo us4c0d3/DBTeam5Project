@@ -11,19 +11,19 @@ public class JoinDML {
 		tm = new TableMain();
 	}
 
-	public String CustomerInsert(String name, String password, String phone_number) throws IOException {
+	public String insertCustomer(String name, String password, String phone_number) throws IOException {
 		String id = tm.customer.INSERT(name, password, phone_number);
 
 		return id;
 	}
 
-	public String ChefInsert(String name, String phone_number) throws IOException {
+	public String insertChef(String name, String phone_number) throws IOException {
 		String id = tm.chef.INSERT(name, phone_number);
 
 		return id;
 	}
 
-	public String ManagerInsert(String name, String password, String phone_number) throws IOException {
+	public String insertManager(String name, String password, String phone_number) throws IOException {
 		String id = tm.manager.INSERT(name, password, phone_number);
 
 		return id;
