@@ -1,7 +1,10 @@
 package com.app.utils;
 
 import java.io.IOException;
-import java.sql.ResultSet;
+import java.util.List;
+import com.app.tables.Ingredient;
+import com.app.tables.Menu;
+import com.app.tables.Menu_item;
 import com.app.tables.TableMain;
 
 public class MenuDML {
@@ -11,22 +14,23 @@ public class MenuDML {
     tm = new TableMain();
   }
 
-  public ResultSet showMenu_item(String name, String category, String soldout) throws IOException {
-    ResultSet rs = tm.menu_item.SELECT(name, category, soldout);
+  public List<Menu_item> showMenu_item(String name, String category, String soldout)
+      throws IOException {
+    List<Menu_item> rs = tm.menu_item.SELECT(name, category, soldout);
     // ResultSet rs = tm.menu_item.SELECT("piece", "Regular Menu", "T"); // name, category, soldout
 
     return rs;
   }
 
-  public ResultSet showMenu(String start_date, String end_date) throws IOException {
-    ResultSet rs = tm.menu.SELECT(start_date, end_date);
+  public List<Menu> showMenu(String start_date, String end_date) throws IOException {
+    List<Menu> rs = tm.menu.SELECT(start_date, end_date);
     // ResultSet rs = tm.menu.SELECT("2023-01-01", "2023-01-31"); // start_date, end_date
 
     return rs;
   }
 
-  public ResultSet showIngredient(String id) throws IOException {
-    ResultSet rs = tm.ingredient.SELECT(id);
+  public List<Ingredient> showIngredient(String id) throws IOException {
+    List<Ingredient> rs = tm.ingredient.SELECT(id);
     // ResultSet rs = tm.ingredient.SELECT("IN000001"); // id
 
     return rs;
@@ -42,12 +46,13 @@ public class MenuDML {
     return id;
   }
 
-  /*
-   * public int insertNeed(String menu_item_id, String ingredient_id) throws IOException { int res =
-   * tm.need.INSERT(menu_item_id, ingredient_id);
-   * 
-   * return res; }
-   */
+
+  public int insertNeed(String menu_item_id, String ingredient_id) throws IOException {
+    int res = tm.need.INSERT(menu_item_id, ingredient_id);
+
+    return res;
+  }
+
 
   public String insertMenu(String start_date, String end_date, String manager_id)
       throws IOException {
@@ -59,12 +64,13 @@ public class MenuDML {
     return id;
   }
 
-  /*
-   * public int insertContains(String menu_id, String menu_item_id) throws IOException { int res =
-   * tm.contains.INSERT(menu_id, menu_item_id);
-   * 
-   * return res; }
-   */
+
+  public int insertContains(String menu_id, String menu_item_id) throws IOException {
+    int res = tm.contains.INSERT(menu_id, menu_item_id);
+
+    return res;
+  }
+
 
   public int modifyMenu(String id, String start_date, String end_date) throws IOException {
     int res = tm.menu.UPDATE(id, start_date, end_date);
