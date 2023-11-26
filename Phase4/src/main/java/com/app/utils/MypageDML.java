@@ -16,42 +16,42 @@ public class MypageDML {
 		this.conn = conn;
 	}
 
-	public ResultSet CustomerShow(String id, String password) {
+	public ResultSet showCustomer(String id, String password) {
 		ResultSet rs = null;
 		rs = tm.customer.SELECT(id, password);
 
 		return rs;
 	}
 
-	public ResultSet ManagerShow(String id, String password) {
+	public ResultSet showManager(String id, String password) {
 		ResultSet rs = null;
 		rs = tm.manager.SELECT(id, password);
 
 		return rs;
 	}
 
-	public ResultSet ChefShow(String id) {
+	public ResultSet showChef(String id) {
 		ResultSet rs = null;
 		rs = tm.chef.SELECT(id);
 
 		return rs;
 	}
 
-	public int CustomerUpdate(String id, String Attribute, String update_value) {
+	public int updateCustomer(String id, String Attribute, String update_value) {
 		int res = 0;
 		res = tm.customer.UPDATE(id, Attribute, update_value);
 
 		return res;
 	}
 
-	public int ManagerUpdate(String id, String Attribute, String update_value) {
+	public int updateManager(String id, String Attribute, String update_value) {
 		int res = 0;
 		res = tm.manager.UPDATE(id, Attribute, update_value);
 
 		return res;
 	}
 
-	public int ChefUpdate(String id, String Attribute, String update_value) {
+	public int updateChef(String id, String Attribute, String update_value) {
 		int res = 0;
 		res = tm.chef.UPDATE(id, Attribute, update_value);
 
