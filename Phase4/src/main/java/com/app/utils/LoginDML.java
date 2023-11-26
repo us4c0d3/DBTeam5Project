@@ -19,7 +19,7 @@ public class LoginDML {
 		this.conn = conn;
 	}
 
-	boolean LoginCustomerValidate(String id, String password) throws IOException {
+	boolean validateLoginCustomer(String id, String password) throws IOException {
 		ResultSet rs = null;
 		String customerId = "";
 
@@ -41,7 +41,7 @@ public class LoginDML {
 		}
 	}
 
-	boolean LoginManagerValidate(String id, String password) throws IOException {
+	boolean validateLoginManager(String id, String password) throws IOException {
 		ResultSet rs = null;
 		String managerId = "";
 
