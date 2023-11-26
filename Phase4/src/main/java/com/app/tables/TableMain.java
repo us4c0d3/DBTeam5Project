@@ -4,6 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * 각 테이블 객체 생성
+ * 
+ * @filename TableMain.java
+ * @author JangWooseok
+ */
+
 public class TableMain {
 	public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 	public static final String USER_NAME = "teamproject";
@@ -52,6 +59,9 @@ public class TableMain {
 		this.payment = new Payment(this.conn);
 	}
 
+	/**
+	 * @description connection을 닫는 메소드
+	 */
 	public void closeConnection() {
 		try {
 			if (conn != null && !conn.isClosed()) {
@@ -63,14 +73,25 @@ public class TableMain {
 		}
 	}
 
+	/**
+	 * 동시성 제어를 위한 AutoCommit off. 
+	 * @throws SQLException
+	 */
 	public void beginTransaction() throws SQLException {
 		conn.setAutoCommit(false);
 	}
 
+	/**
+	 * commit 기능
+	 * @throws SQLException
+	 */
 	public void commit() throws SQLException {
 		conn.commit();
 	}
 
+	/**
+	 * rollback 기능
+	 */
 	public void rollback() {
 		try {
 			conn.rollback();
