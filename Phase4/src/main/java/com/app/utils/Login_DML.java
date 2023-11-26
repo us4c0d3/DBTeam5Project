@@ -8,55 +8,55 @@ import java.sql.SQLException;
 
 import com.app.tables.TableMain;
 
-public class Login_DML {
+public class LoginDML {
 	TableMain tm;
 	private Connection conn = null;
 	PreparedStatement ps;
 	String sql = "";
 
-	public Login_DML(Connection conn) {
+	public LoginDML(Connection conn) {
 		tm = new TableMain();
 		this.conn = conn;
 	}
 
-	boolean Login_customer_validate(String id, String password) throws IOException {
+	boolean LoginCustomerValidate(String id, String password) throws IOException {
 		ResultSet rs = null;
-		String customer_id = "";
+		String customerId = "";
 
 		rs = tm.customer.SELECT(id, password);
 
 		try {
 			if (rs.next()) {
-				customer_id = rs.getString(1);
+				customerId = rs.getString(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		if (customer_id != "") {
+		if (customerId != "") {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	boolean Login_manager_validate(String id, String password) throws IOException {
+	boolean LoginManagerValidate(String id, String password) throws IOException {
 		ResultSet rs = null;
-		String manager_id = "";
+		String managerId = "";
 
 		rs = tm.manager.SELECT(id, password);
 
 		try {
 			if (rs.next()) {
-				manager_id = rs.getString(1);
+				managerId = rs.getString(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		if (manager_id != "") {
+		if (managerId != "") {
 			return true;
 		} else {
 			return false;
