@@ -8,7 +8,7 @@ import com.app.tables.TableMain;
 
 public class OrderDML {
   TableMain tm;
-  private Connection conn = null;
+  private Connection conn = null; // 다른 table과 join된 쿼리를 처리하기 위한 connection
   PreparedStatement ps;
 
   public OrderDML(Connection conn) {
@@ -16,12 +16,15 @@ public class OrderDML {
     this.conn = conn;
   }
 
+  // id를 이용하여 customer_id, order_id, total_price, payment_type, card_info를 가져오는 쿼리
   public ResultSet showOrder(String id) {
     ResultSet rs = tm.payment.SELECT(id);
 
     return rs;
   }
 
+  // id를 이용하여 order table의 속성 말고도 각 order의 menu_item에 대한 정보(id, name, amount, unit_price,
+  // item_quantity, category, soldout)까지 모두 가져오는 쿼리
   public ResultSet showOrder2(String id) {
     ResultSet rs = null;
     try {
