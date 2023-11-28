@@ -83,8 +83,8 @@ public class Menu_item {
   public String getlastId() {
     String lastId = "IT000000";
     try {
-      String query = "SELECT c.Item_id\r\n" + "FROM customer c\r\n" + "order by c.Item_id DESC\r\n"
-          + "FETCH FIRST 1 ROWS ONLY";
+      String query = "SELECT mi.Item_id\r\n" + "FROM Menu_item mi\r\n"
+          + "order by mi.Item_id DESC\r\n" + "FETCH FIRST 1 ROWS ONLY";
       ps = conn.prepareStatement(query);
       ResultSet rs = ps.executeQuery();
       if (rs.next())
@@ -104,16 +104,18 @@ public class Menu_item {
     return String.format("IT%06d", numPart);
   }
 
-  public String INSERT(String name, String category) throws IOException {
+  public String INSERT(String name, String category, int Unit_price) throws IOException {
     String id = null;
     try {
       id = generateNextId(getlastId());
 
-      sql = "INSERT INTO Menu_item(Item_id, Name, Category) VALUES(?, ?, ?)";
+      sql =
+          "INSERT INTO Menu_item(Item_id, Name, Category, Unit_price, Item_quantity) VALUES(?, ?, ?, ?, 0)";
       ps = conn.prepareStatement(sql);
       ps.setString(1, id);
       ps.setString(2, name);
       ps.setString(3, category);
+      ps.setInt(4, Unit_price);
 
       int res = ps.executeUpdate();
       // conn.commit();
@@ -138,6 +140,34 @@ public class Menu_item {
       else {
         ps.setString(3, soldout);
       }
+      rs = ps.executeQuery();
+      if (rs != null) {
+        while (rs.next()) {
+          Menu_items.add(new Menu_item(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4),
+              rs.getString(5), rs.getString(6)));
+        }
+      }
+      // conn.commit();
+      rs.close();
+      ps.close();
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return Menu_items;
+  }
+
+  public List<Menu_item> SELECT2(String start_date) throws IOException {
+    List<Menu_item> Menu_items = new ArrayList<>();
+    ResultSet rs = null;
+    try {
+      sql =
+          "SELECT mi.item_id, mi.name, mi.unit_price, mi.item_quantity, mi.category, mi.soldout\r\n"
+              + "FROM menu me, menu_item mi, contains co\r\n"
+              + "WHERE me.start_date = TO_DATE(?, 'yyyy-mm-dd')\r\n"
+              + "AND me.menu_id = co.menu_id\r\n" + "AND mi.item_id = co.item_id";
+      ps = conn.prepareStatement(sql);
+      ps.setString(1, start_date);
       rs = ps.executeQuery();
       if (rs != null) {
         while (rs.next()) {
