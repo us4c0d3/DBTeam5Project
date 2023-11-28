@@ -74,7 +74,7 @@ public class Ingredient {
     List<Ingredient> Ingredients = new ArrayList<>();
     ResultSet rs = null;
     try {
-      sql = "SELECT * FROM Menu WHERE ingredient_id LIKE ?";
+      sql = "SELECT * FROM Ingredient WHERE ingredient_id LIKE ?";
       ps = conn.prepareStatement(sql);
       ps.setString(1, "%" + id + "%");
 
