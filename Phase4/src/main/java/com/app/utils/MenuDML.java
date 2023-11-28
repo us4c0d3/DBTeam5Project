@@ -29,6 +29,18 @@ public class MenuDML {
     return rs;
   }
 
+  public List<Menu> showMenu_v2() throws IOException {
+    List<Menu> rs = tm.menu.SELECT2();
+    // ResultSet rs = tm.menu.SELECT("2023-01-01", "2023-01-31"); // start_date, end_date
+
+    return rs;
+  }
+
+  public List<Menu_item> showMenu_item_v2(String start_date) throws IOException {
+    List<Menu_item> result = tm.menu_item.SELECT2(start_date);
+    return result;
+  }
+
   public List<Ingredient> showIngredient(String id) throws IOException {
     List<Ingredient> rs = tm.ingredient.SELECT(id);
     // ResultSet rs = tm.ingredient.SELECT("IN000001"); // id
@@ -36,12 +48,12 @@ public class MenuDML {
     return rs;
   }
 
-  public String insertMenu_item(String name, String category, String manager_id, String Date_time)
+  public String insertMenu_item(String name, String category, int unit_price, String manager_id)
       throws IOException {
-    String id = tm.menu_item.INSERT(name, category);
+    String id = tm.menu_item.INSERT(name, category, unit_price);
     // String id = tm.menu_item.INSERT("4 piece pie", "Regular Menu"); // name, category
     if (id != "" && id != null) {
-      tm.managed_item.INSERT(id, manager_id, Date_time);
+      tm.managed_item.INSERT(id, manager_id);
     }
     return id;
   }
