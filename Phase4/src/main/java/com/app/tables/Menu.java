@@ -112,7 +112,7 @@ public class Menu {
     return res;
   }
 
-  public List<Menu> SELECT(String start_date, String end_date) throws IOException {
+  public List<Menu> SELECT(String start_date, String end_date) throws IOException { // start_date, end_date로 tuple 추출
     List<Menu> Menus = new ArrayList<>();
     ResultSet rs = null;
     try {
@@ -121,6 +121,29 @@ public class Menu {
       ps = conn.prepareStatement(sql);
       ps.setString(1, start_date);
       ps.setString(2, end_date);
+
+      rs = ps.executeQuery();
+      if (rs != null) {
+        while (rs.next()) {
+          Menus.add(new Menu(rs.getDate(2), rs.getDate(3)));
+        }
+      }
+      // conn.commit();
+      rs.close();
+      ps.close();
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return Menus;
+  }
+
+  public List<Menu> SELECT2() throws IOException { // 모든 tuple 추출
+    List<Menu> Menus = new ArrayList<>();
+    ResultSet rs = null;
+    try {
+      sql = "SELECT * FROM Menu ORDER BY start_date";
+      ps = conn.prepareStatement(sql);
 
       rs = ps.executeQuery();
       if (rs != null) {
