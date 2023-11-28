@@ -4,14 +4,49 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Manager {
   Connection conn;
   String sql = "";
   PreparedStatement ps;
+  private String name;
+  private String password;
+  private String phone_number;
 
   public Manager(Connection conn) {
     this.conn = conn;
+  }
+
+  public Manager(String name, String password, String phone_number) {
+    this.name = name;
+    this.password = password;
+    this.phone_number = phone_number;
+  }
+
+  public String getName() {
+    return this.name;
+  }
+
+  public String getPassword() {
+    return this.password;
+  }
+
+  public String getPhone_number() {
+    return this.phone_number;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public void setPhone_number(String phone_number) {
+    this.phone_number = phone_number;
   }
 
   public String getlastId() {
@@ -102,7 +137,8 @@ public class Manager {
     return res;
   }
 
-  public ResultSet SELECT(String id, String password) {
+  public List<Manager> SELECT(String id, String password) {
+    List<Manager> Managers = new ArrayList<>();
     ResultSet res = null;
     try {
       sql = "SELECT * FROM MANAGER WHERE manager_id = ? AND password = ?";
@@ -115,13 +151,18 @@ public class Manager {
        * if (res == 0) { System.out.println("Can't delete"); } else { System.out.println(id +
        * " customer delete"); }
        */
-
+      if (res != null) {
+        while (res.next()) {
+          Managers.add(new Manager(res.getString(2), res.getString(3), res.getString(4)));
+        }
+      }
+      res.close();
       ps.close();
     } catch (SQLException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    return res;
+    return Managers;
   }
 }
 
