@@ -6,11 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.app.tables.TableMain;
 
 public class LoginDML {
@@ -19,9 +14,9 @@ public class LoginDML {
 	PreparedStatement ps;
 	String sql = "";
 
-	public LoginDML(Connection conn) {
-		U
-		this.conn = conn;
+	public LoginDML() {
+		this.conn = DBConnection.getConnection();
+		this.tm = new TableMain(this.conn);
 	}
 
 	/**
@@ -43,7 +38,7 @@ public class LoginDML {
 		}
 	}
 
-	boolean validateLoginCustomer(String id, String password) throws IOException {
+	public boolean validateLoginCustomer(String id, String password) throws IOException {
 		ResultSet rs = null;
 		String customerId = "";
 
@@ -65,7 +60,7 @@ public class LoginDML {
 		}
 	}
 
-	boolean validateLoginManager(String id, String password) throws IOException {
+	public boolean validateLoginManager(String id, String password) throws IOException {
 		ResultSet rs = null;
 		String managerId = "";
 
@@ -86,34 +81,4 @@ public class LoginDML {
 			return false;
 		}
 	}
-
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
-		String password = request.getParameter("password");
-		boolean isAuthenticated = false;
-
-		switch (checkCusOrMan(userId)) {
-			case 0:
-				isAuthenticated = validateLoginCustomer(userId, password);
-				break;
-			case 1:
-				isAuthenticated = validateLoginManager(userId, password);
-				break;
-			default:
-				isAuthenticated = false;
-		}
-
-		if (isAuthenticated) {
-			// 쿠키 생성 및 설정
-			Cookie loginCookie = new Cookie("userId", userId);
-			loginCookie.setMaxAge(30 * 60); // 30분 동안 유효
-			response.addCookie(loginCookie);
-
-			// 다른 페이지로 리다이렉트 또는 메시지 표시
-			response.sendRedirect("home.jsp");
-		} else {
-			System.out.println("Login Error");
-		}
-	}
-
 }

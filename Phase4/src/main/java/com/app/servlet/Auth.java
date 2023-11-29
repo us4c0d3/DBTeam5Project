@@ -9,12 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.app.utils.LoginDML;
+
 /**
  * Servlet implementation class Auth
  */
 @WebServlet("/Auth")
 public class Auth extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	LoginDML loginDML;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -22,7 +25,7 @@ public class Auth extends HttpServlet {
 	public Auth() {
 		super();
 		// TODO Auto-generated constructor stub
-		// what should i do?
+		this.loginDML = new LoginDML();
 	}
 
 	/**
@@ -32,6 +35,9 @@ public class Auth extends HttpServlet {
 		throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("\nrole: ").append(request.getParameter("role"));
+		response.getWriter().append("\nID: ").append(request.getParameter("userId"));
+		response.getWriter().append("\npassword: ").append(request.getParameter("password"));
 	}
 
 	/**
@@ -49,9 +55,9 @@ public class Auth extends HttpServlet {
 		boolean isAuthenticated = false;
 
 		if (role.equals("customer")) {
-			isAuthenticated = validateLoginCustomer(userId, password);
+			isAuthenticated = loginDML.validateLoginCustomer(userId, password);
 		} else if (role.equals("manager")) {
-			isAuthenticated = validateLoginManager(userId, password);
+			isAuthenticated = loginDML.validateLoginManager(userId, password);
 		} else {
 			isAuthenticated = false;
 		}
