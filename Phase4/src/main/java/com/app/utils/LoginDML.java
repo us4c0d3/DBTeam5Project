@@ -20,7 +20,7 @@ public class LoginDML {
 	String sql = "";
 
 	public LoginDML(Connection conn) {
-		tm = new TableMain();
+		U
 		this.conn = conn;
 	}
 
@@ -112,8 +112,7 @@ public class LoginDML {
 			// 다른 페이지로 리다이렉트 또는 메시지 표시
 			response.sendRedirect("home.jsp");
 		} else {
-			// 로그인 실패 처리
-			// 에러 메시지 표시 등
+			System.out.println("Login Error");
 		}
 	}
 

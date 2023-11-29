@@ -1,7 +1,6 @@
 package com.app.tables;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
@@ -12,10 +11,6 @@ import java.sql.SQLException;
  */
 
 public class TableMain {
-	public static final String URL = "jdbc:oracle:thin:@192.168.219.100:1521:orcl";
-	public static final String USER_NAME = "teamproject";
-	public static final String USER_PASSWD = "comp322";
-
 	// Declare Instances
 	public Chef chef;
 	public Customer customer;
@@ -31,27 +26,8 @@ public class TableMain {
 
 	Connection conn = null;
 
-	public TableMain() {
-		try {
-			// Load a JDBC driver for Oracle DBMS
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			// Get a Connection object
-			System.out.println("Success!");
-		} catch (ClassNotFoundException e) {
-			System.err.println("error = " + e.getMessage());
-			System.exit(1);
-		}
-
-		// Make a connection
-		try {
-			conn = DriverManager.getConnection(URL, USER_NAME, USER_PASSWD);
-			System.out.println("Connected.");
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-			System.err.println("Cannot get a connection: " + ex.getLocalizedMessage());
-			System.err.println("Cannot get a connection: " + ex.getMessage());
-			System.exit(1);
-		}
+	public TableMain(Connection conn) {
+		this.conn = conn;
 
 		// Create Instances
 		this.chef = new Chef(this.conn);

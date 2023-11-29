@@ -23,13 +23,15 @@
 		}
 	*/
 	
-	String userName = "";
-	String userPhoneNumber = "";
+	String userCurrentName = "";
+	String userCurrentPhoneNumber = "";
 	
     %>
-    <form action="updateUserInfo" method="post">
-        Name: <input type="text" name="name" value="aaa" required><br>
-        Email: <input type="email" name="email" value="bbb" required><br>
+    <form action="Mypage.jsp" method="post">
+        Name: <input type="text" name="name" value="<%= userCurrentName %>>" required><br>
+        Email: <input type="email" name="phoneNumber" value="<%= userCurrentPhoneNumber %>" required><br>
+        Current Password: <input type="password" name="currentPassword" required><br>
+        
         <!-- 다른 필요한 필드 추가 -->
         <input type="submit" value="Update">
     </form>
