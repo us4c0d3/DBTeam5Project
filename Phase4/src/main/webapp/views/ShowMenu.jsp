@@ -7,13 +7,13 @@
 </head>
 <body>
 	<form action="ShowMenu.jsp" method="post">
-		Date: <select name="start_date">
+		Date: <select name="menu_id">
 			<%
 			MenuDML mDML = new MenuDML();
 			List<Menu> DateList = mDML.showMenu_v2();
 			if (DateList != null) {
 			  for (int i = 0; i < DateList.size(); i++) {
-			    out.println("<option value=\"" + DateList.get(i).getStart_date() + "\">"
+			    out.println("<option value=\"" + DateList.get(i).getMenu_id() + "\">"
 			    + DateList.get(i).getStart_date() + " ~ " + DateList.get(i).getEnd_date() + "</option>");
 			  }
 			}
@@ -22,10 +22,10 @@
 	</form>
 	<h2>Menu</h2>
 	<%
-	String start_date = "";
-	if (request.getParameter("start_date") != null) {
-	  start_date = request.getParameter("start_date");
-	  List<Menu_item> rs = mDML.showMenu_item_v2(start_date);
+	String menu_id = "";
+	if (request.getParameter("menu_id") != null) {
+	  menu_id = request.getParameter("menu_id");
+	  List<Menu_item> rs = mDML.showMenu_item_v2(menu_id);
 	  if (rs == null) {
 	    out.println("No result.");
 	  } else if (rs != null) {
