@@ -157,17 +157,16 @@ public class Menu_item {
     return Menu_items;
   }
 
-  public List<Menu_item> SELECT2(String start_date) throws IOException {
+  public List<Menu_item> SELECT2(String menu_id) throws IOException {
     List<Menu_item> Menu_items = new ArrayList<>();
     ResultSet rs = null;
     try {
       sql =
           "SELECT mi.item_id, mi.name, mi.unit_price, mi.item_quantity, mi.category, mi.soldout\r\n"
-              + "FROM menu me, menu_item mi, contains co\r\n"
-              + "WHERE me.start_date = TO_DATE(?, 'yyyy-mm-dd')\r\n"
+              + "FROM menu me, menu_item mi, contains co\r\n" + "WHERE me.menu_id = ?\r\n"
               + "AND me.menu_id = co.menu_id\r\n" + "AND mi.item_id = co.item_id";
       ps = conn.prepareStatement(sql);
-      ps.setString(1, start_date);
+      ps.setString(1, menu_id);
       rs = ps.executeQuery();
       if (rs != null) {
         while (rs.next()) {
