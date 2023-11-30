@@ -14,6 +14,7 @@ public class Menu {
   Connection conn;
   String sql = "";
   PreparedStatement ps;
+  private String menu_id;
   private Date start_date;
   private Date end_date;
 
@@ -21,9 +22,14 @@ public class Menu {
     this.conn = conn;
   }
 
-  public Menu(Date start_date, Date end_date) {
+  public Menu(String menu_id, Date start_date, Date end_date) {
+    this.menu_id = menu_id;
     this.start_date = start_date;
     this.end_date = end_date;
+  }
+
+  public String getMenu_id() {
+    return this.menu_id;
   }
 
   public Date getStart_date() {
@@ -32,6 +38,10 @@ public class Menu {
 
   public Date getEnd_date() {
     return this.end_date;
+  }
+
+  public void setMenu_id(String menu_id) {
+    this.menu_id = menu_id;
   }
 
   public void setStart_date(Date start_date) {
@@ -112,7 +122,9 @@ public class Menu {
     return res;
   }
 
-  public List<Menu> SELECT(String start_date, String end_date) throws IOException { // start_date, end_date로 tuple 추출
+  public List<Menu> SELECT(String start_date, String end_date) throws IOException { // start_date,
+                                                                                    // end_date로
+                                                                                    // tuple 추출
     List<Menu> Menus = new ArrayList<>();
     ResultSet rs = null;
     try {
@@ -125,7 +137,7 @@ public class Menu {
       rs = ps.executeQuery();
       if (rs != null) {
         while (rs.next()) {
-          Menus.add(new Menu(rs.getDate(2), rs.getDate(3)));
+          Menus.add(new Menu(rs.getString(1), rs.getDate(2), rs.getDate(3)));
         }
       }
       // conn.commit();
@@ -148,7 +160,7 @@ public class Menu {
       rs = ps.executeQuery();
       if (rs != null) {
         while (rs.next()) {
-          Menus.add(new Menu(rs.getDate(2), rs.getDate(3)));
+          Menus.add(new Menu(rs.getString(1), rs.getDate(2), rs.getDate(3)));
         }
       }
       // conn.commit();
