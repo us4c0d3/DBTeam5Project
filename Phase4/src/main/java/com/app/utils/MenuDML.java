@@ -36,8 +36,8 @@ public class MenuDML {
     return rs;
   }
 
-  public List<Menu_item> showMenu_item_v2(String start_date) throws IOException {
-    List<Menu_item> result = tm.menu_item.SELECT2(start_date);
+  public List<Menu_item> showMenu_item_v2(String menu_id) throws IOException {
+    List<Menu_item> result = tm.menu_item.SELECT2(menu_id);
     return result;
   }
 
