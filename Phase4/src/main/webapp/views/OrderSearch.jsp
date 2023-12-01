@@ -1,25 +1,10 @@
-<%@ page import="com.app.utils.OrderDML,java.sql.*"%>
+<%@ page import="com.app.utils.*,java.sql.*,com.app.tables.*,java.util.*,com.app.utils.DBConnection"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-<title>Menu</title>
+<title>Search Order</title>
 </head>
 <body>
-<%
-	String serverIP = "localhost";
-	String strSID = "orcl";
-	String portNum = "1521";
-	String user = "teamproject";
-	String pass = "comp322";
-	String url = "jdbc:oracle:thin:@" + serverIP + ":" + portNum + ":" + strSID;
-	
-	Connection conn = null;
-	PreparedStatement pstmt;
-
-	Class.forName("oracle.jdbc.driver.OracleDriver");
-	conn = DriverManager.getConnection(url, user, pass);
-%>
-
 	<form action="OrderSearch.jsp" method="post">
 		<label for="id">Customer ID:</label>
   		<input type="text" id="id" name="id">
@@ -27,45 +12,52 @@
 	</form>
 	<h2>Search Order</h2>
 	<%
-	OrderDML orderDML = new OrderDML(conn);
+	OrderDML orderDML = new OrderDML(DBConnection.getConnection());
 	String id = "";
 	if (request.getParameter("id") != null)
 	  id = request.getParameter("id");
-	ResultSet rs = orderDML.showOrder2(id);
-	if (rs == null) {
-	  out.println("No result.");
-	} else if (rs != null) {
-	  out.println("<table border=\"1\">");
-	  ResultSetMetaData rsmd = rs.getMetaData();
-	  int cnt = rsmd.getColumnCount();
-	  for (int i = 1; i <= cnt; i++) {
-	    out.println("<th>" + rsmd.getColumnName(i) + "</th>");
-	  }
-
-	  while (rs.next()) {
-	    out.println("<tr>");
-	    out.println("<td>" + rs.getString(1) + "</td>");
-	    out.println("<td>" + rs.getString(2) + "</td>");
-	    out.println("<td>" + rs.getString(3) + "</td>");
-	    out.println("<td>" + rs.getString(4) + "</td>");
-	    out.println("<td>" + rs.getString(5) + "</td>");
-	    out.println("<td>" + rs.getString(6) + "</td>");
-	    out.println("<td>" + rs.getString(7) + "</td>");
-	    out.println("<td>" + rs.getString(8) + "</td>");
-	    out.println("<td>" + rs.getString(9) + "</td>");
-	    out.println("<td>" + rs.getString(10) + "</td>");
-	    out.println("<td>" + rs.getString(11) + "</td>");
-	    out.println("<td>" + rs.getString(12) + "</td>");
-	    out.println("</tr>");
-	  }
-
-	  out.println("</table>");
-	  rs.close();
+	Object[] result = orderDML.showOrder2(id);
+	List<String> customerIds = (List<String>) result[0];
+	List<String> orderIds = (List<String>) result[1];
+	List<Payment> payments = (List<Payment>) result[2];
+	List<Menu_item> menuItems = (List<Menu_item>) result[3];
+	List<Integer> amounts = (List<Integer>) result[4];
+	if (payments != null && menuItems != null && amounts != null) {
+		out.println("<table border=\"1\">");
+		out.println("<th>" + "CUSTOMER_ID" + "</th>");
+		out.println("<th>" + "ORDER_ID" + "</th>");
+		out.println("<th>" + "TOTAL_PRICE" + "</th>");
+		out.println("<th>" + "PAYMENT_TYPE" + "</th>");
+		out.println("<th>" + "CARD_INFO" + "</th>");
+		out.println("<th>" + "ITEM_ID" + "</th>");
+		out.println("<th>" + "NAME" + "</th>");
+		out.println("<th>" + "AMOUNT" + "</th>");
+		out.println("<th>" + "UNIT_PRICE" + "</th>");
+		out.println("<th>" + "ITEM_QUANTITY" + "</th>");
+		out.println("<th>" + "CATEGORY" + "</th>");	  
+		out.println("<th>" + "SOLDOUT" + "</th>");	
 	}
-
-	// 메뉴 아이템 조회 로직
-	// 예: List<MenuItem> menuItems = DatabaseUtil.getMenuItems();
-	// 메뉴 아이템을 화면에 표시
+	for (int i = 0; i < payments.size(); i++) {
+		out.println("<tr>");
+		String customerId = customerIds.get(i);
+		String orderID = orderIds.get(i);
+		Payment payment = payments.get(i);
+		Menu_item menuItem = menuItems.get(i);
+		Integer amount = amounts.get(i);
+		out.println("<td>" + customerId + "</td>");
+		out.println("<td>" + orderID + "</td>");
+		out.println("<td>" + payment.getTotal_price() + "</td>");
+		out.println("<td>" + payment.getPayment_type() + "</td>");
+		out.println("<td>" + payment.getCard_info() + "</td>");
+		out.println("<td>" + menuItem.getItem_id() + "</td>");
+		out.println("<td>" + menuItem.getName() + "</td>");
+		out.println("<td>" + amount + "</td>");
+		out.println("<td>" + menuItem.getUnit_price() + "</td>");
+		out.println("<td>" + menuItem.getItem_quantity() + "</td>");
+		out.println("<td>" + menuItem.getCategory() + "</td>");
+		out.println("<td>" + menuItem.getSoldout() + "</td>");
+		out.println("</tr>");
+	}
 	%>
 </body>
 </html>
