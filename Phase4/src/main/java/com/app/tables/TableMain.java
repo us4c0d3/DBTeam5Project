@@ -1,7 +1,8 @@
 package com.app.tables;
 
 import java.sql.Connection;
-import java.sql.SQLException;
+
+import com.app.utils.DBConnection;
 
 /**
  * 각 테이블 객체 생성
@@ -27,7 +28,7 @@ public class TableMain {
 	Connection conn = null;
 
 	public TableMain(Connection conn) {
-		this.conn = conn;
+		this.conn = DBConnection.getConnection();
 
 		// Create Instances
 		this.chef = new Chef(this.conn);
@@ -42,48 +43,4 @@ public class TableMain {
 		this.edited_menu = new Edited_menu(this.conn);
 		this.managed_item = new Managed_item(this.conn);
 	}
-
-	/**
-	 * @description connection을 닫는 메소드
-	 */
-	public void closeConnection() {
-		try {
-			if (conn != null && !conn.isClosed()) {
-				conn.close();
-				System.out.println("Connection closed.");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 동시성 제어를 위한 AutoCommit off.
-	 * 
-	 * @throws SQLException
-	 */
-	public void beginTransaction() throws SQLException {
-		conn.setAutoCommit(false);
-	}
-
-	/**
-	 * commit 기능
-	 * 
-	 * @throws SQLException
-	 */
-	public void commit() throws SQLException {
-		conn.commit();
-	}
-
-	/**
-	 * rollback 기능
-	 */
-	public void rollback() {
-		try {
-			conn.rollback();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 }

@@ -45,6 +45,41 @@ public class DBConnection {
 		return conn;
 	}
 
+	/**
+	 * 동시성 제어를 위한 AutoCommit off.
+	 * 
+	 * @throws SQLException
+	 */
+	public static void beginTransaction() throws SQLException {
+		if (conn != null) {
+			conn.setAutoCommit(false);
+		}
+	}
+
+	/**
+	 * commit 기능
+	 * 
+	 * @throws SQLException
+	 */
+	public static void commit() throws SQLException {
+		if (conn != null) {
+			conn.commit();
+		}
+	}
+
+	/**
+	 * rollback 기능
+	 */
+	public void rollback() {
+		if (conn != null) {
+			try {
+				conn.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public static void closeConnection() throws SQLException {
 		if (conn != null) {
 			conn.close();
