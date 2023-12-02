@@ -151,4 +151,28 @@ public class Manager {
 		}
 		return managers;
 	}
+
+	public List<Manager> SELECTbyID(String id) {
+		List<Manager> managers = new ArrayList<>();
+		ResultSet rs = null;
+		try {
+			sql = "SELECT * FROM MANAGER WHERE manager_id = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+
+			rs = ps.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					managers.add(new Manager(rs.getString(1), rs.getString(2), rs.getString(4)));
+				}
+			}
+
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return managers;
+	}
 }

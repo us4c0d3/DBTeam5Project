@@ -155,4 +155,28 @@ public class Customer {
 		}
 		return customers;
 	}
+
+	public List<Customer> SELECTbyID(String userId) {
+		List<Customer> customers = new ArrayList<>();
+		ResultSet rs = null;
+		try {
+			sql = "SELECT * FROM CUSTOMER WHERE customer_id = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userId);
+
+			rs = ps.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					customers.add(new Customer(rs.getString(1), rs.getString(2), rs.getString(4)));
+				}
+			}
+
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return customers;
+	}
 }
