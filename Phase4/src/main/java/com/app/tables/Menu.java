@@ -3,17 +3,43 @@ package com.app.tables;
 import java.io.IOException;
 // import JDBC package
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Menu {
   Connection conn;
   String sql = "";
   PreparedStatement ps;
+  private Date start_date;
+  private Date end_date;
 
   public Menu(Connection conn) {
     this.conn = conn;
+  }
+
+  public Menu(Date start_date, Date end_date) {
+    this.start_date = start_date;
+    this.end_date = end_date;
+  }
+
+  public Date getStart_date() {
+    return this.start_date;
+  }
+
+  public Date getEnd_date() {
+    return this.end_date;
+  }
+
+  public void setStart_date(Date start_date) {
+    this.start_date = start_date;
+  }
+
+  public void setEnd_date(Date end_date) {
+    this.end_date = end_date;
   }
 
   public String getlastId() {
@@ -86,7 +112,8 @@ public class Menu {
     return res;
   }
 
-  public ResultSet SELECT(String start_date, String end_date) throws IOException {
+  public List<Menu> SELECT(String start_date, String end_date) throws IOException {
+    List<Menu> Menus = new ArrayList<>();
     ResultSet rs = null;
     try {
       sql =
@@ -96,12 +123,18 @@ public class Menu {
       ps.setString(2, end_date);
 
       rs = ps.executeQuery();
+      if (rs != null) {
+        while (rs.next()) {
+          Menus.add(new Menu(rs.getDate(2), rs.getDate(3)));
+        }
+      }
       // conn.commit();
+      rs.close();
       ps.close();
     } catch (SQLException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    return rs;
+    return Menus;
   }
 }
