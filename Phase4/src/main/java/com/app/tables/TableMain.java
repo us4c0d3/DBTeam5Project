@@ -12,6 +12,9 @@ import com.app.utils.DBConnection;
  */
 
 public class TableMain {
+	// singleton instance
+	private static TableMain instance;
+
 	// Declare Instances
 	public Chef chef;
 	public Customer customer;
@@ -27,7 +30,7 @@ public class TableMain {
 
 	Connection conn = null;
 
-	public TableMain(Connection conn) {
+	public TableMain() {
 		this.conn = DBConnection.getConnection();
 
 		// Create Instances
@@ -42,5 +45,12 @@ public class TableMain {
 		this.need = new Need(this.conn);
 		this.edited_menu = new Edited_menu(this.conn);
 		this.managed_item = new Managed_item(this.conn);
+	}
+
+	public static synchronized TableMain getInstance() {
+		if (instance == null) {
+			instance = new TableMain();
+		}
+		return instance;
 	}
 }

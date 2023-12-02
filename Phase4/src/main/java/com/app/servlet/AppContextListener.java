@@ -6,6 +6,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.app.tables.TableMain;
 import com.app.utils.DBConnection;
 
 @WebListener
@@ -14,6 +15,7 @@ public class AppContextListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		DBConnection.getConnection(); // 애플리케이션 시작 시 DB 연결 초기화
+		TableMain.getInstance();
 		System.out.println("Context Initialized.");
 	}
 

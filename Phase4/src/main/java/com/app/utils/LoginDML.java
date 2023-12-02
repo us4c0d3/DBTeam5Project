@@ -17,7 +17,7 @@ public class LoginDML {
 
 	public LoginDML() {
 		this.conn = DBConnection.getConnection();
-		this.tm = new TableMain(this.conn);
+		this.tm = TableMain.getInstance();
 	}
 
 	/**

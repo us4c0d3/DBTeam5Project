@@ -3,7 +3,10 @@ package com.app.utils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
+import com.app.tables.Customer;
+import com.app.tables.Manager;
 import com.app.tables.TableMain;
 
 public class MypageDML {
@@ -12,22 +15,20 @@ public class MypageDML {
 	PreparedStatement ps;
 
 	public MypageDML(Connection conn) {
-		tm = new TableMain();
-		this.conn = conn;
+		this.conn = DBConnection.getConnection();
+		tm = TableMain.getInstance();
 	}
 
-	public ResultSet showCustomer(String id, String password) {
-		ResultSet rs = null;
-		rs = tm.customer.SELECT(id, password);
+	public List<Customer> showCustomer(String id, String password) {
+		List<Customer> customer = tm.customer.SELECT(id, password);
 
-		return rs;
+		return customer;
 	}
 
-	public ResultSet showManager(String id, String password) {
-		ResultSet rs = null;
-		rs = tm.manager.SELECT(id, password);
+	public List<Manager> showManager(String id, String password) {
+		List<Manager> manager = tm.manager.SELECT(id, password);
 
-		return rs;
+		return manager;
 	}
 
 	public ResultSet showChef(String id) {

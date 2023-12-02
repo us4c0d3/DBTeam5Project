@@ -6,6 +6,6 @@ public class UtilMain {
 	TableMain tables;
 
 	public UtilMain() {
-		this.tables = new TableMain(DBConnection.getConnection());
+		this.tables = new TableMain();
 	}
 }
