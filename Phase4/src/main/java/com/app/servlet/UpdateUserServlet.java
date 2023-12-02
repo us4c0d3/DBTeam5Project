@@ -62,6 +62,7 @@ public class UpdateUserServlet extends HttpServlet {
 		}
 
 		// 리디렉션
+		request.getSession().setAttribute("successMessage", "Information updated successfully.");
 		response.sendRedirect("Mypage.jsp");
 	}
 

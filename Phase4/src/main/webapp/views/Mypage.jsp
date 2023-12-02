@@ -8,6 +8,13 @@
 <body>
     <h2>Update Your Information</h2>
     <% 
+ // 성공 메시지 가져오기
+    String successMessage = (String)session.getAttribute("successMessage");
+    if (successMessage != null && !successMessage.isEmpty()) {
+        out.println("<p style='color: green;'>" + successMessage + "</p>");
+        session.removeAttribute("successMessage"); // 메시지 표시 후 제거
+    }
+    
  	// 오류 메시지 가져오기
     String errorMessage = (String)session.getAttribute("errorMessage");
     if (errorMessage != null && !errorMessage.isEmpty()) {
