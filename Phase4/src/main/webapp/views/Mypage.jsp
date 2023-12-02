@@ -8,6 +8,13 @@
 <body>
     <h2>Update Your Information</h2>
     <% 
+ 	// 오류 메시지 가져오기
+    String errorMessage = (String)session.getAttribute("errorMessage");
+    if (errorMessage != null && !errorMessage.isEmpty()) {
+        out.println("<p style='color: red;'>" + errorMessage + "</p>");
+        session.removeAttribute("errorMessage"); // 메시지 표시 후 제거
+    }
+    
     TableMain tm = TableMain.getInstance();
     Cookie[] cookies = request.getCookies();
     int checkCusOrMan = -1; // customer: 1, manager: 0
@@ -41,12 +48,12 @@
     }
 	
     %>
-    <form action="Mypage.jsp" method="post">
-        Name: <input type="text" name="name" value="<%= userCurrentName %>>" required><br>
+    <form action="http://localhost:8080/Phase4/UpdateUserServlet" method="post">
+    	<input type="hidden" name="userId" value="<%= userId %>">
+        Name: <input type="text" name="name" value="<%= userCurrentName %>" required><br>
         Phone number: <input type="email" name="phoneNumber" value="<%= userCurrentPhoneNumber %>" required><br>
         Current Password: <input type="password" name="currentPassword" required><br>
-        
-        <!-- 다른 필요한 필드 추가 -->
+        Change Password: <input type="password" name="changePassword">
         <input type="submit" value="Update">
     </form>
 </body>

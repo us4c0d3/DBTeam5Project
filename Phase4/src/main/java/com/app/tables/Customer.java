@@ -88,13 +88,19 @@ public class Customer {
 		return id;
 	}
 
-	public int UPDATE(String id, String Attribute, String update_value) {
+	public int UPDATE(String id, String name, String password, String phone_nubmer) {
 		int res = 0;
 		try {
-			sql = "UPDATE CUSTOMER " + "SET " + Attribute + " = ? " + "WHERE customer_id = ?";
+			sql = "UPDATE CUSTOMER\r\n"
+				+ "SET name = ?,\r\n"
+				+ "	password = ?,\r\n"
+				+ "	phone_number = ?\r\n"
+				+ "WHERE customer_id = ?";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, update_value);
-			ps.setString(2, id);
+			ps.setString(1, name);
+			ps.setString(2, password);
+			ps.setString(3, phone_nubmer);
+			ps.setString(4, id);
 
 			res = ps.executeUpdate();
 			/*

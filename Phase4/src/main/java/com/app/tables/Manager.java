@@ -86,13 +86,19 @@ public class Manager {
 		return id;
 	}
 
-	public int UPDATE(String id, String Attribute, String update_value) {
+	public int UPDATE(String id, String name, String password, String phone_nubmer) {
 		int res = 0;
 		try {
-			sql = "UPDATE MANAGER " + "SET " + Attribute + " = ? " + "WHERE manager_id = ?";
+			sql = "UPDATE MANAGER\r\n"
+				+ "SET name = ?,\r\n"
+				+ "	password = ?,\r\n"
+				+ "	phone_number = ?\r\n"
+				+ "WHERE manager_id = ?";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, update_value);
-			ps.setString(2, id);
+			ps.setString(1, name);
+			ps.setString(2, password);
+			ps.setString(3, phone_nubmer);
+			ps.setString(4, id);
 
 			res = ps.executeUpdate();
 			/*
