@@ -1,6 +1,7 @@
 package com.app.utils;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -70,13 +71,41 @@ public class DBConnection {
 	/**
 	 * rollback 기능
 	 */
-	public void rollback() {
+	public static void rollback() {
 		if (conn != null) {
 			try {
 				conn.rollback();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	public static void setReadUncommited() throws SQLException {
+		DatabaseMetaData dbmd = conn.getMetaData();
+		if (dbmd.supportsTransactionIsolationLevel(Connection.TRANSACTION_READ_UNCOMMITTED)) {
+			conn.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
+		}
+	}
+
+	public static void setReadCommited() throws SQLException {
+		DatabaseMetaData dbmd = conn.getMetaData();
+		if (dbmd.supportsTransactionIsolationLevel(Connection.TRANSACTION_READ_COMMITTED)) {
+			conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+		}
+	}
+
+	public static void setRepeatableRead() throws SQLException {
+		DatabaseMetaData dbmd = conn.getMetaData();
+		if (dbmd.supportsTransactionIsolationLevel(Connection.TRANSACTION_REPEATABLE_READ)) {
+			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
+		}
+	}
+
+	public static void setSerializable() throws SQLException {
+		DatabaseMetaData dbmd = conn.getMetaData();
+		if (dbmd.supportsTransactionIsolationLevel(Connection.TRANSACTION_SERIALIZABLE)) {
+			conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 		}
 	}
 
