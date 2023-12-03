@@ -39,32 +39,34 @@
 		%>
 	</form>
 	<%
+	p
+
 	//insertMenu(String start_date, String end_date, String manager_id)
 	String start_date = "", end_date = "", manager_id = "MA000001"; //"MA000001"; // manager_id from Cookies
 	if (request.getParameter("start_date") != null)
-	  start_date = request.getParameter("start_date");
+		start_date = request.getParameter("start_date");
 	if (request.getParameter("end_date") != null)
-	  end_date = request.getParameter("end_date");
+		end_date = request.getParameter("end_date");
 
 	if (start_date != "" && end_date != "" && manager_id != "") {
-	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-	  Date trans_start_date = sdf.parse(start_date);
-	  Date trans_end_date = sdf.parse(end_date);
-	  if (trans_start_date.compareTo(trans_end_date) > 0) {
-	    out.println("Start_date cannot be faster than end_date");
-	  } else {
-	    String id = mDML.insertMenu(start_date, end_date, manager_id);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		Date trans_start_date = sdf.parse(start_date);
+		Date trans_end_date = sdf.parse(end_date);
+		if (trans_start_date.compareTo(trans_end_date) > 0) {
+			out.println("Start_date cannot be faster than end_date");
+		} else {
+			String id = mDML.insertMenu(start_date, end_date, manager_id);
 
-	    if (id == "" || id == null) {
-	  out.println("No result.");
-	    } else if (id != null) {
-	  out.println(id + " Menu insert successfully");
-	  String[] Menu_items = request.getParameterValues("selected_menu_item");
-	  for (int i = 0; i < Menu_items.length; i++) {
-	    mDML.insertContains(id, Menu_items[i]);
-	  }
-	    }
-	  }
+			if (id == "" || id == null) {
+		out.println("No result.");
+			} else if (id != null) {
+		out.println(id + " Menu insert successfully");
+		String[] Menu_items = request.getParameterValues("selected_menu_item");
+		for (int i = 0; i < Menu_items.length; i++) {
+			mDML.insertContains(id, Menu_items[i]);
+		}
+			}
+		}
 	}
 
 	// 메뉴 아이템 생성 로직
