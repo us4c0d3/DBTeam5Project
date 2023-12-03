@@ -22,9 +22,16 @@
 		ingredient_id = request.getParameter("ingredient_id");
 	if (request.getParameter("quantity") != null)
 		ingredient_quentity = request.getParameter("quantity");
-	if (ingredient_id != "" && ingredient_quentity != "") {
-    	mDML.modifyIngredient(ingredient_id, attribute, ingredient_quentity);
-    	DBConnection.commit();
+	try {
+		DBConnection.beginTransaction();
+		if (ingredient_id != "" && ingredient_quentity != "") {
+	    	mDML.modifyIngredient(ingredient_id, attribute, ingredient_quentity);
+		}
+		DBConnection.commit();
+	} catch (SQLException e) {
+	    // 실패한 경우 롤백
+	    DBConnection.rollback();
+	    e.printStackTrace();
 	}
     List<Ingredient> result = mDML.showIngredient(ingredient_id);
 	if (result != null) {

@@ -23,10 +23,18 @@
 		start_date = request.getParameter("start_date");
 	if (request.getParameter("end_date") != null)
 		end_date = request.getParameter("end_date");
-	if (menu_id != "" && start_date != "" && end_date != "") {
-		mDML.modifyMenu(menu_id, "start_date", start_date);
-		mDML.modifyMenu(menu_id, "end_date", end_date);
-    	DBConnection.commit();
+	try {
+		DBConnection.beginTransaction();
+		if (menu_id != "" && start_date != "" && end_date != "") {
+			mDML.modifyMenu(menu_id, "start_date", start_date);
+			mDML.modifyMenu(menu_id, "end_date", end_date);
+	    	DBConnection.commit();
+		}
+		DBConnection.commit();
+	} catch (SQLException e) {
+	    // 실패한 경우 롤백
+	    DBConnection.rollback();
+	    e.printStackTrace();
 	}
 	List<Menu> result = mDML.showMenu_v2();
 	if (result != null) {

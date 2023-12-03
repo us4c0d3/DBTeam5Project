@@ -51,21 +51,27 @@
 		category = request.getParameter("category");
 	if (request.getParameter("unit_price") != null)
 		unit_price = Integer.valueOf(request.getParameter("unit_price"));
-
-	if (name != "" && category != "" && unit_price != -100000000 && manager_id != "") {
-		String id = mDML.insertMenu_item(name, category, unit_price, manager_id);
-
-		if (id == "" || id == null) {
-			out.println("No result.");
-		} else if (id != null) {
-			out.println(id + " Menu_item insert successfully");
-			String[] Ingredients = request.getParameterValues("selected_ingredient");
-			for (int i = 0; i < Ingredients.length; i++) {
-		mDML.insertNeed(id, Ingredients[i]);
+	
+	try {
+		DBConnection.beginTransaction();
+		if (name != "" && category != "" && unit_price != -100000000 && manager_id != "") {
+			String id = mDML.insertMenu_item(name, category, unit_price, manager_id);
+	
+			if (id == "" || id == null) {
+				out.println("No result.");
+			} else if (id != null) {
+				out.println(id + " Menu_item insert successfully");
+				String[] Ingredients = request.getParameterValues("selected_ingredient");
+				for (int i = 0; i < Ingredients.length; i++) {
+					mDML.insertNeed(id, Ingredients[i]);
+				}
 			}
-			DBConnection.commit();
-			
 		}
+		DBConnection.commit();
+	} catch (SQLException e) {
+	    // 실패한 경우 롤백
+	    DBConnection.rollback();
+	    e.printStackTrace();
 	}
 
 	// 메뉴 아이템 생성 로직
