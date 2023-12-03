@@ -70,7 +70,7 @@ public class Auth extends HttpServlet {
 			// 다른 페이지로 리다이렉트 또는 메시지 표시
 			response.sendRedirect("/Phase4/views/index.jsp");
 		} else {
-			response.sendError(0);
+			response.sendRedirect("/Phase4/static/html/Login.html?error=true");
 			System.out.println("Login Error");
 		}
 	}
