@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>My Page</title>
+    <script src="../js/navbarScript.js"></script>
 <!-- bootstrap css -->
 <link rel="stylesheet" href="./../static/css/bootstrap.min.css">
 </head>
