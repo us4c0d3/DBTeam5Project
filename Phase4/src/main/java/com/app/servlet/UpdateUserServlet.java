@@ -56,14 +56,16 @@ public class UpdateUserServlet extends HttpServlet {
 
 		// DB 업데이트 로직
 		if (userId.startsWith("CU")) {
-			tm.customer.UPDATE(userId, name, (changePassword == null ? currentPassword : changePassword), phoneNumber);
+			tm.customer.UPDATE(userId, name, (changePassword.equals("") ? currentPassword : changePassword),
+				phoneNumber);
 		} else if (userId.startsWith("MA")) {
-			tm.manager.UPDATE(userId, name, (changePassword == null ? currentPassword : changePassword), phoneNumber);
+			tm.manager.UPDATE(userId, name, (changePassword.equals("") ? currentPassword : changePassword),
+				phoneNumber);
 		}
 
 		// 리디렉션
 		request.getSession().setAttribute("successMessage", "Information updated successfully.");
-		response.sendRedirect("Mypage.jsp");
+		response.sendRedirect("/Phase4/views/Mypage.jsp");
 	}
 
 }
