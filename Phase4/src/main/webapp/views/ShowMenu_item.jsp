@@ -30,35 +30,35 @@
 	MenuDML mDML = new MenuDML();
 	String name = "", category = "", soldout = "";
 	if (request.getParameter("name") != null)
-	  name = request.getParameter("name");
+		name = request.getParameter("name");
 	if (request.getParameter("category") != null)
-	  category = request.getParameter("category");
+		category = request.getParameter("category");
 	if (request.getParameter("soldout") != null)
-	  soldout = request.getParameter("soldout");
+		soldout = request.getParameter("soldout");
 	List<Menu_item> rs = mDML.showMenu_item(name, category, soldout);
 	if (rs == null) {
-	  out.println("No result.");
+		out.println("No result.");
 	} else if (rs != null) {
-	  out.println("<table border=\"1\">");
-	  out.println("<th>" + "ITEM_ID" + "</th>");
-	  out.println("<th>" + "NAME" + "</th>");
-	  out.println("<th>" + "UNIT_PRICE" + "</th>");
-	  out.println("<th>" + "ITEM_QUANTITY" + "</th>");
-	  out.println("<th>" + "CATEGORY" + "</th>");
-	  out.println("<th>" + "SOLDOUT" + "</th>");
+		out.println("<table border=\"1\">");
+		out.println("<th>" + "ITEM_ID" + "</th>");
+		out.println("<th>" + "NAME" + "</th>");
+		out.println("<th>" + "UNIT_PRICE" + "</th>");
+		out.println("<th>" + "ITEM_QUANTITY" + "</th>");
+		out.println("<th>" + "CATEGORY" + "</th>");
+		out.println("<th>" + "SOLDOUT" + "</th>");
 
-	  for (int i = 0; i < rs.size(); i++) {
-	    out.println("<tr>");
-	    out.println("<td>" + rs.get(i).getItem_id() + "</td>");
-	    out.println("<td>" + rs.get(i).getName() + "</td>");
-	    out.println("<td>" + Double.toString(rs.get(i).getUnit_price()) + "</td>");
-	    out.println("<td>" + Double.toString(rs.get(i).getItem_quantity()) + "</td>");
-	    out.println("<td>" + rs.get(i).getCategory() + "</td>");
-	    out.println("<td>" + rs.get(i).getSoldout() + "</td>");
-	    out.println("</tr>");
-	  }
+		for (int i = 0; i < rs.size(); i++) {
+			out.println("<tr>");
+			out.println("<td>" + rs.get(i).getItem_id() + "</td>");
+			out.println("<td>" + rs.get(i).getName() + "</td>");
+			out.println("<td>" + Double.toString(rs.get(i).getUnit_price()) + "</td>");
+			out.println("<td>" + Double.toString(rs.get(i).getItem_quantity()) + "</td>");
+			out.println("<td>" + rs.get(i).getCategory() + "</td>");
+			out.println("<td>" + rs.get(i).getSoldout() + "</td>");
+			out.println("</tr>");
+		}
 
-	  out.println("</table>");
+		out.println("</table>");
 	}
 
 	// 메뉴 아이템 조회 로직
