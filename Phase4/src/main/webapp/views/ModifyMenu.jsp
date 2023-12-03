@@ -4,8 +4,49 @@
 <html>
 <head>
 <title>Modify Menu</title>
+<!-- bootstrap css -->
+<link rel="stylesheet" href="./../static/css/bootstrap.min.css">
 </head>
 <body>
+	<!-- header -->
+	<nav class="navbar navbar-dark bg-primary">
+		<div class="container-fluid">
+			<a class="nav-link" href="./../static/html/index.html"> <span
+				class="navbar-brand mb-0 h1">Restaurant</span>
+			</a>
+			<div>
+				<a class="nav-link" href="./Mypage.jsp"> <span
+					class="navbar-brand mb-0 h">Mypage</span>
+				</a> <a class="nav-link" href="./../static/html/Login.html"> <span
+					class="navbar-brand mb-0 h">Login</span></a>
+			</div>
+		</div>
+		<ul class="nav" id="bar">
+			<li class="SearchOrder"><a class="nav-link"
+				href="./OrderSearch.jsp"> <span class="navbar-brand mb-0 h">Search
+						Order</span></a></li>
+			<li class="ShowMenu"><a class="nav-link" href="./ShowMenu.jsp">
+					<span class="navbar-brand mb-0 h">Show Menu</span>
+			</a></li>
+			<li class="InsertMenu"><a class="nav-link"
+				href="./InsertMenu.jsp"> <span class="navbar-brand mb-0 h">Insert
+						Menu</span></a></li>
+			<li class="ModifyMenu"><a class="nav-link"
+				href="./ModifyMenu.jsp"> <span class="navbar-brand mb-0 h">Modify
+						Menu</span></a></li>
+			<li class="ShowMenu_item"><a class="nav-link"
+				href="./ShowMenu_item.jsp"> <span class="navbar-brand mb-0 h">Show
+						Menu item</span></a></li>
+			<li class="InsertMenu_item"><a class="nav-link"
+				href="./InsertMenu_item.jsp"> <span class="navbar-brand mb-0 h">Insert
+						Menu item</span></a></li>
+			<li class="ModifyIngredient"><a class="nav-link"
+				href="./ModifyIngredient.jsp"> <span class="navbar-brand mb-0 h">Modify
+						Ingredient</span></a></li>
+		</ul>
+	</nav>
+	
+	<!-- body -->
 	<form action="ModifyMenu.jsp" method="post">
 		Menu_Id: <input type="text" id="id" name="id" /><br>
 		Modify_Start_Date: <input type="date" id="date" name="start_date"

@@ -4,8 +4,49 @@
 <html>
 <head>
 <title>Insert Menu_item</title>
+<!-- bootstrap css -->
+<link rel="stylesheet" href="./../static/css/bootstrap.min.css">
 </head>
 <body>
+	<!-- header -->
+	<nav class="navbar navbar-dark bg-primary">
+		<div class="container-fluid">
+			<a class="nav-link" href="./../static/html/index.html"> <span
+				class="navbar-brand mb-0 h1">Restaurant</span>
+			</a>
+			<div>
+				<a class="nav-link" href="./Mypage.jsp"> <span
+					class="navbar-brand mb-0 h">Mypage</span>
+				</a> <a class="nav-link" href="./../static/html/Login.html"> <span
+					class="navbar-brand mb-0 h">Login</span></a>
+			</div>
+		</div>
+		<ul class="nav" id="bar">
+			<li class="SearchOrder"><a class="nav-link"
+				href="./OrderSearch.jsp"> <span class="navbar-brand mb-0 h">Search
+						Order</span></a></li>
+			<li class="ShowMenu"><a class="nav-link" href="./ShowMenu.jsp">
+					<span class="navbar-brand mb-0 h">Show Menu</span>
+			</a></li>
+			<li class="InsertMenu"><a class="nav-link"
+				href="./InsertMenu.jsp"> <span class="navbar-brand mb-0 h">Insert
+						Menu</span></a></li>
+			<li class="ModifyMenu"><a class="nav-link"
+				href="./ModifyMenu.jsp"> <span class="navbar-brand mb-0 h">Modify
+						Menu</span></a></li>
+			<li class="ShowMenu_item"><a class="nav-link"
+				href="./ShowMenu_item.jsp"> <span class="navbar-brand mb-0 h">Show
+						Menu item</span></a></li>
+			<li class="InsertMenu_item"><a class="nav-link"
+				href="./InsertMenu_item.jsp"> <span class="navbar-brand mb-0 h">Insert
+						Menu item</span></a></li>
+			<li class="ModifyIngredient"><a class="nav-link"
+				href="./ModifyIngredient.jsp"> <span class="navbar-brand mb-0 h">Modify
+						Ingredient</span></a></li>
+		</ul>
+	</nav>
+
+	<!-- body -->
 	<form action="InsertMenu_item.jsp" method="post">
 		name: <input type="text" name="name" /><br> unit price: <input
 			type="text" name="unit_price" /><br> category: <select
@@ -51,27 +92,27 @@
 		category = request.getParameter("category");
 	if (request.getParameter("unit_price") != null)
 		unit_price = Integer.valueOf(request.getParameter("unit_price"));
-	
+
 	try {
 		DBConnection.beginTransaction();
 		if (name != "" && category != "" && unit_price != -100000000 && manager_id != "") {
 			String id = mDML.insertMenu_item(name, category, unit_price, manager_id);
-	
+
 			if (id == "" || id == null) {
-				out.println("No result.");
+		out.println("No result.");
 			} else if (id != null) {
-				out.println(id + " Menu_item insert successfully");
-				String[] Ingredients = request.getParameterValues("selected_ingredient");
-				for (int i = 0; i < Ingredients.length; i++) {
-					mDML.insertNeed(id, Ingredients[i]);
-				}
+		out.println(id + " Menu_item insert successfully");
+		String[] Ingredients = request.getParameterValues("selected_ingredient");
+		for (int i = 0; i < Ingredients.length; i++) {
+			mDML.insertNeed(id, Ingredients[i]);
+		}
 			}
 		}
 		DBConnection.commit();
 	} catch (SQLException e) {
-	    // 실패한 경우 롤백
-	    DBConnection.rollback();
-	    e.printStackTrace();
+		// 실패한 경우 롤백
+		DBConnection.rollback();
+		e.printStackTrace();
 	}
 
 	// 메뉴 아이템 생성 로직
