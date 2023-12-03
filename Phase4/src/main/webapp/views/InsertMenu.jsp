@@ -39,8 +39,6 @@
 		%>
 	</form>
 	<%
-	p
-
 	//insertMenu(String start_date, String end_date, String manager_id)
 	String start_date = "", end_date = "", manager_id = "MA000001"; //"MA000001"; // manager_id from Cookies
 	if (request.getParameter("start_date") != null)
