@@ -11,7 +11,7 @@ public class MenuDML {
   TableMain tm;
 
   public MenuDML() {
-    tm = new TableMain();
+    tm = TableMain.getInstance();
   }
 
   public List<Menu_item> showMenu_item(String name, String category, String soldout)

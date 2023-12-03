@@ -16,7 +16,7 @@ public class OrderDML {
   PreparedStatement ps;
 
   public OrderDML(Connection conn) {
-    tm = new TableMain();
+    tm = TableMain.getInstance();
     this.conn = conn;
   }
 
