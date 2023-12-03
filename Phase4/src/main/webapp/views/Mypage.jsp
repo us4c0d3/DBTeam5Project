@@ -58,7 +58,7 @@
     <form action="http://localhost:8080/Phase4/UpdateUserServlet" method="post">
     	<input type="hidden" name="userId" value="<%= userId %>">
         Name: <input type="text" name="name" value="<%= userCurrentName %>" required><br>
-        Phone number: <input type="email" name="phoneNumber" value="<%= userCurrentPhoneNumber %>" required><br>
+        Phone number: <input type="text" name="phoneNumber" value="<%= userCurrentPhoneNumber %>" required><br>
         Current Password: <input type="password" name="currentPassword" required><br>
         Change Password: <input type="password" name="changePassword">
         <input type="submit" value="Update">
