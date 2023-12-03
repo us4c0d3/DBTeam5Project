@@ -47,8 +47,7 @@ public class Auth extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		// doGet(request, response);
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		String role = request.getParameter("role");
