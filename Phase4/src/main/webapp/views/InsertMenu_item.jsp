@@ -95,6 +95,7 @@
 
 	try {
 		DBConnection.beginTransaction();
+		DBConnection.setReadCommited();
 		if (name != "" && category != "" && unit_price != -100000000 && manager_id != "") {
 			String id = mDML.insertMenu_item(name, category, unit_price, manager_id);
 

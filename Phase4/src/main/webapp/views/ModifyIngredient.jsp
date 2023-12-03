@@ -65,6 +65,7 @@
 		ingredient_quentity = request.getParameter("quantity");
 	try {
 		DBConnection.beginTransaction();
+		DBConnection.setReadCommited();
 		if (ingredient_id != "" && ingredient_quentity != "") {
 	    	mDML.modifyIngredient(ingredient_id, attribute, ingredient_quentity);
 		}

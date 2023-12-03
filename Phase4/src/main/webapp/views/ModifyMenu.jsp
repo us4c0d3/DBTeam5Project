@@ -66,6 +66,7 @@
 		end_date = request.getParameter("end_date");
 	try {
 		DBConnection.beginTransaction();
+		DBConnection.setReadCommited();
 		if (menu_id != "" && start_date != "" && end_date != "") {
 			mDML.modifyMenu(menu_id, "start_date", start_date);
 			mDML.modifyMenu(menu_id, "end_date", end_date);

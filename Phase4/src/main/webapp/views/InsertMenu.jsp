@@ -89,6 +89,7 @@
 	
 	try {
 		DBConnection.beginTransaction();
+		DBConnection.setReadCommited();
 		if (start_date != "" && end_date != "" && manager_id != "") {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 			Date trans_start_date = sdf.parse(start_date);
