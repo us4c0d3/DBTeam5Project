@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-	public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	public static final String URL = "jdbc:oracle:thin:@192.168.219.100:1521:orcl";
 	public static final String USER_NAME = "teamproject";
 	public static final String USER_PASSWD = "comp322";
 
