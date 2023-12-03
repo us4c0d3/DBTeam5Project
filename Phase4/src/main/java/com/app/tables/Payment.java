@@ -5,23 +5,56 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Payment {
 	private Connection conn;
 	PreparedStatement ps;
 	String sql = "";
+	private String total_price;
+	private String payment_type;
+	private String card_info;
 
 	public Payment(Connection conn) {
 		this.conn = conn;
+	}
+
+	public Payment(String total_price, String payment_type, String card_info) {
+		this.total_price = total_price;
+		this.payment_type = payment_type;
+		this.card_info = card_info;
+	}
+
+	public String getTotal_price() {
+		return this.total_price;
+	}
+
+	public String getPayment_type() {
+		return this.payment_type;
+	}
+
+	public String getCard_info() {
+		return this.card_info;
+	}
+
+	public void setTotal_price(String total_price) {
+		this.total_price = total_price;
+	}
+
+	public void setPayment_type(String payment_type) {
+		this.payment_type = payment_type;
+	}
+
+	public void setCard_info(String card_info) {
+		this.card_info = card_info;
 	}
 
 	public String getLastId() {
 		String lastId = "OR000000";
 		ResultSet rs = null;
 		try {
-			String query = "SELECT order_id\r\n"
-				+ "FROM payment \r\n"
-				+ "order by order_id DESC\r\n"
+			String query = "SELECT order_id\r\n" + "FROM payment \r\n" + "order by order_id DESC\r\n"
 				+ "FETCH FIRST 1 ROWS ONLY";
 			ps = this.conn.prepareStatement(query);
 			rs = ps.executeQuery();
@@ -122,7 +155,8 @@ public class Payment {
 		return res;
 	}
 
-	public ResultSet SELECT(String customerId) {
+	public List<Payment> SELECT(String customerId) {
+		List<Payment> Payments = new ArrayList<>();
 		ResultSet rs = null;
 		try {
 			sql = "SELECT * FROM PAYMENT WHERE customer_id = ?";
@@ -130,10 +164,17 @@ public class Payment {
 			ps.setString(1, customerId);
 
 			rs = ps.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					Payments.add(new Payment(rs.getString(3), rs.getString(4), rs.getString(5)));
+				}
+			}
+			rs.close();
+			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return rs;
+		return Payments;
 	}
 }
