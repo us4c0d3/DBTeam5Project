@@ -1,5 +1,5 @@
 <%@ page
-	import="com.app.utils.MenuDML,com.app.tables.*,java.sql.*,java.util.*"%>
+	import="com.app.utils.MenuDML,com.app.utils.DBConnection,com.app.tables.*,java.sql.*,java.util.*"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
@@ -63,6 +63,8 @@
 			for (int i = 0; i < Ingredients.length; i++) {
 		mDML.insertNeed(id, Ingredients[i]);
 			}
+			DBConnection.commit();
+			
 		}
 	}
 

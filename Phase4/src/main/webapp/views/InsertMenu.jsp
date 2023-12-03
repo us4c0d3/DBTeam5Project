@@ -1,5 +1,5 @@
 <%@ page
-	import="com.app.utils.MenuDML,com.app.tables.*,java.sql.*,java.util.*,java.util.Date,java.text.SimpleDateFormat"%>
+	import="com.app.utils.MenuDML,com.app.utils.DBConnection,com.app.tables.*,java.sql.*,java.util.*,java.util.Date,java.text.SimpleDateFormat"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
@@ -16,25 +16,25 @@
 		MenuDML mDML = new MenuDML();
 		List<Menu_item> Menu_itemList = mDML.showMenu_item("", "", "");
 		if (Menu_itemList != null) {
-		  out.println("<table border=\"1\">");
-		  out.println("<th>" + "ITEM_ID" + "</th>");
-		  out.println("<th>" + "NAME" + "</th>");
-		  out.println("<th>" + "UNIT_PRICE" + "</th>");
-		  out.println("<th>" + "ITEM_QUANTITY" + "</th>");
-		  out.println("<th>" + "CATEGORY" + "</th>");
-		  out.println("<th>" + "SOLDOUT" + "</th>");
-		  for (int i = 0; i < Menu_itemList.size(); i++) {
-		    out.println("<tr>");
-		    out.println("<td>" + Menu_itemList.get(i).getItem_id() + "</td>");
-		    out.println("<td>" + Menu_itemList.get(i).getName() + "</td>");
-		    out.println("<td>" + Double.toString(Menu_itemList.get(i).getUnit_price()) + "</td>");
-		    out.println("<td>" + Double.toString(Menu_itemList.get(i).getItem_quantity()) + "</td>");
-		    out.println("<td>" + Menu_itemList.get(i).getCategory() + "</td>");
-		    out.println("<td>" + Menu_itemList.get(i).getSoldout() + "</td>");
-		    out.println("<td><input type=\"checkbox\" name=\"selected_menu_item\" value=\""
-		    + Menu_itemList.get(i).getItem_id() + "\"></td>");
-		    out.println("</tr>");
-		  }
+			out.println("<table border=\"1\">");
+			out.println("<th>" + "ITEM_ID" + "</th>");
+			out.println("<th>" + "NAME" + "</th>");
+			out.println("<th>" + "UNIT_PRICE" + "</th>");
+			out.println("<th>" + "ITEM_QUANTITY" + "</th>");
+			out.println("<th>" + "CATEGORY" + "</th>");
+			out.println("<th>" + "SOLDOUT" + "</th>");
+			for (int i = 0; i < Menu_itemList.size(); i++) {
+				out.println("<tr>");
+				out.println("<td>" + Menu_itemList.get(i).getItem_id() + "</td>");
+				out.println("<td>" + Menu_itemList.get(i).getName() + "</td>");
+				out.println("<td>" + Double.toString(Menu_itemList.get(i).getUnit_price()) + "</td>");
+				out.println("<td>" + Double.toString(Menu_itemList.get(i).getItem_quantity()) + "</td>");
+				out.println("<td>" + Menu_itemList.get(i).getCategory() + "</td>");
+				out.println("<td>" + Menu_itemList.get(i).getSoldout() + "</td>");
+				out.println("<td><input type=\"checkbox\" name=\"selected_menu_item\" value=\""
+			+ Menu_itemList.get(i).getItem_id() + "\"></td>");
+				out.println("</tr>");
+			}
 		}
 		%>
 	</form>
@@ -63,6 +63,7 @@
 		for (int i = 0; i < Menu_items.length; i++) {
 			mDML.insertContains(id, Menu_items[i]);
 		}
+		DBConnection.commit();
 			}
 		}
 	}

@@ -26,6 +26,7 @@
 	if (menu_id != "" && start_date != "" && end_date != "") {
 		mDML.modifyMenu(menu_id, "start_date", start_date);
 		mDML.modifyMenu(menu_id, "end_date", end_date);
+    	DBConnection.commit();
 	}
 	List<Menu> result = mDML.showMenu_v2();
 	if (result != null) {

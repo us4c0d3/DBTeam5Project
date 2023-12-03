@@ -22,7 +22,10 @@
 		ingredient_id = request.getParameter("ingredient_id");
 	if (request.getParameter("quantity") != null)
 		ingredient_quentity = request.getParameter("quantity");
-    mDML.modifyIngredient(ingredient_id, attribute, ingredient_quentity);
+	if (ingredient_id != "" && ingredient_quentity != "") {
+    	mDML.modifyIngredient(ingredient_id, attribute, ingredient_quentity);
+    	DBConnection.commit();
+	}
     List<Ingredient> result = mDML.showIngredient(ingredient_id);
 	if (result != null) {
 		out.println("<table border=\"1\">");
