@@ -31,6 +31,8 @@ public class OrderDML {
 	// id를 이용하여 order table의 속성 말고도 각 order의 menu_item에 대한 정보(id, name, amount, unit_price,
 	// item_quantity, category, soldout)까지 모두 가져오는 쿼리
 	public Object[] showOrder2(String id) {
+		List<String> customerIds = new ArrayList<>();
+		List<String> orderIds = new ArrayList<>();
 		List<Payment> Payments = new ArrayList<>();
 		List<Menu_item> Menu_items = new ArrayList<>();
 		List<Integer> Amounts = new ArrayList<>();
@@ -45,6 +47,8 @@ public class OrderDML {
 			rs = ps.executeQuery();
 			if (rs != null) {
 				while (rs.next()) {
+					customerIds.add(rs.getString(1));
+					orderIds.add(rs.getString(2));
 					Payments.add(new Payment(rs.getString(3), rs.getString(4), rs.getString(5)));
 					Menu_items.add(new Menu_item(rs.getString(6), rs.getString(7), rs.getInt(9),
 						rs.getInt(10), rs.getString(11), rs.getString(12)));
@@ -56,7 +60,7 @@ public class OrderDML {
 			e.printStackTrace();
 		}
 
-		Object[] objects = new Object[] {Payments, Menu_items, Amounts};
+		Object[] objects = new Object[] {customerIds, orderIds, Payments, Menu_items, Amounts};
 		return objects;
 	}
 }
