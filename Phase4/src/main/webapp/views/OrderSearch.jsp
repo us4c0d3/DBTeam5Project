@@ -4,6 +4,7 @@
 <html>
 <head>
 <title>Search Order</title>
+<script src="../js/navbarScript.js"></script>
 <!-- bootstrap css -->
 <link rel="stylesheet" href="./../static/css/bootstrap.min.css">
 </head>
