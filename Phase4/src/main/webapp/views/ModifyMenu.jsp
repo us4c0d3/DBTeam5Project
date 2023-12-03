@@ -7,7 +7,7 @@
 </head>
 <body>
 	<form action="ModifyMenu.jsp" method="post">
-		Menu_Id:  <input type="text" id="id" name="id"/><br>
+		Menu_Id: <input type="text" id="id" name="id" /><br>
 		Modify_Start_Date: <input type="date" id="date" name="start_date"
 			value="2020-01-01" min="2020-01-01" max="2023-12-31" /><br>
 		Modify_End_Date: <input type="date" id="date" name="end_date"
@@ -18,13 +18,16 @@
 	MenuDML mDML = new MenuDML();
 	String menu_id = "", start_date = "", end_date = "";
 	if (request.getParameter("id") != null)
-		  start_date = request.getParameter("id");
+		menu_id = request.getParameter("id");
 	if (request.getParameter("start_date") != null)
-		  start_date = request.getParameter("start_date");
+		start_date = request.getParameter("start_date");
 	if (request.getParameter("end_date") != null)
-		  start_date = request.getParameter("end_date");
-	mDML.modifyMenu(menu_id, start_date, end_date);
-	List<Menu> result = mDML.showMenu(start_date, end_date);
+		end_date = request.getParameter("end_date");
+	if (menu_id != "" && start_date != "" && end_date != "") {
+		mDML.modifyMenu(menu_id, "start_date", start_date);
+		mDML.modifyMenu(menu_id, "end_date", end_date);
+	}
+	List<Menu> result = mDML.showMenu_v2();
 	if (result != null) {
 		out.println("<table border=\"1\">");
 		out.println("<th>" + "MENU_ID" + "</th>");
