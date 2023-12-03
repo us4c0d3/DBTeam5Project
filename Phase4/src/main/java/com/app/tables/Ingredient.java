@@ -14,6 +14,7 @@ public class Ingredient {
 	String sql = "";
 	PreparedStatement ps;
 
+	private String ingredient_id;
 	private String name;
 	private int unit_price;
 	private int quantity;
@@ -26,6 +27,17 @@ public class Ingredient {
 		this.name = name;
 		this.unit_price = unit_price;
 		this.quantity = quantity;
+	}
+
+	public Ingredient(String id, String name, int unit_price, int quantity) {
+		this.ingredient_id = id;
+		this.name = name;
+		this.unit_price = unit_price;
+		this.quantity = quantity;
+	}
+
+	public String getId() {
+		return this.ingredient_id;
 	}
 
 	public String getName() {
@@ -81,7 +93,7 @@ public class Ingredient {
 			rs = ps.executeQuery();
 			if (rs != null) {
 				while (rs.next()) {
-					Ingredients.add(new Ingredient(rs.getString(2), rs.getInt(3), rs.getInt(4)));
+					Ingredients.add(new Ingredient(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4)));
 				}
 			}
 			// conn.commit();
