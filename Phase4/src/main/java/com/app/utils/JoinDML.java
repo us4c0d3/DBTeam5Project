@@ -8,7 +8,7 @@ public class JoinDML {
 	TableMain tm;
 
 	public JoinDML() {
-		tm = new TableMain();
+		tm = TableMain.getInstance();
 	}
 
 	public String insertCustomer(String name, String password, String phone_number) throws IOException {

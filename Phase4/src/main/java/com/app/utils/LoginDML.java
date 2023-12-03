@@ -3,9 +3,10 @@ package com.app.utils;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
 
+import com.app.tables.Customer;
+import com.app.tables.Manager;
 import com.app.tables.TableMain;
 
 public class LoginDML {
@@ -14,53 +15,47 @@ public class LoginDML {
 	PreparedStatement ps;
 	String sql = "";
 
-	public LoginDML(Connection conn) {
-		tm = new TableMain();
-		this.conn = conn;
+	public LoginDML() {
+		this.conn = DBConnection.getConnection();
+		this.tm = TableMain.getInstance();
 	}
 
-	boolean validateLoginCustomer(String id, String password) throws IOException {
-		ResultSet rs = null;
-		String customerId = "";
-
-		rs = tm.customer.SELECT(id, password);
-
-		try {
-			if (rs.next()) {
-				customerId = rs.getString(1);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	/**
+	 * userId가 어떠한 유형의 유저인지 확인하는 메서드
+	 * 
+	 * @param userId
+	 * @return 0: Customer
+	 * @return 1: Manager
+	 * @return -1: error
+	 */
+	int checkCusOrMan(String userId) {
+		String token = userId.substring(0, 2);
+		if (token.equals("CU")) {
+			return 0;
+		} else if (token.equals("MA")) {
+			return 1;
+		} else {
+			return -1;
 		}
+	}
 
-		if (customerId != "") {
+	public boolean validateLoginCustomer(String id, String password) throws IOException {
+		List<Customer> customer = tm.customer.SELECT(id, password);
+
+		if (!customer.isEmpty()) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	boolean validateLoginManager(String id, String password) throws IOException {
-		ResultSet rs = null;
-		String managerId = "";
+	public boolean validateLoginManager(String id, String password) throws IOException {
+		List<Manager> manager = tm.manager.SELECT(id, password);
 
-		rs = tm.manager.SELECT(id, password);
-
-		try {
-			if (rs.next()) {
-				managerId = rs.getString(1);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (managerId != "") {
+		if (!manager.isEmpty()) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-
 }

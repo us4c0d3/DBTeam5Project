@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form action="http://localhost:8080/Phase4/Auth" method="get">
+        Role: <input type="radio" name="role" value="customer" required>Customer
+              <input type="radio" name="role" value="manager" required>Manager<br>
+        ID: <input type="text" name="userId" required><br>
+        Password: <input type="password" name="password" required><br>
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>
