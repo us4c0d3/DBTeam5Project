@@ -1,11 +1,11 @@
-## JDBC Web Programming Project
+# JDBC Web Programming Project
 
-# 시스템이 제공하는 서비스 소개.
+## 시스템이 제공하는 서비스 소개.
 - 식당의 재고 소진 여부 확인 및 식당 메뉴, 주문 내역을 확인하는 사이트
 - 사용자(1) 고객: 고객은 로그인 유무에 상관없이 고객 아이디를 입력하면 주문 정보 및 결제 내역과 결제 내역과 메뉴 정보, 재고 소진 여부를 확인할 수 있다.
 - 사용자(2) 매니저: 매니저는 로그인을 통해 메뉴 수정, 메뉴 아이템 추가가 가능하다.
 
-# 웹 페이지 종류.
+## 웹 페이지 종류.
 1. 로그인 페이지: 사용자는 Customer와 Manager 중 자신의 역할을 선택하고 아이디와 비밀번호를 입력하고 로그인을 한다. 로그인을 성공하면 메인페이지로 이동한다.
 2. 메인페이지: 사용자는 로그인 유무에 상관없이 메인페이지에서 원하는 서비스를 선택할 수 있다.
 3. 마이페이지: 사용자가 비밀번호를 수정하는 페이지이다. 사용자는 이름과 휴대폰 번호, 현재 비밀번호, 변경할 비밀번호를 모두 입력하여 비밀번호를 수정한다.
@@ -17,13 +17,13 @@
 9. 메뉴 아이템 추가 페이지: 사용자가 추가할 메뉴 아이템을 선택하고, 메뉴 아이템 이름과 가격, 카테고리를 선택하여 추가한다.
 10. 재료 수정 페이지: 재료 아이디와 수정할 양을 입력하면 해당 재료의 수량이 변경된다. (해당 페이지는 매니저만 접근 권한이 있다.)
 
-# How to execute code.
-## Web 화면 실행.
+## How to execute code.
+*Web 화면 실행.
 Phase4 > src > main > webapp > static > html > Login.html을 실행하면, 로그인 웹 화면이 실행된다. 
 여기서 Manager 또는 Cutomor를 선택하고, 아이디와 비밀번호를 입력하면 여러 기능을 선택할 수 있는 메인페이지에 접속할 수 있다.
 
-# What environments to be configured for testin your code.
-1. Apach Tomcat 8.5 다운로드 (in C:/)
+## What environments to be configured for testin your code.
+1. Download Apach Tomcat 8.5 in C:/
 2. Install JDK 8
 3. Download Eclipse IDE for EE 
 4. Installation of Eclipse IDE for EE
