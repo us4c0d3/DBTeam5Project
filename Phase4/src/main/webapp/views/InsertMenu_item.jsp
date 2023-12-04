@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>Insert Menu_item</title>
-<script src="../js/navbarScript.js"></script>
+<script src="../static/js/navbarScript.js"></script>
 <!-- bootstrap css -->
 <link rel="stylesheet" href="./../static/css/bootstrap.min.css">
 </head>
