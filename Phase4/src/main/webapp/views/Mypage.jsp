@@ -94,7 +94,7 @@
 						List<Customer> customers = tm.customer.SELECTbyID(userId);
 						userCurrentName = customers.get(0).getName();
 						userCurrentPhoneNumber = customers.get(0).getPhonenumber();
-					} else if (checkCusOrMan == -1) {
+					} else if (checkCusOrMan == 0) {
 						List<Manager> managers = tm.manager.SELECTbyID(userId);
 						userCurrentName = managers.get(0).getName();
 						userCurrentPhoneNumber = managers.get(0).getPhonenumber();
