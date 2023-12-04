@@ -3,8 +3,11 @@
 
 <head>
 	<title>Login</title>
-	<script>
+	<script src="../js/navbarScript.js">
 		window.onload = function () {
+			toggleLoginLogout();
+			toggleMenuItems();
+			toggleCustomerId();
 			const urlParams = new URLSearchParams(window.location.search);
 			const error = urlParams.get('error');
 
@@ -13,7 +16,6 @@
 			}
 		};
 	</script>
-	<script src="../js/navbarScript.js"></script>
 	<!-- bootstrap css -->
 	<link rel="stylesheet" href="./../css/bootstrap.min.css">
 </head>
