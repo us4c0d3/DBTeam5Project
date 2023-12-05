@@ -1,0 +1,19 @@
+# 동시성 제어, 디비 일관성 & 무결성 제어 방법.
+
+## 메뉴 정보를 수정하거나 추가할 때, DB의 트랜잭션 Isolation Level 중 Read Commited 적용한다.
+이 격리 수준은 트랜잭션에서 데이터를 읽을 때, '커밋된(commit)' 데이터만 읽도록 보장한다.
+즉, 한 트랜잭션이 다른 트랜잭션에서 아직 커밋되지 않은 변경(즉, 'dirty'데이터)을 볼 수 없다는 것을 의미한다.
+이를 통해 트랜잭션들이 서로 간섭하지 않도록 하며, 이는 'Dirty Read'문제를 방지한다.
+
+* DB에 insert하는 쿼리 실행 시,Read Commited 적용.
+1. DBConnection.beginTransaction(); 을 호출하면 DB 연결에 대한 트랜젝션 시작.
+2. DBConnection.SetReadCommited();를 호출하여 DB의 isolation level을 설정.
+ReadCommitted  isolation level에서는 다른 트랜잭션에서 커밋한 내용을 
+현재 트랜잭션에서 볼 수 있다.
+3. 메뉴 정보를 DB에 insert하는 쿼리를 실행한다.
+4. 쿼리가 성공적으로 실행되면, DBConnection.rollback();을 호출하여
+트랜잭션을 커밋한다. 커밋을 하면 트랜잭션에서 실행된 모든 쿼리의 결과가 DB에 반영한다.
+5. 만약 트랜잭션 중 예외가 발생하면 DBConnection.rollback();을 호출하여 트랜잭션을 롤백함. 롤백을 하면 트랜잭션에서 실행된 모든 쿼리의 결과가 취소되고, DB는 트랜잭션을 시작하기 전 상태로 돌아간다.
+
+
+
