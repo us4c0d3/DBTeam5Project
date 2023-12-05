@@ -6,60 +6,30 @@
 	<script src="../js/navbarScript.js"></script>
 	<!-- bootstrap css -->
 	<link rel="stylesheet" href="./../css/bootstrap.min.css">
+    <link rel="stylesheet" href="./../css/navbarStyle.css">
 </head>
 
 <body>
 	<!-- header -->
-	<nav class="navbar navbar-dark bg-primary">
-		<div class="container-fluid">
-			<a class="nav-link" href="./index.html"> <span class="navbar-brand mb-0 h1">Restaurant</span>
-			</a>
-			<div>
-				<a class="nav-link" href="./../../views/Mypage.jsp">
-					<span class="navbar-brand mb-0 h">Mypage</span>
-				</a>
-				<a class="nav-link" href="./Login.html"> <span class="navbar-brand mb-0 h">Login</span></a>
-			</div>
+	<nav class="navbar">
+		<div class="logo">
+			<a href="./index.html">Restaurant</a>
 		</div>
-		<ul class="nav" id="bar">
-			<li class="SearchOrder"><a class="nav-link" href="./../../views/OrderSearch.jsp"> <span
-						class="navbar-brand mb-0 h">Search
-						Order</span></a></li>
-			<li class="ShowMenu"><a class="nav-link" href="./../../views/ShowMenu.jsp">
-					<span class="navbar-brand mb-0 h">Show Menu</span>
-				</a></li>
-			<li class="InsertMenu"><a class="nav-link" href="./../../views/InsertMenu.jsp"> <span class="navbar-brand mb-0 h">Insert
-						Menu</span></a></li>
-			<li class="ModifyMenu"><a class="nav-link" href="./../../views/ModifyMenu.jsp"> <span class="navbar-brand mb-0 h">Modify
-						Menu</span></a></li>
-			<li class="ShowMenu_item"><a class="nav-link" href="./../../views/ShowMenu_item.jsp"> <span
-						class="navbar-brand mb-0 h">Show
-						Menu item</span></a></li>
-			<li class="InsertMenu_item"><a class="nav-link" href="./../../views/InsertMenu_item.jsp"> <span
-						class="navbar-brand mb-0 h">Insert
-						Menu item</span></a></li>
-			<li class="ModifyIngredient"><a class="nav-link" href="./../../views/ModifyIngredient.jsp"> <span
-						class="navbar-brand mb-0 h">Modify
-						Ingredient</span></a></li>
-		</ul>
-	</nav>
+        
+        <a href="./../../views/OrderSearch.jsp" class="SearchOrder">Search Order</a>
+        <a href="./../../views/ShowMenu.jsp" class="ShowMenu">Show Menu</a>
+        <a href="./../../views/ShowMenu_item.jsp" class="ShowMenu_item">Show Menu Item</a>
+        <a href="./../../views/InsertMenu.jsp">Insert Menu</a>
+        <a href="./../../views/ModifyMenu.jsp">Modify Menu</a>
+        <a href="./../../views/InsertMenu_item.jsp">Insert Menu Item</a>
+        <a href="./../../views/ModifyIngredient.jsp">Modify Ingredient</a>
+        
+        <div class="right-links">
+            <a href="./Login.html">Login</a>
+            <a href="./../../views/Mypage.jsp">Mypage</a>
+        </div>
+    </nav>
 
-	<!-- body -->
-	<!--<button type="button" onclick="location.href='./../../views/Login.jsp'">Login</button> <br>
-		<button type="button" onclick="location.href='./../../views/Mypage.jsp'">My page</button> <br>
-		<button type="button" onclick="location.href='./../../views/SearchOrder.jsp'">Order</button> <br>
-		<button type="button" onclick="location.href='./../../views/ShowMenu.jsp'">Show Menu</button> <br>
-		<button type="button" onclick="location.href='./../../views/InsertMenu.jsp'">Insert Menu</button> <br>
-		<button type="button" onclick="location.href='./../../views/ModifyMenu.jsp'">Modify Menu</button> <br>
-		<button type="button" onclick="location.href='./../../views/ShowMenu_item.jsp'">Show Menu item</button> <br>
-		<button type="button" onclick="location.href='./../../views/InsertMenu_item.jsp'">Insert Menu item</button>
-		<br>
-		<button type="button" onclick="location.href='./../../views/ModifyMenu_item.jsp'">Modify Menu item</button>
-		<br>
-		<button type="button" onclick="location.href='./../../views/ModifyIngredient.jsp'">Modify
-			Ingredient</button>
-		<br>
-		-->
 </body>
 
 </html>

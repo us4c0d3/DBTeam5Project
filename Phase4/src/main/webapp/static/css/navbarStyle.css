@@ -1,0 +1,43 @@
+@charset "EUC-KR";
+.navbar {
+    background-color: #007bff; /* 주 색상 */
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    visibility: visible;
+    position: relative;
+}
+.navbar a.hidden-link {
+    visibility: hidden; /* 보이지 않게 하되 */
+    position: relative; /* 위치는 기본값 유지해서 공간 차지 */
+}
+.navbar a:hover {
+    background-color: #0056b3; /* 호버 색상 */
+    color: white;
+}
+.navbar .logo a {
+    background-color: #0044cc; /* 활성 탭 색상 */
+    color: white;
+}
+.navbar .right-links {
+    display: flex;
+}
+.navbar .right-links a {
+    padding: 14px 10px;
+    font-size: 0.9em; /* 작은 폰트 크기 */
+}
+@media screen and (max-width: 600px) {
+    .navbar a, .navbar img {
+        padding: 10px 15px;
+    }
+    .navbar .right-links a {
+        padding: 10px 8px;
+    }
+}

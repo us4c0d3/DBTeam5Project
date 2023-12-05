@@ -1,0 +1,47 @@
+@charset "EUC-KR";
+body { 
+    font-family: Arial, sans-serif; 
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
+}
+.login-container {
+    background: white;
+    width: 300px;
+    margin: auto;
+    margin-top: 30px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+}
+input[type=submit]:hover {
+    opacity: 0.8;
+}
+.navbar {
+    background-color: #007bff;
+}
+.navbar a {
+    color: white;
+}
+.navbar a:hover {
+    background-color: #0056b3;
+}

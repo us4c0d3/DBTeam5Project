@@ -7,45 +7,28 @@
 <script src="../static/js/navbarScript.js"></script>
 <!-- bootstrap css -->
 <link rel="stylesheet" href="./../static/css/bootstrap.min.css">
+<link rel="stylesheet" href="./../static/css/navbarStyle.css">
 </head>
 <body>
 	<!-- header -->
-	<nav class="navbar navbar-dark bg-primary">
-		<div class="container-fluid">
-			<a class="nav-link" href="./../static/html/index.html"> <span
-				class="navbar-brand mb-0 h1">Restaurant</span>
-			</a>
-			<div>
-				<a class="nav-link" href="./Mypage.jsp"> <span
-					class="navbar-brand mb-0 h">Mypage</span>
-				</a> <a class="nav-link" href="./../static/html/Login.html"> <span
-					class="navbar-brand mb-0 h">Login</span></a>
-			</div>
+	<nav class="navbar">
+		<div class="logo">
+			<a href="./../static/html/index.html">Restaurant</a>
 		</div>
-		<ul class="nav" id="bar">
-			<li class="SearchOrder"><a class="nav-link"
-				href="./OrderSearch.jsp"> <span class="navbar-brand mb-0 h">Search
-						Order</span></a></li>
-			<li class="ShowMenu"><a class="nav-link" href="./ShowMenu.jsp">
-					<span class="navbar-brand mb-0 h">Show Menu</span>
-			</a></li>
-			<li class="InsertMenu"><a class="nav-link"
-				href="./InsertMenu.jsp"> <span class="navbar-brand mb-0 h">Insert
-						Menu</span></a></li>
-			<li class="ModifyMenu"><a class="nav-link"
-				href="./ModifyMenu.jsp"> <span class="navbar-brand mb-0 h">Modify
-						Menu</span></a></li>
-			<li class="ShowMenu_item"><a class="nav-link"
-				href="./ShowMenu_item.jsp"> <span class="navbar-brand mb-0 h">Show
-						Menu item</span></a></li>
-			<li class="InsertMenu_item"><a class="nav-link"
-				href="./InsertMenu_item.jsp"> <span class="navbar-brand mb-0 h">Insert
-						Menu item</span></a></li>
-			<li class="ModifyIngredient"><a class="nav-link"
-				href="./ModifyIngredient.jsp"> <span class="navbar-brand mb-0 h">Modify
-						Ingredient</span></a></li>
-		</ul>
-	</nav>
+        
+        <a href="./OrderSearch.jsp" class="SearchOrder">Search Order</a>
+        <a href="./ShowMenu.jsp" class="ShowMenu">Show Menu</a>
+        <a href="./ShowMenu_item.jsp" class="ShowMenu_item">Show Menu Item</a>
+        <a href="./InsertMenu.jsp">Insert Menu</a>
+        <a href="./ModifyMenu.jsp">Modify Menu</a>
+        <a href="./InsertMenu_item.jsp">Insert Menu Item</a>
+        <a href="./ModifyIngredient.jsp">Modify Ingredient</a>
+        
+        <div class="right-links">
+            <a href="./../static/html/Login.html">Login</a>
+            <a href="./Mypage.jsp">Mypage</a>
+        </div>
+    </nav>
 
 	<!-- body -->
 	<form action="InsertMenu_item.jsp" method="post">
