@@ -27,6 +27,11 @@ public class DBConnection {
 		try {
 			conn = DriverManager.getConnection(URL, USER_NAME, USER_PASSWD);
 			System.out.println("Connected.");
+			conn.setAutoCommit(false);
+			DatabaseMetaData dbmd = conn.getMetaData();
+			if (dbmd.supportsTransactionIsolationLevel(Connection.TRANSACTION_READ_COMMITTED)) {
+				conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 			System.err.println("Cannot get a connection: " + ex.getLocalizedMessage());
@@ -35,19 +40,12 @@ public class DBConnection {
 		}
 	}
 
-	public static Connection getConnection() throws SQLException {
+	public static Connection getConnection() {
 		if (conn == null) {
 			synchronized (DBConnection.class) {
 				if (conn == null) {
 					new DBConnection();
 				}
-			}
-		}
-		if (conn != null) {
-			conn.setAutoCommit(false);
-			DatabaseMetaData dbmd = conn.getMetaData();
-			if (dbmd.supportsTransactionIsolationLevel(Connection.TRANSACTION_READ_COMMITTED)) {
-				conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			}
 		}
 		return conn;
