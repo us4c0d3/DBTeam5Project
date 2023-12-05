@@ -2,17 +2,21 @@
 <html>
 <head>
     <title>Login</title>
-    <script>
-		window.onload = function () {
-			const urlParams = new URLSearchParams(window.location.search);
-			const error = urlParams.get('error');
+    <script src="../js/navbarScript.js"></script>
+	<script>
+    window.onload = function () {
+        toggleLoginLogout();
+        toggleMenuItems();
+        toggleCustomerId();
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
 
-			if (error) {
-				alert("Login failed. Please input the valid ID and Password");
-			}
-		};
+        if (error) {
+            alert("Login failed. Please input the valid ID and Password");
+        }
+    };
 	</script>
-	<script src="../js/navbarScript.js"></script>
     <link rel="stylesheet" href="./../css/bootstrap.min.css">
     <link rel="stylesheet" href="./../css/navbarStyle.css">
     <link rel="stylesheet" href="./../css/loginform.css">
