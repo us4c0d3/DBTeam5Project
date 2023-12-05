@@ -88,7 +88,7 @@
 
 	try {
 		DBConnection.beginTransaction();
-		DBConnection.setReadCommited();
+		DBConnection.setSerializable();
 		if (name != "" && category != "" && unit_price != -100000000 && manager_id != "") {
 			String id = mDML.insertMenu_item(name, category, unit_price, manager_id);
 
@@ -107,6 +107,8 @@
 		// 실패한 경우 롤백
 		DBConnection.rollback();
 		e.printStackTrace();
+	} finally {
+		DBConnection.setReadCommited();
 	}
 
 	// 메뉴 아이템 생성 로직
