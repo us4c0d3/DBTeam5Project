@@ -138,19 +138,24 @@ DECLARE
     v_ingredient_id CHAR(8);
     v_total_quantity NUMBER;
     v_new_quantity NUMBER;
+    v_count NUMBER;
 BEGIN
     -- need 테이블에 대한 변경 사항을 추적하고 해당하는 Menu_item의 item_quantity를 업데이트
     v_item_id := :NEW.item_id;
     v_ingredient_id := :NEW.ingredient_id;
-    
+
     SELECT mi.item_quantity INTO v_total_quantity
     FROM menu_item mi
     WHERE mi.item_id = v_item_id;
-    
+
     SELECT i.quantity INTO v_new_quantity
     FROM ingredient i
     WHERE i.ingredient_id = v_ingredient_id;
-    
+
+    SELECT COUNT(*) INTO v_count
+    FROM need ne
+    WHERE ne.item_id = v_item_id;
+
     IF v_new_quantity <= 0 THEN
         -- quantity가 0 이하일 경우 item_quantity를 0으로 업데이트
         UPDATE menu_item
@@ -158,6 +163,11 @@ BEGIN
         WHERE item_id = v_item_id;
     ELSIF v_new_quantity < v_total_quantity THEN
         -- quantity가 기존보다 작으면 해당하는 재료의 개수로 item_quantity를 업데이트
+        UPDATE menu_item
+        SET item_quantity = v_new_quantity
+        WHERE item_id = v_item_id;
+    ELSIF v_count = 0 THEN
+        -- need가 그 전에 없었을 경우 그 재료의 개수로 업데이트
         UPDATE menu_item
         SET item_quantity = v_new_quantity
         WHERE item_id = v_item_id;
