@@ -1,79 +1,66 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<title>Login</title>
-	<script src="../js/navbarScript.js">
-		window.onload = function () {
-			toggleLoginLogout();
-			toggleMenuItems();
-			toggleCustomerId();
-			const urlParams = new URLSearchParams(window.location.search);
-			const error = urlParams.get('error');
+    <title>Login</title>
+    <script src="../js/navbarScript.js"></script>
+	<script>
+    window.onload = function () {
+        toggleLoginLogout();
+        toggleMenuItems();
+        toggleCustomerId();
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
 
-			if (error) {
-				alert("Login failed. Please input the valid ID and Password");
-			}
-		};
+        if (error) {
+            alert("Login failed. Please input the valid ID and Password");
+        }
+    };
 	</script>
-	<!-- bootstrap css -->
-	<link rel="stylesheet" href="./../css/bootstrap.min.css">
+    <link rel="stylesheet" href="./../css/bootstrap.min.css">
+    <link rel="stylesheet" href="./../css/navbarStyle.css">
+    <link rel="stylesheet" href="./../css/loginform.css">
 </head>
-
 <body>
-	<!-- header -->
-	<nav class="navbar navbar-dark bg-primary">
-		<div class="container-fluid">
-			<a class="nav-link" href="./index.html"> <span class="navbar-brand mb-0 h1">Restaurant</span>
-			</a>
-			<div>
-				<a class="nav-link" href="./../../views/Mypage.jsp">
-					<span class="navbar-brand mb-0 h">Mypage</span>
-				</a>
-				<a class="nav-link" href="./Login.html"> <span class="navbar-brand mb-0 h">Login</span></a>
-			</div>
+    <nav class="navbar">
+		<div class="logo">
+			<a href="./index.html">Restaurant</a>
 		</div>
-		<ul class="nav" id="bar">
-			<li class="SearchOrder"><a class="nav-link" href="./../../views/OrderSearch.jsp"> <span
-						class="navbar-brand mb-0 h">Search
-						Order</span></a></li>
-			<li class="ShowMenu"><a class="nav-link" href="./../../views/ShowMenu.jsp">
-					<span class="navbar-brand mb-0 h">Show Menu</span>
-				</a></li>
-			<li class="InsertMenu"><a class="nav-link" href="./../../views/InsertMenu.jsp"> <span
-						class="navbar-brand mb-0 h">Insert
-						Menu</span></a></li>
-			<li class="ModifyMenu"><a class="nav-link" href="./../../views/ModifyMenu.jsp"> <span
-						class="navbar-brand mb-0 h">Modify
-						Menu</span></a></li>
-			<li class="ShowMenu_item"><a class="nav-link" href="./../../views/ShowMenu_item.jsp"> <span
-						class="navbar-brand mb-0 h">Show
-						Menu item</span></a></li>
-			<li class="InsertMenu_item"><a class="nav-link" href="./../../views/InsertMenu_item.jsp"> <span
-						class="navbar-brand mb-0 h">Insert
-						Menu item</span></a></li>
-			<li class="ModifyIngredient"><a class="nav-link" href="./../../views/ModifyIngredient.jsp"> <span
-						class="navbar-brand mb-0 h">Modify
-						Ingredient</span></a></li>
-		</ul>
-	</nav>
+        
+        <a href="./../../views/OrderSearch.jsp" class="SearchOrder">Search Order</a>
+        <a href="./../../views/ShowMenu.jsp" class="ShowMenu">Show Menu</a>
+        <a href="./../../views/ShowMenu_item.jsp" class="ShowMenu_item">Show Menu Item</a>
+        <a href="./../../views/InsertMenu.jsp">Insert Menu</a>
+        <a href="./../../views/ModifyMenu.jsp">Modify Menu</a>
+        <a href="./../../views/InsertMenu_item.jsp">Insert Menu Item</a>
+        <a href="./../../views/ModifyIngredient.jsp">Modify Ingredient</a>
+        
+        <div class="right-links">
+            <a href="./Login.html">Login</a>
+            <a href="./../../views/Mypage.jsp">Mypage</a>
+        </div>
+    </nav>
 
-	<!-- body -->
-	<div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
-		<div class="text-start">
-			<div>
-				<br>
-				<h2 class="align-top">Login</h2>
-				<form class="align-bottom" action="http://localhost:8080/Phase4/Auth" method="post">
-					Role: <input type="radio" name="role" value="customer" required>Customer
-					<input type="radio" name="role" value="manager" required>Manager<br>
-					ID: <input type="text" name="userId" required><br>
-					Password: <input type="password" name="password" required><br>
-					<input type="submit" value="Login">
-				</form>
-			</div>
-		</div>
-	</div>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="http://localhost:8080/Phase4/Auth" method="post">
+            <div>
+                <label>Role:</label>
+                <input type="radio" name="role" value="customer" required>Customer
+                <input type="radio" name="role" value="manager" required>Manager
+            </div>
+            <div>
+                <input type="text" name="userId" placeholder="ID" required>
+            </div>
+            <div>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <div>
+                <input type="submit" value="Login">
+            </div>
+        </form>
+    </div>
+    
 </body>
-
 </html>

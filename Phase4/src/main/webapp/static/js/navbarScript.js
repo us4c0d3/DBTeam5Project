@@ -1,3 +1,22 @@
+function getLoginHref() {
+    // 현재 페이지의 경로를 가져옵니다.
+    var path = window.location.pathname;
+    // 경로에 'jsp'가 포함되어 있으면 JSP 페이지로 간주하고 상대 경로를 조정합니다.
+    var isJspPage = path.indexOf('jsp') !== -1;
+    // 조건에 따라 적절한 경로를 반환합니다.
+    return isJspPage ? './../static/html/Login.html' : './Login.html';
+}
+
+function deleteCookie(name) {
+    document.cookie = name + '=; path=/Phase4; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+function handleLogout() {
+    deleteCookie('userId');
+	window.location.href = getLoginHref();
+    //window.location.reload(); // 또는 로그인 페이지로 리디렉션: window.location.href = './Login.html';
+}
+
 function getUserIdFromCookie() {
 	let cookies = document.cookie.split(';');
 	for (let i = 0; i < cookies.length; i++) {
@@ -8,39 +27,41 @@ function getUserIdFromCookie() {
 }
 
 function toggleLoginLogout() {
-	let userId = getUserIdFromCookie();
-	let currentUrl = window.location.href;
-	let fileExtension = currentUrl.split('.').pop();
-	if (userId) {
-		if (fileExtension.startsWith('html')) {
-			document.querySelector('.nav-link[href="./Login.html"]').innerHTML = '<span class="navbar-brand mb-0 h">Logout</span>';
-		}
-		else {
-			document.querySelector('.nav-link[href="./../static/html/Login.html"]').innerHTML = '<span class="navbar-brand mb-0 h">Logout</span>';
-		}
-	} else {
-		if (fileExtension.startsWith('html')) {
-			document.querySelector('.nav-link[href="./Login.html"]').innerHTML = '<span class="navbar-brand mb-0 h">Login</span>';
-		}
-		else {
-			document.querySelector('.nav-link[href="./../static/html/Login.html"]').innerHTML = '<span class="navbar-brand mb-0 h">Login</span>';
-		}
-	}
+    let userId = getUserIdFromCookie();
+    let loginLink = document.querySelector('.right-links a:nth-child(1)');
+    let loginHref = getLoginHref();
+
+    if (userId) {
+        loginLink.textContent = 'Logout';
+        loginLink.href = '#';
+        loginLink.removeEventListener('click', handleLogout);
+        loginLink.addEventListener('click', handleLogout);
+    } else {
+        loginLink.textContent = 'Login';
+        loginLink.href = loginHref; // 동적으로 설정된 경로를 사용합니다.
+        loginLink.removeEventListener('click', handleLogout);
+    }
 }
 
 function toggleMenuItems() {
-	let userId = getUserIdFromCookie();
-	if (userId == null)
-		userId = '';
-	let isManager = userId.startsWith('MA');
-	let menuItems = document.querySelectorAll('.nav li');
-	menuItems.forEach(item => {
-		if (isManager || item.classList.contains('ShowMenu') || item.classList.contains('ShowMenu_item') || item.classList.contains('SearchOrder')) {
-			item.style.display = '';
-		} else {
-			item.style.display = 'none';
-		}
-	});
+    let userId = getUserIdFromCookie();
+    let navItems = document.querySelectorAll('.navbar a:not(.logo a, .right-links a)');
+    
+    navItems.forEach(item => {
+        item.classList.remove('hidden-link'); // 숨김 클래스 제거
+
+        if(userId) {
+            let isManager = userId.startsWith('MA');
+            if(!(isManager || item.classList.contains('ShowMenu') || item.classList.contains('ShowMenu_item') || item.classList.contains('SearchOrder'))) {
+                item.classList.add('hidden-link');
+			}
+        } else {
+            // 비로그인 상태에서는 SearchOrder, ShowMenu, ShowMenu_item 클래스를 가진 항목을 숨깁니다.
+            if(!(item.classList.contains('SearchOrder') || item.classList.contains('ShowMenu') || item.classList.contains('ShowMenu_item'))) {
+                item.classList.add('hidden-link');
+            }
+        }
+    });
 }
 
 function toggleCustomerId() {
