@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-<title>Insert Menu_item</title>
+<title>Insert Menu item</title>
 <script src="../static/js/navbarScript.js"></script>
 <!-- bootstrap css -->
 <link rel="stylesheet" href="./../static/css/bootstrap.min.css">
@@ -48,41 +48,50 @@
 	</nav>
 
 	<!-- body -->
-	<form action="InsertMenu_item.jsp" method="post">
-		name: <input type="text" name="name" /><br> unit price: <input
-			type="text" name="unit_price" /><br> category: <select
-			name="category">
-			<option value="" selected></option>
-			<option value="Condiments Menu">Condiments Menu</option>
-			<option value="Regular Menu">Regular Menu</option>
-			<option value="Breakfast Menu">Breakfast Menu</option>
-			<option value="McCafe Menu">McCafe Menu</option>
-			<option value="Desserts Menu">Desserts Menu</option>
-			<option value="Gourmet Menu">Gourmet Menu</option>
-			<option value="Desserts Menu">Desserts Menu</option>
-			<option value="Beverages Menu">Beverages Menu</option>
-			<option value="Condiments Menu">Condiments Menu</option>
-		</select> <br> <br> <input type="submit" name="Submit" />
-		<%
-		MenuDML mDML = new MenuDML();
-		List<Ingredient> IngredientList = mDML.showIngredient("");
-		if (IngredientList != null) {
-			out.println("<table border=\"1\">");
-			out.println("<th>" + "NAME" + "</th>");
-			out.println("<th>" + "UNIT_PRICE" + "</th>");
-			out.println("<th>" + "QUANTITY" + "</th>");
-			for (int i = 0; i < IngredientList.size(); i++) {
-				out.println("<tr>");
-				out.println("<td>" + IngredientList.get(i).getName() + "</td>");
-				out.println("<td>" + Double.toString(IngredientList.get(i).getUnit_price()) + "</td>");
-				out.println("<td>" + Double.toString(IngredientList.get(i).getQuantity()) + "</td>");
-				out.println("<td><input type=\"checkbox\" name=\"selected_ingredient\" value=\""
-			+ IngredientList.get(i).getName() + "\"></td>");
-				out.println("</tr>");
-			}
-		}
-		%>
-	</form>
+	<div class="d-flex justify-content-center align-items-center">
+		<div class="text-start">
+			<div>
+				<br>
+				<form action="InsertMenu_item.jsp" method="post">
+					name: <input type="text" name="name" />  unit price: <input
+						type="text" name="unit_price" />  category: <select
+						name="category">
+						<option value="" selected></option>
+						<option value="Condiments Menu">Condiments Menu</option>
+						<option value="Regular Menu">Regular Menu</option>
+						<option value="Breakfast Menu">Breakfast Menu</option>
+						<option value="McCafe Menu">McCafe Menu</option>
+						<option value="Desserts Menu">Desserts Menu</option>
+						<option value="Gourmet Menu">Gourmet Menu</option>
+						<option value="Desserts Menu">Desserts Menu</option>
+						<option value="Beverages Menu">Beverages Menu</option>
+						<option value="Condiments Menu">Condiments Menu</option>
+					</select>   <input type="submit" name="Submit" /> <br> <br>
+					<h2>Ingredient</h2>
+					<%
+					MenuDML mDML = new MenuDML();
+					List<Ingredient> IngredientList = mDML.showIngredient("");
+					if (IngredientList != null) {
+						out.println("<table class=\"table table-success table-striped\" border=\"1\">");
+						out.println("<th>" + "NAME" + "</th>");
+						out.println("<th>" + "UNIT_PRICE" + "</th>");
+						out.println("<th>" + "QUANTITY" + "</th>");
+						out.println("<th>" + "Check" + "</th>");
+						for (int i = 0; i < IngredientList.size(); i++) {
+							out.println("<tr>");
+							out.println("<td>" + IngredientList.get(i).getName() + "</td>");
+							out.println("<td>" + Double.toString(IngredientList.get(i).getUnit_price()) + "</td>");
+							out.println("<td>" + Double.toString(IngredientList.get(i).getQuantity()) + "</td>");
+							out.println("<td><input type=\"checkbox\" name=\"selected_ingredient\" value=\""
+						+ IngredientList.get(i).getName() + "\"></td>");
+							out.println("</tr>");
+						}
+					}
+					%>
+				</form>
+			</div>
+		</div>
+	</div>
 	<%
 	//insertMenu_item(String name, String category, String manager_id)
 	String name = "", category = "", manager_id = "MA000001"; //"MA000001"; // manager_id from Cookies
