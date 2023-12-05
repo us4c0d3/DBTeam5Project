@@ -64,7 +64,30 @@ function toggleMenuItems() {
     });
 }
 
+function toggleCustomerId() {
+	let userId = getUserIdFromCookie();
+	if (userId == null) userId = "";
+	var currentPath = window.location.pathname;
+	var pathSegments = currentPath.split('/');
+	var fileName = pathSegments[pathSegments.length - 1];
+	if (fileName === 'OrderSearch.jsp') {
+		let isManager = userId.startsWith('MA');
+		let isCustomer = userId.startsWith('CU');
+		let Form = document.querySelector('form');
+		if (isCustomer) {
+			Form.innerHTML = '<label for="id">Customer ID:' + userId + '</label> ' + '<input type="text" id="id" style="display: none;" name="id" value="' + userId + '"/>' + ' <input type="submit" value="Search"/>';
+		}
+		else if (isManager) {
+			Form.innerHTML = '<label for="id">Customer ID:</label> <input type="text" id="id" name="id"> <input type="submit" value="Search">';
+		}
+		else {
+			Form.innerHTML = '<label for="id">Customer ID:</label>';
+		}
+	}
+}
+
 window.onload = function() {
-    toggleLoginLogout();
-    toggleMenuItems();
+	toggleLoginLogout();
+	toggleMenuItems();
+	toggleCustomerId();
 };
