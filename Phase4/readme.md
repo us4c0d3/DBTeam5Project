@@ -9,8 +9,8 @@
 # 실행 방법
 1. Database 접속
  - USER_NAME = teamproject, USER_PASSWD = comp322.
-2. https://github.com/us4c0d3/DBTeam5Project/tree/main/Phase2 `Team5-Phase2-1.sql` 실행 - DDL.
-3. https://github.com/us4c0d3/DBTeam5Project/tree/main/Phase2 `Team5-Phase2-2.sql` 실행 - Insert 구문.
+2. `Team5-Phase4-1.sql` 실행 - DDL.
+3. `Team5-Phase4-2.sql` 실행 - Insert 구문.
 4. Phase4 > src > main > webapp > static > html > Login.html을 실행.
 5. localhost:8080 접속.
 6. 로그인.
@@ -23,8 +23,11 @@
 
 # 시스템이 제공하는 서비스 소개.
 - 식당의 재고 소진 여부 확인 및 식당 메뉴, 주문 내역을 확인하는 사이트.
-- 사용자(1) 고객: 고객은 로그인 유무에 상관없이 고객 아이디를 입력하면 주문 정보 및 결제 내역과 결제 내역과 메뉴 정보, 재고 소진 여부를 확인할 수 있다.
-- 사용자(2) 매니저: 매니저는 로그인을 통해 메뉴 수정, 메뉴 아이템 추가가 가능하다.
+- 사용자(1) 고객
+   - 고객은 로그인을 통해 주문 정보, 메뉴 조회, 메뉴 아이템 조회를 할 수 있다.
+   - 고객은 비로그인 상태에서 메뉴 조회 및 메뉴 아이템 조회만 할 수 있다.
+- 사용자(2) 매니저
+   - 매니저는 로그인을 통해 추가로적으로 메뉴 추가, 메뉴 수정, 메뉴 아이템 추가, 재료 수정을 할 수 있다.
 
 # 데모 링크
 

@@ -1,0 +1,23 @@
+# 동시성 제어, 디비 일관성 & 무결성 제어 방법.
+
+## DB를 조작하는데 사용하는 DML의 각 특성과 데이터 추가 시 자동 생성되는 id값에 따라 트랜잭션의 isolation level을 다르게 설정하였다. 
+
+### SELECT 문에서는 ReadCommitted 사용한다.
+ - SELECT 문에서는 Dirty Read에 대한 문제만 있고 RepeatableRead, Phantom에 대한 문제는 없기 때문에 ReadCommitted 유지한다.
+
+### INSERT 문에 대해서는 Serializable 사용한다.
+- INSERT할 때 id를 생성하는 방법으로 DB에 저장된 tuple 중에서 가장 마지막 tuple의 id + 1한 값을 리턴하는 방식을 사용하였다. 
+- 이것을 이용한 트랜잭션이 있다고 할 때, 두 클라이언트에서 이 트랜잭션을 동시에 실행했다고 하면 두 클라이언트는 같은 방식으로 id를 생성하므로 같은 id를 할당받게 된다. 
+- 같은 id에 대해서 INSERT를 동시에 하면 안 되므로 이 트랜잭션은 Serializable해야 한다. 
+- 하나가 commit에 성공하면 나머지는 실패하도록 설계한다.
+- 그 과정에서 InsertMenu_item.jsp 에서 문제 발생했다.
+- 트랜잭션 중 NEED에 대한 INSERT 쿼리를 사용하는데, NEED에는 트리거가 있어서 동시성 제어 문제 발생했다.
+- InsertMenu_item.jsp의 트랜잭션 중에는 NEED TABLE에 LOCK을 걸고 commit()한 뒤, LOCK을 해제하여 문제를 해결하였다.
+
+### UPDATE 문에서는 ReadCommitted 사용한다.
+- UPDATE는 INSERT 때와는 달리 id를 새로 만들거나 하지 않고 기존에 있던 아이템의 id를 이용하는 것이므로 트랜잭션 내에서 다른 트랜잭션이 commit된다고 해도 문제가 없다. 
+- 하지만 잘못된 정보에 대한 입력인 dirty read는 일어나면 안 되므로 ReadUncommitted는 사용할 수 없다. 
+- 그러므로 ReadCommitted 사용한다.
+
+
+
