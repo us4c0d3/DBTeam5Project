@@ -18,12 +18,12 @@ function handleLogout() {
 }
 
 function getUserIdFromCookie() {
-    let cookies = document.cookie.split(';');
-    for(let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i].trim().split('=');
-        if(cookie[0] === 'userId') return cookie[1];
-    }
-    return null;
+	let cookies = document.cookie.split(';');
+	for (let i = 0; i < cookies.length; i++) {
+		let cookie = cookies[i].trim().split('=');
+		if (cookie[0] === 'userId') return cookie[1];
+	}
+	return null;
 }
 
 function toggleLoginLogout() {
