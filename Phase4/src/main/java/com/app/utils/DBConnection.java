@@ -35,12 +35,19 @@ public class DBConnection {
 		}
 	}
 
-	public static Connection getConnection() {
+	public static Connection getConnection() throws SQLException {
 		if (conn == null) {
 			synchronized (DBConnection.class) {
 				if (conn == null) {
 					new DBConnection();
 				}
+			}
+		}
+		if (conn != null) {
+			conn.setAutoCommit(false);
+			DatabaseMetaData dbmd = conn.getMetaData();
+			if (dbmd.supportsTransactionIsolationLevel(Connection.TRANSACTION_READ_COMMITTED)) {
+				conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			}
 		}
 		return conn;
