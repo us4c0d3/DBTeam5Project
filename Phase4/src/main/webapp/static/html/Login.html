@@ -3,8 +3,11 @@
 
 <head>
 	<title>Login</title>
-	<script>
+	<script src="../js/navbarScript.js">
 		window.onload = function () {
+			toggleLoginLogout();
+			toggleMenuItems();
+			toggleCustomerId();
 			const urlParams = new URLSearchParams(window.location.search);
 			const error = urlParams.get('error');
 
@@ -13,7 +16,6 @@
 			}
 		};
 	</script>
-	<script src="../js/navbarScript.js"></script>
 	<!-- bootstrap css -->
 	<link rel="stylesheet" href="./../css/bootstrap.min.css">
 </head>
@@ -57,15 +59,20 @@
 	</nav>
 
 	<!-- body -->
-	<div>
-		<h2>Login</h2>
-		<form action="http://localhost:8080/Phase4/Auth" method="post">
-			Role: <input type="radio" name="role" value="customer" required>Customer
-			<input type="radio" name="role" value="manager" required>Manager<br>
-			ID: <input type="text" name="userId" required><br>
-			Password: <input type="password" name="password" required><br>
-			<input type="submit" value="Login">
-		</form>
+	<div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+		<div class="text-start">
+			<div>
+				<br>
+				<h2 class="align-top">Login</h2>
+				<form class="align-bottom" action="http://localhost:8080/Phase4/Auth" method="post">
+					Role: <input type="radio" name="role" value="customer" required>Customer
+					<input type="radio" name="role" value="manager" required>Manager<br>
+					ID: <input type="text" name="userId" required><br>
+					Password: <input type="password" name="password" required><br>
+					<input type="submit" value="Login">
+				</form>
+			</div>
+		</div>
 	</div>
 </body>
 

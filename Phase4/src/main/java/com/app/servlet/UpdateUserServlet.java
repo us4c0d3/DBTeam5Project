@@ -1,6 +1,7 @@
 package com.app.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.app.tables.TableMain;
+import com.app.utils.DBConnection;
 import com.app.utils.LoginDML;
 
 /**
@@ -41,26 +43,37 @@ public class UpdateUserServlet extends HttpServlet {
 		TableMain tm = TableMain.getInstance();
 		boolean validPassword = false;
 
-		if (userId.startsWith("CU")) {
-			validPassword = this.loginDML.validateLoginCustomer(userId, currentPassword);
-		} else if (userId.startsWith("MA")) {
-			validPassword = this.loginDML.validateLoginManager(userId, currentPassword);
-		}
+		try {
+			DBConnection.beginTransaction();
+			DBConnection.setReadCommited();
 
-		if (!validPassword) {
-			// 잘못된 패스워드, Mypage로 리디렉션 및 오류 메시지 전달
-			request.getSession().setAttribute("errorMessage", "Invalid current password.");
-			response.sendRedirect("Mypage.jsp");
-			return;
-		}
+			if (userId.startsWith("CU")) {
+				validPassword = this.loginDML.validateLoginCustomer(userId, currentPassword);
+			} else if (userId.startsWith("MA")) {
+				validPassword = this.loginDML.validateLoginManager(userId, currentPassword);
+			}
 
-		// DB 업데이트 로직
-		if (userId.startsWith("CU")) {
-			tm.customer.UPDATE(userId, name, (changePassword.equals("") ? currentPassword : changePassword),
-				phoneNumber);
-		} else if (userId.startsWith("MA")) {
-			tm.manager.UPDATE(userId, name, (changePassword.equals("") ? currentPassword : changePassword),
-				phoneNumber);
+			if (!validPassword) {
+				// 잘못된 패스워드, Mypage로 리디렉션 및 오류 메시지 전달
+				request.getSession().setAttribute("errorMessage", "Invalid current password.");
+				response.sendRedirect("/Phase4/views/Mypage.jsp");
+				return;
+			}
+
+			// DB 업데이트 로직
+			if (userId.startsWith("CU")) {
+				tm.customer.UPDATE(userId, name, (changePassword.equals("") ? currentPassword : changePassword),
+					phoneNumber);
+			} else if (userId.startsWith("MA")) {
+				tm.manager.UPDATE(userId, name, (changePassword.equals("") ? currentPassword : changePassword),
+					phoneNumber);
+			}
+
+			DBConnection.commit();
+		} catch (SQLException e) {
+			// 실패한 경우 롤백
+			DBConnection.rollback();
+			e.printStackTrace();
 		}
 
 		// 리디렉션
