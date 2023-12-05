@@ -89,6 +89,11 @@
 	try {
 		DBConnection.beginTransaction();
 		DBConnection.setSerializable();
+		Connection conn = DBConnection.getConnection();
+		Statement stmt = conn.createStatement();
+		String sql = "LOCK TABLE NEED IN EXCLUSIVE MODE";
+		stmt.executeUpdate(sql);
+		stmt.close();
 		if (name != "" && category != "" && unit_price != -100000000 && manager_id != "") {
 			String id = mDML.insertMenu_item(name, category, unit_price, manager_id);
 
