@@ -1,0 +1,56 @@
+/* 기본 글꼴 설정 */
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 폼 스타일링 */
+form {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+input[type=text],
+input[type=password] {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+input[type=submit] {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #0056b3;
+}
+
+/* 간격 및 레이아웃 조정 */
+.text-start {
+  max-width: 500px; /* 폼의 최대 너비 */
+  margin: auto;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .navbar a {
+    padding: 0.5rem;
+  }
+
+  .right-links a {
+    margin-bottom: 1rem;
+  }
+}
