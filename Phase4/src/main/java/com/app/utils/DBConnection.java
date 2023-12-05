@@ -27,6 +27,11 @@ public class DBConnection {
 		try {
 			conn = DriverManager.getConnection(URL, USER_NAME, USER_PASSWD);
 			System.out.println("Connected.");
+			conn.setAutoCommit(false);
+			DatabaseMetaData dbmd = conn.getMetaData();
+			if (dbmd.supportsTransactionIsolationLevel(Connection.TRANSACTION_READ_COMMITTED)) {
+				conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 			System.err.println("Cannot get a connection: " + ex.getLocalizedMessage());

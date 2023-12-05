@@ -82,7 +82,7 @@
 
 	try {
 		DBConnection.beginTransaction();
-		DBConnection.setReadCommited();
+		DBConnection.setSerializable();
 		if (start_date != "" && end_date != "" && manager_id != "") {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 			Date trans_start_date = sdf.parse(start_date);
@@ -108,6 +108,8 @@
 		// 실패한 경우 롤백
 		DBConnection.rollback();
 		e.printStackTrace();
+	} finally {
+		DBConnection.setReadCommited();
 	}
 
 	// 메뉴 아이템 생성 로직
