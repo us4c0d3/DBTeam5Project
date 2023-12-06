@@ -144,34 +144,68 @@ BEGIN
     v_item_id := :NEW.item_id;
     v_ingredient_id := :NEW.ingredient_id;
 
-    SELECT mi.item_quantity INTO v_total_quantity
-    FROM menu_item mi
-    WHERE mi.item_id = v_item_id;
-
     SELECT i.quantity INTO v_new_quantity
     FROM ingredient i
     WHERE i.ingredient_id = v_ingredient_id;
-
+    
     SELECT COUNT(*) INTO v_count
     FROM need ne
     WHERE ne.item_id = v_item_id;
-
-    IF v_new_quantity <= 0 THEN
-        -- quantity가 0 이하일 경우 item_quantity를 0으로 업데이트
-        UPDATE menu_item
-        SET item_quantity = 0
-        WHERE item_id = v_item_id;
-    ELSIF v_new_quantity < v_total_quantity THEN
-        -- quantity가 기존보다 작으면 해당하는 재료의 개수로 item_quantity를 업데이트
-        UPDATE menu_item
-        SET item_quantity = v_new_quantity
-        WHERE item_id = v_item_id;
-    ELSIF v_count = 0 THEN
-        -- need가 그 전에 없었을 경우 그 재료의 개수로 업데이트
-        UPDATE menu_item
-        SET item_quantity = v_new_quantity
-        WHERE item_id = v_item_id;
+    
+    if v_count = 0 THEN
+        IF v_new_quantity <= 0 THEN
+            -- quantity가 0 이하일 경우 item_quantity를 0으로 업데이트
+            UPDATE menu_item
+            SET item_quantity = 0
+            WHERE item_id = v_item_id;
+        ELSE
+            UPDATE menu_item
+            SET item_quantity = v_new_quantity
+            WHERE item_id = v_item_id;
+        END IF;
+    ELSE
+        SELECT MIN(i.quantity) INTO v_total_quantity
+        FROM need ne, ingredient i
+        WHERE ne.item_id = v_item_id
+        AND ne.ingredient_id = i.ingredient_id;
+        
+        IF v_new_quantity < v_total_quantity THEN
+            -- quantity가 기존보다 작으면 해당하는 재료의 개수로 item_quantity를 업데이트
+            UPDATE menu_item
+            SET item_quantity = v_new_quantity
+            WHERE item_id = v_item_id;
+        END IF;
     END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER update_item_quantity2
+BEFORE UPDATE ON ingredient
+FOR EACH ROW
+DECLARE
+    v_ingredient_id CHAR(8);
+    v_total_quantity NUMBER;
+    v_new_quantity NUMBER;
+    v_count NUMBER;
+    CURSOR C1(c_ingredient_id ingredient.ingredient_id%TYPE)
+    IS
+    SELECT mi.item_id as item_id, mi.item_quantity as item_quantity
+    FROM menu_item mi, need ne
+    WHERE mi.item_id = ne.item_id
+    AND ne.ingredient_id = c_ingredient_id;
+BEGIN
+    v_ingredient_id := :NEW.ingredient_id;
+    v_new_quantity := :NEW.quantity;
+    
+    FOR REC IN C1(v_ingredient_id)
+    LOOP
+        IF v_new_quantity < REC.item_quantity THEN
+            -- quantity가 기존보다 작으면 해당하는 재료의 개수로 item_quantity를 업데이트
+            UPDATE menu_item
+            SET item_quantity = v_new_quantity
+            WHERE item_id = REC.item_id;
+        END IF;
+    END LOOP;
 END;
 /
 
