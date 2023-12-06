@@ -36,7 +36,7 @@
 		<div class="text-start">
 			<div>
 				<br>
-				<form action="OrderSearch.jsp" method="post">
+				<form action="OrderSearch.jsp" method="post" style="width:800px;">
 					<label for="id">Customer ID:</label> <input type="text" id="id"
 						name="id"> <input type="submit" value="Search">
 				</form>
@@ -54,18 +54,16 @@
 				List<Integer> amounts = (List<Integer>)result[4];
 				if (payments != null && menuItems != null && amounts != null) {
 					out.println("<table class=\"table table-success table-striped\" border=\"1\">");
-					out.println("<th>" + "CUSTOMER_ID" + "</th>");
-					out.println("<th>" + "ORDER_ID" + "</th>");
-					out.println("<th>" + "TOTAL_PRICE" + "</th>");
-					out.println("<th>" + "PAYMENT_TYPE" + "</th>");
-					out.println("<th>" + "CARD_INFO" + "</th>");
-					out.println("<th>" + "ITEM_ID" + "</th>");
-					out.println("<th>" + "NAME" + "</th>");
-					out.println("<th>" + "AMOUNT" + "</th>");
-					out.println("<th>" + "UNIT_PRICE" + "</th>");
-					out.println("<th>" + "ITEM_QUANTITY" + "</th>");
-					out.println("<th>" + "CATEGORY" + "</th>");
-					out.println("<th>" + "SOLDOUT" + "</th>");
+					out.println("<th width=\"100\">" + "CUSTOMER_ID" + "</th>");
+					out.println("<th width=\"100\">" + "ORDER_ID" + "</th>");
+					out.println("<th width=\"100\">" + "TOTAL_PRICE" + "</th>");
+					out.println("<th width=\"150\">" + "PAYMENT_TYPE" + "</th>");
+					out.println("<th width=\"190\">" + "CARD_INFO" + "</th>");
+					out.println("<th width=\"360\">" + "NAME" + "</th>");
+					out.println("<th width=\"50\">" + "AMOUNT" + "</th>");
+					out.println("<th width=\"50\">" + "UNIT_PRICE" + "</th>");
+					out.println("<th width=\"170\">" + "CATEGORY" + "</th>");
+					out.println("<th width=\"50\">" + "SOLDOUT" + "</th>");
 				}
 				for (int i = 0; i < payments.size(); i++) {
 					out.println("<tr>");
@@ -79,11 +77,9 @@
 					out.println("<td>" + payment.getTotal_price() + "</td>");
 					out.println("<td>" + payment.getPayment_type() + "</td>");
 					out.println("<td>" + payment.getCard_info() + "</td>");
-					out.println("<td>" + menuItem.getItem_id() + "</td>");
 					out.println("<td>" + menuItem.getName() + "</td>");
 					out.println("<td>" + amount + "</td>");
 					out.println("<td>" + menuItem.getUnit_price() + "</td>");
-					out.println("<td>" + menuItem.getItem_quantity() + "</td>");
 					out.println("<td>" + menuItem.getCategory() + "</td>");
 					out.println("<td>" + menuItem.getSoldout() + "</td>");
 					out.println("</tr>");
