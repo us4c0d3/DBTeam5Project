@@ -86,8 +86,21 @@ function toggleCustomerId() {
 	}
 }
 
+function redirectToLoginIfNotLoggedIn() {
+    let userId = getUserIdFromCookie(); // 기존에 작성된 쿠키에서 userId 가져오는 함수를 사용
+    let currentPath = window.location.pathname;
+    let isMypage = currentPath.includes('Mypage.jsp'); // 현재 페이지가 Mypage인지 확인
+	let isSearchOrder = currentPath.includes('OrderSearch.jsp');
+    
+    // Mypage에 있고, userId가 없으면 로그인 페이지로 리디렉션
+    if ((isMypage || isSearchOrder) && !userId) {
+        window.location.href = getLoginHref(); // 로그인 페이지로 리디렉션하는 함수를 사용
+    }
+}
+
 window.onload = function() {
 	toggleLoginLogout();
 	toggleMenuItems();
 	toggleCustomerId();
+	redirectToLoginIfNotLoggedIn();
 };

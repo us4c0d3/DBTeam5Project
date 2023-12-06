@@ -8,6 +8,7 @@
 <!-- bootstrap css -->
 <link rel="stylesheet" href="./../static/css/bootstrap.min.css">
 <link rel="stylesheet" href="./../static/css/navbarStyle.css">
+<link rel="stylesheet" href="./../static/css/mypageform.css">
 </head>
 <body>
 	<!-- header -->
@@ -84,16 +85,26 @@
 					}
 				}
 				%>
-				<form action="http://localhost:8080/Phase4/UpdateUserServlet"
-					method="post">
-					<input type="hidden" name="userId" value="<%=userId%>">
-					Name: <input type="text" name="name" value="<%=userCurrentName%>"
-						required><br> Phone number: <input type="text"
-						name="phoneNumber" value="<%=userCurrentPhoneNumber%>" required><br>
-					Current Password: <input type="password" name="currentPassword"
-						required><br> Change Password: <input type="password"
-						name="changePassword"> <input type="submit" value="Update">
-				</form>
+				<form action="http://localhost:8080/Phase4/UpdateUserServlet" method="post">
+			        <input type="hidden" name="userId" value="<%=userId%>">
+			        <div>
+			          <label for="name">Name:</label>
+			          <input type="text" id="name" name="name" value="<%=userCurrentName%>" required>
+			        </div>
+			        <div>
+			          <label for="phoneNumber">Phone number:</label>
+			          <input type="text" id="phoneNumber" name="phoneNumber" value="<%=userCurrentPhoneNumber%>" required>
+			        </div>
+			        <div>
+			          <label for="currentPassword">Current Password *Required*:</label>
+			          <input type="password" id="currentPassword" name="currentPassword" required>
+			        </div>
+			        <div>
+			          <label for="changePassword">Change Password:</label>
+			          <input type="password" id="changePassword" name="changePassword">
+			        </div>
+			        <input type="submit" value="Update">
+			    </form>
 			</div>
 		</div>
 	</div>
