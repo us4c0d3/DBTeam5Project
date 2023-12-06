@@ -36,7 +36,7 @@
 			<br>
 			<%
 			MenuDML mDML = new MenuDML();
-			String name = "", category = "", soldout = "";
+			String name = "", category = "", soldout = "F";
 			List<Menu_item> rs = mDML.showMenu_item(name, category, soldout);
 			if (rs.size() > 0) {
 				int randomNumber = (int)(Math.random() * (rs.size() - 1));
