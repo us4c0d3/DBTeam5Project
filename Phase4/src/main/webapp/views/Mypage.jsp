@@ -13,7 +13,7 @@
 	<!-- header -->
 	<nav class="navbar">
 		<div class="logo">
-			<a href="./../static/html/index.html">Restaurant</a>
+			<a href="./index.jsp">Restaurant</a>
 		</div>
         
         <a href="./OrderSearch.jsp" class="SearchOrder">Search Order</a>
