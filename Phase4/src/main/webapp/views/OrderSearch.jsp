@@ -63,15 +63,21 @@
 					out.println("<th width=\"50\">" + "AMOUNT" + "</th>");
 					out.println("<th width=\"50\">" + "UNIT_PRICE" + "</th>");
 					out.println("<th width=\"170\">" + "CATEGORY" + "</th>");
-					out.println("<th width=\"50\">" + "SOLDOUT" + "</th>");
 				}
 				for (int i = 0; i < payments.size(); i++) {
 					out.println("<tr>");
 					String customerId = customerIds.get(i);
+					if (i != 0) customerId = "";
 					String orderID = orderIds.get(i);
 					Payment payment = payments.get(i);
 					Menu_item menuItem = menuItems.get(i);
 					Integer amount = amounts.get(i);
+					if (i > 0 && orderID.equals(orderIds.get(i - 1))) {
+						orderID = "";
+						payment.setTotal_price("");
+						payment.setPayment_type("");
+						payment.setCard_info("");
+					}
 					out.println("<td>" + customerId + "</td>");
 					out.println("<td>" + orderID + "</td>");
 					out.println("<td>" + payment.getTotal_price() + "</td>");
@@ -81,7 +87,6 @@
 					out.println("<td>" + amount + "</td>");
 					out.println("<td>" + menuItem.getUnit_price() + "</td>");
 					out.println("<td>" + menuItem.getCategory() + "</td>");
-					out.println("<td>" + menuItem.getSoldout() + "</td>");
 					out.println("</tr>");
 				}
 				%>
