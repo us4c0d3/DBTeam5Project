@@ -45,13 +45,11 @@
 					out.println("<table class=\"table table-success table-striped\" border=\"1\">");
 					out.println("<th width=\"300\">" + "NAME" + "</th>");
 					out.println("<th width=\"50\">" + "UNIT_PRICE" + "</th>");
-					out.println("<th width=\"50\">" + "SOLDOUT" + "</th>");
 
 					Menu_item getItem = rs.get(randomNumber);
 					out.println("<tr>");
 					out.println("<td>" + getItem.getName() + "</td>");
 					out.println("<td>" + Integer.toString(getItem.getUnit_price()) + "</td>");
-					out.println("<td>" + getItem.getSoldout() + "</td>");
 					out.println("</tr>");
 					out.println("</table>");
 				}
