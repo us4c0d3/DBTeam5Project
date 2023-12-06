@@ -35,7 +35,7 @@
 		<div class="text-start">
 			<div>
 				<br>
-				<form action="InsertMenu_item.jsp" method="post">
+				<form action="InsertMenu_item.jsp" method="post" style="width:800px;">
 					name: <input type="text" name="name" />  unit price: <input
 						type="text" name="unit_price" />  category: <select
 						name="category">
@@ -56,10 +56,10 @@
 					List<Ingredient> IngredientList = mDML.showIngredient("");
 					if (IngredientList != null) {
 						out.println("<table class=\"table table-success table-striped\" border=\"1\">");
-						out.println("<th>" + "NAME" + "</th>");
-						out.println("<th>" + "UNIT_PRICE" + "</th>");
-						out.println("<th>" + "QUANTITY" + "</th>");
-						out.println("<th>" + "Check" + "</th>");
+						out.println("<th width=\"30%\">" + "NAME" + "</th>");
+						out.println("<th width=\"25%\">" + "UNIT_PRICE" + "</th>");
+						out.println("<th width=\"25%\">" + "QUANTITY" + "</th>");
+						out.println("<th width=\"20%\">" + "Check" + "</th>");
 						for (int i = 0; i < IngredientList.size(); i++) {
 							out.println("<tr>");
 							out.println("<td>" + IngredientList.get(i).getName() + "</td>");

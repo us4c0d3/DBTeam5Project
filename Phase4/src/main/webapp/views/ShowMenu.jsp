@@ -36,7 +36,7 @@
 		<div class="text-start">
 			<div>
 				<br>
-				<form action="ShowMenu.jsp" method="post">
+				<form action="ShowMenu.jsp" method="post" style="width:800px;">
 					Date: <select name="menu_id">
 						<%
 						MenuDML mDML = new MenuDML();
@@ -55,12 +55,11 @@
 				String menu_id = "";
 
 				out.println("<table class=\"table table-success table-striped\" border=\"1\">");
-				out.println("<th>" + "ITEM_ID" + "</th>");
-				out.println("<th>" + "NAME" + "</th>");
-				out.println("<th>" + "UNIT_PRICE" + "</th>");
-				out.println("<th>" + "ITEM_QUANTITY" + "</th>");
-				out.println("<th>" + "CATEGORY" + "</th>");
-				out.println("<th>" + "SOLDOUT" + "</th>");
+				out.println("<th width=\"360\">" + "NAME" + "</th>");
+				out.println("<th width=\"50\">" + "UNIT_PRICE" + "</th>");
+				out.println("<th width=\"50\">" + "ITEM_QUANTITY" + "</th>");
+				out.println("<th width=\"170\">" + "CATEGORY" + "</th>");
+				out.println("<th width=\"50\">" + "SOLDOUT" + "</th>");
 
 				if (request.getParameter("menu_id") != null) {
 					menu_id = request.getParameter("menu_id");
@@ -71,7 +70,6 @@
 					} else if (rs != null) {
 						for (int i = 0; i < rs.size(); i++) {
 					out.println("<tr>");
-					out.println("<td>" + rs.get(i).getItem_id() + "</td>");
 					out.println("<td>" + rs.get(i).getName() + "</td>");
 					out.println("<td>" + Double.toString(rs.get(i).getUnit_price()) + "</td>");
 					out.println("<td>" + Double.toString(rs.get(i).getItem_quantity()) + "</td>");

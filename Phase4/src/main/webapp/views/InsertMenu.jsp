@@ -15,45 +15,44 @@
 		<div class="logo">
 			<a href="./index.jsp">Restaurant</a>
 		</div>
-        
-        <a href="./OrderSearch.jsp" class="SearchOrder">Search Order</a>
-        <a href="./ShowMenu.jsp" class="ShowMenu">Show Menu</a>
-        <a href="./ShowMenu_item.jsp" class="ShowMenu_item">Show Menu Item</a>
-        <a href="./InsertMenu.jsp">Insert Menu</a>
-        <a href="./ModifyMenu.jsp">Modify Menu</a>
-        <a href="./InsertMenu_item.jsp">Insert Menu Item</a>
-        <a href="./ModifyIngredient.jsp">Modify Ingredient</a>
-        
-        <div class="right-links">
-            <a href="./../static/html/Login.html">Login</a>
-            <a href="./Mypage.jsp">Mypage</a>
-        </div>
-    </nav>
+
+		<a href="./OrderSearch.jsp" class="SearchOrder">Search Order</a> <a
+			href="./ShowMenu.jsp" class="ShowMenu">Show Menu</a> <a
+			href="./ShowMenu_item.jsp" class="ShowMenu_item">Show Menu Item</a> <a
+			href="./InsertMenu.jsp">Insert Menu</a> <a href="./ModifyMenu.jsp">Modify
+			Menu</a> <a href="./InsertMenu_item.jsp">Insert Menu Item</a> <a
+			href="./ModifyIngredient.jsp">Modify Ingredient</a>
+
+		<div class="right-links">
+			<a href="./../static/html/Login.html">Login</a> <a
+				href="./Mypage.jsp">Mypage</a>
+		</div>
+	</nav>
 	<!-- body -->
 
 	<div class="d-flex justify-content-center align-items-center">
 		<div class="text-start">
 			<div>
 				<br>
-				<form action="InsertMenu.jsp" method="post">
-					Modify_Start_Date: <input type="date" id="date" name="start_date"
-						value="2020-01-01" min="2020-01-01" max="2023-12-31" /> 
-					Modify_End_Date: <input type="date" id="date" name="end_date"
-						value="2020-01-01" min="2020-01-01" max="2023-12-31" /> 
-					  <input type="submit" name="Submit" /> <br> <br>
-					  <h2>Menu Items</h2>
+				<form action="InsertMenu.jsp" method="post" style="width: 1000px;">
+					Insert_Start_Date: <input type="date" id="date" name="start_date"
+						value="2020-01-01" min="2020-01-01" max="2023-12-31" />
+					Insert_End_Date: <input type="date" id="date" name="end_date"
+						value="2020-01-01" min="2020-01-01" max="2023-12-31" /> <input
+						type="submit" name="Submit" /> <br> <br>
+					<h2>Menu Items</h2>
 					<%
 					MenuDML mDML = new MenuDML();
 					List<Menu_item> Menu_itemList = mDML.showMenu_item("", "", "");
 					if (Menu_itemList != null) {
 						out.println("<table class=\"table table-success table-striped\" border=\"1\">");
-						out.println("<th>" + "ITEM_ID" + "</th>");
-						out.println("<th>" + "NAME" + "</th>");
-						out.println("<th>" + "UNIT_PRICE" + "</th>");
-						out.println("<th>" + "ITEM_QUANTITY" + "</th>");
-						out.println("<th>" + "CATEGORY" + "</th>");
-						out.println("<th>" + "SOLDOUT" + "</th>");
-						out.println("<th>" + "Check" + "</th>");
+						out.println("<th width=\"100\">" + "ITEM_ID" + "</th>");
+						out.println("<th width=\"360\">" + "NAME" + "</th>");
+						out.println("<th width=\"50\">" + "UNIT_PRICE" + "</th>");
+						out.println("<th width=\"50\">" + "ITEM_QUANTITY" + "</th>");
+						out.println("<th width=\"170\">" + "CATEGORY" + "</th>");
+						out.println("<th width=\"50\">" + "SOLDOUT" + "</th>");
+						out.println("<th width=\"20\">" + "Check" + "</th>");
 						for (int i = 0; i < Menu_itemList.size(); i++) {
 							out.println("<tr>");
 							out.println("<td>" + Menu_itemList.get(i).getItem_id() + "</td>");

@@ -35,7 +35,7 @@
 		<div class="text-start">
 			<div>
 				<br>
-				<form action="ModifyIngredient.jsp" method="post">
+				<form action="ModifyIngredient.jsp" method="post" style="width:700px;">
 					<label for="ingredient_id">Ingredient ID:</label> <input
 						type="text" id="ingredient_id" name="ingredient_id"> <label
 						for="quantity">Quantity:</label> <input type="number"

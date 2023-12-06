@@ -36,7 +36,7 @@
 		<div class="text-start">
 			<div>
 				<br>
-				<form action="ShowMenu_item.jsp" method="post">
+				<form action="ShowMenu_item.jsp" method="post" style="width:900px;">
 					name: <input type="text" name="name" />  category: <select
 						name="category">
 						<option value="" selected></option>
@@ -70,19 +70,17 @@
 					out.println("No result.");
 				} else if (rs != null) {
 					out.println("<table class=\"table table-success table-striped\" border=\"1\">");
-					out.println("<th>" + "ITEM_ID" + "</th>");
-					out.println("<th>" + "NAME" + "</th>");
-					out.println("<th>" + "UNIT_PRICE" + "</th>");
-					out.println("<th>" + "ITEM_QUANTITY" + "</th>");
-					out.println("<th>" + "CATEGORY" + "</th>");
-					out.println("<th>" + "SOLDOUT" + "</th>");
+					out.println("<th width=\"360\">" + "NAME" + "</th>");
+					out.println("<th width=\"50\">" + "UNIT_PRICE" + "</th>");
+					out.println("<th width=\"50\">" + "ITEM_QUANTITY" + "</th>");
+					out.println("<th width=\"170\">" + "CATEGORY" + "</th>");
+					out.println("<th width=\"50\">" + "SOLDOUT" + "</th>");
 
 					for (int i = 0; i < rs.size(); i++) {
 						out.println("<tr>");
-						out.println("<td>" + rs.get(i).getItem_id() + "</td>");
 						out.println("<td>" + rs.get(i).getName() + "</td>");
-						out.println("<td>" + Double.toString(rs.get(i).getUnit_price()) + "</td>");
-						out.println("<td>" + Double.toString(rs.get(i).getItem_quantity()) + "</td>");
+						out.println("<td>" + Integer.toString(rs.get(i).getUnit_price()) + "</td>");
+						out.println("<td>" + Integer.toString(rs.get(i).getItem_quantity()) + "</td>");
 						out.println("<td>" + rs.get(i).getCategory() + "</td>");
 						out.println("<td>" + rs.get(i).getSoldout() + "</td>");
 						out.println("</tr>");
