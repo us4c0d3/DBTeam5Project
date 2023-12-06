@@ -61,6 +61,8 @@
 			// 예: List<MenuItem> menuItems = DatabaseUtil.getMenuItems();
 			// 메뉴 아이템을 화면에 표시
 			%>
+			
+			<button onClick="window.location.reload()">Recommend Again!</button>
 		</div>
 	</div>
 </body>
